@@ -130,22 +130,20 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Default command, normal field-relative drive
-    drive.setDefaultCommand(
-        DriveCommands.joystickDrive(
-            drive,
-            () -> -controller.getLeftY(),
-            () -> -controller.getLeftX(),
-            () -> -controller.getRightX()));
+    drive.setDefaultCommand(DriveCommands.joystickDrive(
+        drive,
+        () -> -controller.getLeftY(),
+        () -> -controller.getLeftX(),
+        () -> -controller.getRightX()
+    ));
 
-    // Lock to 0° when A button is held
-    controller
-        .a()
-        .whileTrue(
-            DriveCommands.joystickDriveAtAngle(
-                drive,
-                () -> -controller.getLeftY(),
-                () -> -controller.getLeftX(),
-                () -> Rotation2d.kZero));
+    //Aim at hub
+    controller.leftTrigger(0.8).whileTrue(DriveCommands.driveAimLocked(
+        drive,
+        () -> -controller.getLeftY(),
+        () -> -controller.getLeftX(),
+        Constants.Locations.HUB_POSE
+    ));
 
     // Switch to X pattern when X button is pressed
     controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
