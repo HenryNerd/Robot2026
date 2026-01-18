@@ -8,8 +8,12 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -24,6 +28,8 @@ import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+import frc.robot.subsystems.vision.Vision;
+import frc.robot.subsystems.vision.VisionIOPhotonVision;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -35,6 +41,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
+  private final Vision vision;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
@@ -99,6 +106,40 @@ public class RobotContainer {
         break;
     }
 
+    drive.setVisionStdDevs(VecBuilder.fill(1, 1, 1));
+
+    vision =
+        new Vision(
+            drive::addVisionMeasurement,
+            new VisionIOPhotonVision(
+                "frontLeft",
+                new Transform3d(
+                    -0.307325,
+                    -0.307325,
+                    0.215781,
+                    new Rotation3d(0, Units.degreesToRadians(-45), Units.degreesToRadians(-135)))),
+            new VisionIOPhotonVision(
+                "frontRight",
+                new Transform3d(
+                    -0.307325,
+                    0.307325,
+                    0.215781,
+                    new Rotation3d(0, Units.degreesToRadians(-45), Units.degreesToRadians(135)))),
+            new VisionIOPhotonVision(
+                "backLeft",
+                new Transform3d(
+                    0.307325,
+                    -0.307325,
+                    0.215781,
+                    new Rotation3d(0, Units.degreesToRadians(-45), Units.degreesToRadians(-45)))),
+            new VisionIOPhotonVision(
+                "backRight",
+                new Transform3d(
+                    0.307325,
+                    0.307325,
+                    0.215781,
+                    new Rotation3d(0, Units.degreesToRadians(-45), Units.degreesToRadians(45)))));
+
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
 
@@ -130,20 +171,22 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Default command, normal field-relative drive
-    drive.setDefaultCommand(DriveCommands.joystickDrive(
-        drive,
-        () -> -controller.getLeftY(),
-        () -> -controller.getLeftX(),
-        () -> -controller.getRightX()
-    ));
+    drive.setDefaultCommand(
+        DriveCommands.joystickDrive(
+            drive,
+            () -> -controller.getLeftY(),
+            () -> -controller.getLeftX(),
+            () -> -controller.getRightX()));
 
-    //Aim at hub
-    controller.leftTrigger(0.8).whileTrue(DriveCommands.driveAimLocked(
-        drive,
-        () -> -controller.getLeftY(),
-        () -> -controller.getLeftX(),
-        Constants.Locations.HUB_POSE
-    ));
+    // Aim at hub
+    controller
+        .leftTrigger(0.8)
+        .whileTrue(
+            DriveCommands.driveAimLocked(
+                drive,
+                () -> -controller.getLeftY(),
+                () -> -controller.getLeftX(),
+                Constants.Locations.HUB_POSE));
 
     // Switch to X pattern when X button is pressed
     controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));

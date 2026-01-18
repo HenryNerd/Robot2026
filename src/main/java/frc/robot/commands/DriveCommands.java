@@ -57,11 +57,17 @@ public class DriveCommands {
         .getTranslation();
   }
 
-  public static Command driveAimLocked(Drive drive, DoubleSupplier xSupplier, DoubleSupplier ySupplier, Pose2d pose) {
-    return joystickDriveAtAngle(drive, xSupplier, ySupplier, () -> {
-      Pose2d posDiff = pose.relativeTo(drive.getPose());
-      return Rotation2d.fromRadians(Math.atan(posDiff.getY() / posDiff.getX()));
-    });
+  public static Command driveAimLocked(
+      Drive drive, DoubleSupplier xSupplier, DoubleSupplier ySupplier, Pose2d pose) {
+    return joystickDriveAtAngle(
+        drive,
+        xSupplier,
+        ySupplier,
+        () -> {
+          return Rotation2d.fromRadians(
+              Math.atan2(
+                  pose.getX() - drive.getPose().getX(), pose.getY() - drive.getPose().getY()));
+        });
   }
 
   /**
