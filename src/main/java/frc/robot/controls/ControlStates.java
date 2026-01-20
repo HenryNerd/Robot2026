@@ -1,6 +1,6 @@
 package frc.robot.controls;
 
 public enum ControlStates {
-  DEFAULT,
-  OTHER,
+  COMPETITION,
+  TEST_ONLY_REMOVE_ME,
 }

@@ -23,7 +23,7 @@ public class Controls {
   private final EnumMap<ControlStates, ControllerMapping> mappings =
       new EnumMap<>(ControlStates.class);
 
-  private ControlStates currentState = ControlStates.DEFAULT;
+  private ControlStates currentState = ControlStates.COMPETITION;
 
   private static final Set<Supplier<Trigger>> persistentTriggers = new HashSet<>();
 
@@ -35,10 +35,10 @@ public class Controls {
     operatorController = new CommandXboxController(1);
 
     mappings.put(
-        ControlStates.DEFAULT,
-        new DefaultControllerMapping(driverController, operatorController, drivetrain));
+        ControlStates.COMPETITION,
+        new CompetitionControllerMapping(driverController, operatorController, drivetrain));
     mappings.put(
-        ControlStates.OTHER, new OtherControllerMapping(driverController, operatorController));
+        ControlStates.TEST_ONLY_REMOVE_ME, new RemoveMeControllerMapping(driverController, operatorController));
 
     Consumer<Enum<ControlStates>> onChange =
         (nextState) -> {
@@ -51,7 +51,7 @@ public class Controls {
         };
 
     LoggedNetworkTablesBuilder.createSelectorFromEnum(
-        "Controls/Controller Mode", ControlStates.class, ControlStates.DEFAULT, onChange);
+        "Controls/Controller Mode", ControlStates.class, ControlStates.COMPETITION, onChange);
   }
 
   public static void addPersistentTrigger(Supplier<Trigger> triggerSupplier) {

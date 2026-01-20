@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.DriveCommands;
 import frc.robot.subsystems.drive.Drive;
 
-public class DefaultControllerMapping extends ControllerMapping {
+public class CompetitionControllerMapping extends ControllerMapping {
 
   private final Drive drive;
 
-  public DefaultControllerMapping(
+  public CompetitionControllerMapping(
       CommandXboxController driverController,
       CommandXboxController operatorController,
       Drive drive) {
