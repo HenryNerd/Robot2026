@@ -15,4 +15,8 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     intakeIO.updateInputs(inputs);
   }
+
+  public void set(IntakeState state) {
+    this.intakeIO.set(state);
+  }
 }

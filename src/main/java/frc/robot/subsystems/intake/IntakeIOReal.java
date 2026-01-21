@@ -13,10 +13,15 @@ public class IntakeIOReal implements IntakeIO {
 
   @Override
   public void updateInputs(IntakeIOInputs inputs) {
+
     inputs.isLeftMotorConnected = leftMotor.isConnected();
     inputs.isRightMotorConnected = rightMotor.isConnected();
   }
 
   @Override
-  public void set(IntakeState state) {}
+  public void set(IntakeState state) {
+    double power = state.power();
+    leftMotor.set(power);
+    rightMotor.set(power);
+  }
 }

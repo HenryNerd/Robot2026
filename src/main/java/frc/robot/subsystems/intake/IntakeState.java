@@ -1,22 +1,20 @@
 package frc.robot.subsystems.intake;
 
-import static edu.wpi.first.units.Units.RotationsPerSecond;
-
-import edu.wpi.first.units.measure.AngularVelocity;
-
 public enum IntakeState {
   ON,
   OFF,
   REVERSE;
 
-  public AngularVelocity targetSpeed() {
+  public double power() {
     switch (this) {
       case ON:
-        return RotationsPerSecond.of(1);
+        return 0.5;
+      case OFF:
+        return 0;
       case REVERSE:
-        return RotationsPerSecond.of(-1);
-      default:
-        return RotationsPerSecond.of(0);
+        return -0.5;
     }
+    // If something goes wrong, off is the best option
+    return 0;
   }
 }
