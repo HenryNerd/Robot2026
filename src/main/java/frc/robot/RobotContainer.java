@@ -20,6 +20,8 @@ import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.subsystems.shooter.ShooterIO;
 import frc.robot.subsystems.vision.Vision;
 import frc.robot.subsystems.vision.VisionIOPhotonVision;
 
@@ -33,6 +35,7 @@ public class RobotContainer {
   // Subsystems
   private final Drive drive;
   private final Vision vision;
+  private final Shooter shooter;
 
   private final Controls controls;
   private final Autos autos;
@@ -48,6 +51,8 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.FrontRight),
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
+
+        shooter = new Shooter(new ShooterIO() {});
         break;
 
       case SIM:
@@ -59,6 +64,7 @@ public class RobotContainer {
                 new ModuleIOSim(TunerConstants.FrontRight),
                 new ModuleIOSim(TunerConstants.BackLeft),
                 new ModuleIOSim(TunerConstants.BackRight));
+        shooter = new Shooter(new ShooterIO() {});
         break;
 
       default:
@@ -70,10 +76,11 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
+        shooter = new Shooter(new ShooterIO() {});
         break;
     }
 
-    controls = new Controls(drive);
+    controls = new Controls(drive, shooter);
     autos = new Autos(drive);
 
     vision = initializeVision();
