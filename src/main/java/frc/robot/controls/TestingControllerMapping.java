@@ -1,5 +1,3 @@
 package frc.robot.controls;
 
-public class TestingControllerMapping {
-    
-}
+public class TestingControllerMapping {}

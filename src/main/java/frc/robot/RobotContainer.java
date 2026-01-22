@@ -1,4 +1,3 @@
-
 // Copyright (c) 2021-2026 Littleton Robotics
 // http://github.com/Mechanical-Advantage
 //
@@ -112,8 +111,7 @@ public class RobotContainer {
                 -0.307325,
                 -0.307325,
                 0.215781,
-                new Rotation3d(0, Units.degreesToRadians(-45), Units.degreesToRadians(-135))))
-    );
+                new Rotation3d(0, Units.degreesToRadians(-45), Units.degreesToRadians(-135)))));
   }
 
   public Command getAutonomousCommand() {
