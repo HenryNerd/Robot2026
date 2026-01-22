@@ -10,14 +10,23 @@ import org.littletonrobotics.junction.AutoLog;
 public interface ShooterIO {
   @AutoLog
   public static class ShooterIOInputs {
-    public AngularVelocity shooterTopMotorSpeed = RotationsPerSecond.of(0);
-    public AngularVelocity shooterBottomMotorSpeed = RotationsPerSecond.of(0);
+    public AngularVelocity shooterLeftTopMotorSpeed = RotationsPerSecond.of(0);
+    public AngularVelocity shooterLeftBottomMotorSpeed = RotationsPerSecond.of(0);
+    public AngularVelocity shooterRightTopMotorSpeed = RotationsPerSecond.of(0);
+    public AngularVelocity shooterRightBottomMotorSpeed = RotationsPerSecond.of(0);
 
-    public boolean isShooterTopMotorConnected = false;
-    public boolean isShooterBottomMotorConnected = false;
+    public boolean isShooterLeftTopMotorConnected = false;
+    public boolean isShooterLeftBottomMotorConnected = false;
+    public boolean isShooterRightTopMotorConnected = false;
+    public boolean isShooterRightBottomMotorConnected = false;
+    
 
-    public Voltage shooterTopMotorAppliedVoltage = Volts.of(0);
-    public Voltage shooterBottomMotorAppliedVoltage = Volts.of(0);
+    public Voltage shooterLeftTopMotorAppliedVoltage = Volts.of(0);
+    public Voltage shooterLeftBottomMotorAppliedVoltage = Volts.of(0);
+    
+    public Voltage shooterRightTopMotorAppliedVoltage = Volts.of(0);
+    public Voltage shooterRightBottomMotorAppliedVoltage = Volts.of(0);
+    
   }
 
   public default void updateInputs(ShooterIOInputs inputs) {}
