@@ -71,7 +71,7 @@ public class AutoAimTest {
     testDrive.setInputSpeeds(new ChassisSpeeds(-1, -1, 0));
 
     vector = AutoAimCommand.getResultantVector(testDrive, new Translation2d(3, 1));
-    assertEquals(VecBuilder.fill(2, 0), vector);
+    assertEquals(VecBuilder.fill(4, 2), vector);
   }
 
   @Test
