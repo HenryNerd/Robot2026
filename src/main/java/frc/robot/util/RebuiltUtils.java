@@ -8,10 +8,6 @@ public class RebuiltUtils {
   /**
    * @return The current HUB state on robots alliance
    */
-  public static boolean test() {
-    return true;
-  }
-
   public static boolean isHubActive() {
     // Holy if statment
     String gameData = DriverStation.getGameSpecificMessage();
