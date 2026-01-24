@@ -1,7 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -54,22 +53,22 @@ public class AutoAimTest {
 
     return new AutoAimDrive(gyroIO, fl, fr, bl, br);
   }
-  
-    @Test
-    void validateResultantVector() {
-      AutoAimDrive testDrive = createTestDrive();
 
-      testDrive.setInputSpeeds(new ChassisSpeeds(0, 0, 0));
+  @Test
+  void validateResultantVector() {
+    AutoAimDrive testDrive = createTestDrive();
 
-      Vector<N2> vector = AutoAimCommand.getResultantVector(testDrive, new Translation2d(0, 1));
-      assertEquals(VecBuilder.fill(0, 1), vector);
+    testDrive.setInputSpeeds(new ChassisSpeeds(0, 0, 0));
 
-      testDrive.setInputSpeeds(new ChassisSpeeds(4, 0, 0));
+    Vector<N2> vector = AutoAimCommand.getResultantVector(testDrive, new Translation2d(0, 1));
+    assertEquals(VecBuilder.fill(0, 1), vector);
 
-      vector = AutoAimCommand.getResultantVector(testDrive, new Translation2d(0, 1));
-      assertEquals(VecBuilder.fill(-4, 1), vector);
+    testDrive.setInputSpeeds(new ChassisSpeeds(4, 0, 0));
 
-      testDrive.setInputSpeeds(new ChassisSpeeds(-1, -1, 0));
+    vector = AutoAimCommand.getResultantVector(testDrive, new Translation2d(0, 1));
+    assertEquals(VecBuilder.fill(-4, 1), vector);
+
+    testDrive.setInputSpeeds(new ChassisSpeeds(-1, -1, 0));
 
     vector = AutoAimCommand.getResultantVector(testDrive, new Translation2d(3, 1));
     assertEquals(VecBuilder.fill(4, 2), vector);
