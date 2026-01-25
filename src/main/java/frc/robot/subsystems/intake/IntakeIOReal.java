@@ -18,8 +18,10 @@ public class IntakeIOReal implements IntakeIO {
   public void updateInputs(IntakeIOInputs inputs) {
     inputs.isLeftMotorConnected = leftMotor.isConnected();
     inputs.isRightMotorConnected = rightMotor.isConnected();
-    inputs.leftRPM = leftMotor.getVelocity().getValueAsDouble();
-    inputs.dutyCycle = leftMotor.getDutyCycle().getValueAsDouble();
+    inputs.leftVelocity = leftMotor.getVelocity().getValue();
+    inputs.rightVelocity = rightMotor.getVelocity().getValue();
+    inputs.leftTemp = leftMotor.getDeviceTemp().getValue();
+    inputs.rightTemp = rightMotor.getDeviceTemp().getValue();
   }
 
   @Override

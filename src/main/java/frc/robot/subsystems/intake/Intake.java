@@ -1,11 +1,9 @@
 package frc.robot.subsystems.intake;
 
-import com.pathplanner.lib.events.CancelCommandEvent;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.littletonrobotics.junction.Logger;
 
 public class Intake extends SubsystemBase {
 
@@ -19,6 +17,7 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     intakeIO.updateInputs(inputs);
+    Logger.processInputs("Intake", inputs);
   }
 
   public void set(double power) {

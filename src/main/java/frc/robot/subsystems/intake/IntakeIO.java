@@ -1,5 +1,10 @@
 package frc.robot.subsystems.intake;
 
+import static edu.wpi.first.units.Units.Celsius;
+import static edu.wpi.first.units.Units.RPM;
+
+import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.units.measure.Temperature;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface IntakeIO {
@@ -7,8 +12,10 @@ public interface IntakeIO {
   public static class IntakeIOInputs {
     public boolean isLeftMotorConnected = false;
     public boolean isRightMotorConnected = false;
-    public double leftRPM = 0;
-    public double dutyCycle = 0;
+    public AngularVelocity leftVelocity = RPM.of(0);
+    public AngularVelocity rightVelocity = RPM.of(0);
+    public Temperature leftTemp = Celsius.of(0);
+    public Temperature rightTemp = Celsius.of(0);
   }
 
   public default void updateInputs(IntakeIOInputs inputs) {}
