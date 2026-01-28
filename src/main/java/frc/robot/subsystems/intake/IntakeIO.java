@@ -34,5 +34,5 @@ public interface IntakeIO {
 
   public default void set(double power) {}
 
-  public default void extend() {}
+  public default void setLatchPosition(Angle angle) {}
 }
