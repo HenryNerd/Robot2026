@@ -28,26 +28,9 @@ public class Indexer extends SubsystemBase {
     indexerIO.setPower(power);
   }
 
-  @AutoLogOutput
-  public Command runSpeed(DoubleSupplier speed) {
-    return runEnd(() -> indexerIO.setPower(speed.getAsDouble()), () -> indexerIO.setPower(0.0));
-  }
-
-  @AutoLogOutput
-  public Command instantRunPowerCommand(double power){
-    return (Commands.runOnce(() -> {
-      indexerIO.setPower(power);
-    }));
-  }
-
-  @AutoLogOutput
-  public Command startEndRunPowerCommand(double power){
+  public Command getIndexerSpeedCommand(DoubleSupplier speed){
     return (Commands.startEnd(
-    () -> {
-      indexerIO.setPower(power);
-    },
-    () -> {
-      indexerIO.setPower(0);
-    }));
+    () -> setPower(speed.getAsDouble()),
+    () -> setPower(0)));
   }
 }
