@@ -6,7 +6,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 public class IndexerIOReal implements IndexerIO {
 
   private final TalonFX indexerMotor;
-  private double targetVelocity;
 
   public IndexerIOReal() {
     indexerMotor = new TalonFX(IndexerConstants.indexerMotorID);
@@ -14,12 +13,13 @@ public class IndexerIOReal implements IndexerIO {
 
   @Override
   public void updateInputs(IndexerIOInputs inputs) {
-    inputs.currentVelocity = indexerMotor.getVelocity().getValueAsDouble();
+    inputs.velocity = indexerMotor.getVelocity().getValue();
+    inputs.isConnected = indexerMotor.isConnected();
+    inputs.temp = indexerMotor.getDeviceTemp().getValue();
   }
 
   @Override
-  public void changeVelocity(double dutyCycle) {
-    indexerMotor.setControl((new DutyCycleOut(0)).withOutput(targetVelocity).withEnableFOC(true));
-    targetVelocity = dutyCycle;
+  public void setPower(double dutyCycle) {
+    indexerMotor.setControl((new DutyCycleOut(dutyCycle)).withEnableFOC(true));
   }
 }

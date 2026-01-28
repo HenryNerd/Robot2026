@@ -1,5 +1,7 @@
 package frc.robot.subsystems.intake;
 
+import edu.wpi.first.units.measure.Angle;
+
 public class IntakeIOSim implements IntakeIO {
   public IntakeIOSim() {}
 
@@ -8,4 +10,7 @@ public class IntakeIOSim implements IntakeIO {
 
   @Override
   public void set(double power) {}
+
+  @Override
+  public void setLatchPosition(Angle angle) {}
 }
