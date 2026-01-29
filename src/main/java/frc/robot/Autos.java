@@ -3,6 +3,7 @@ package frc.robot;
 import badgerutils.networktables.LoggedNetworkTablesBuilder;
 import badgerutils.triggers.AllianceTriggers;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.util.FlippingUtil;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -12,6 +13,10 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.controls.Controls;
 import frc.robot.subsystems.drive.Drive;
+import frc.robot.subsystems.indexer.Indexer;
+import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.shooter.Shooter;
+
 import java.util.List;
 import java.util.Optional;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
@@ -19,6 +24,9 @@ import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
 
 public class Autos {
   private final Drive drivetrain;
+  private final Indexer indexer;
+  private final Intake intake;
+  private final Shooter shooter;
 
   // Prefer to construct autos lazily to save limited memory. Required with many auto files
   private final LoggedDashboardChooser<Auto> autoChooser;
@@ -28,8 +36,11 @@ public class Autos {
 
   private static final List<String> autoNames = AutoBuilder.getAllAutoNames();
 
-  public Autos(Drive drivetrain) {
+  public Autos(Drive drivetrain, Indexer indexer, Intake intake, Shooter shooter) {
     this.drivetrain = drivetrain;
+    this.indexer = indexer;
+    this.intake = intake;
+    this.shooter = shooter;
     autoWaitTime.set(0);
 
     autoChooser = new LoggedDashboardChooser<>("Autos/Auto Chooser");
@@ -68,6 +79,7 @@ public class Autos {
 
   private void bindNamedCommands() {
     //        NamedCommands.registerCommand();
+    NamedCommands.registerCommand("shoot8", null);
   }
 
   public static final class Auto {
