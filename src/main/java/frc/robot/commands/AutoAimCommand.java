@@ -35,6 +35,16 @@ public class AutoAimCommand extends ParallelCommandGroup {
     addCommands(lockedAngleCommand, shooterSpeedCommand);
   }
 
+  @Override
+  public void initialize() {
+    target =
+        AllianceTriggers.isBlueAlliance()
+            ? Constants.Locations.blueHub
+            : Constants.Locations.redHub;
+  }
+
+  @Override
+  public void execute() {}
   private static Translation2d getHubTranslation() {
     Translation3d target3d =
         AllianceTriggers.isBlueAlliance()

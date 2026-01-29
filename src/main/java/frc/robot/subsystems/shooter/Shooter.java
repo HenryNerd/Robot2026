@@ -3,6 +3,7 @@ package frc.robot.subsystems.shooter;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Voltage;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.littletonrobotics.junction.Logger;
 
 public class Shooter extends SubsystemBase {
 
@@ -16,13 +17,16 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     shooterIO.updateInputs(inputs);
+    Logger.processInputs("Shooter", inputs);
   }
 
   public void setVelocity(AngularVelocity velocity) {
     shooterIO.setVelocity(velocity);
+    Logger.recordOutput("Shooter/Velocity Setpoint", velocity);
   }
 
   public void setVoltage(Voltage voltage) {
     shooterIO.setVoltage(voltage);
+    Logger.recordOutput("Shooter/Voltage Setpoint", voltage);
   }
 }

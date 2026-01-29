@@ -1,40 +1,16 @@
 package frc.robot.subsystems.shooter;
 
-public interface ShooterConstants {
+public class ShooterConstants {
 
-  double kP = 0;
-  double kI = 0;
-  double kD = 0;
+  public static final double kP = 0;
+  public static final double kI = 0;
+  public static final double kD = 0;
 
-  double kV = 0;
+  public static final double kV = 0;
 
-  class LeftShooterConstants implements ShooterConstants {
+  public static final int leftTopMotorId = 0;
+  public static final int leftBottomMotorId = 0;
 
-    @Override
-    public int getTopMotorId() {
-      return 0;
-    }
-
-    @Override
-    public int getBottomMotorId() {
-      return 0;
-    }
-  }
-
-  class RightShooterConstants implements ShooterConstants {
-
-    @Override
-    public int getTopMotorId() {
-      return 0;
-    }
-
-    @Override
-    public int getBottomMotorId() {
-      return 0;
-    }
-  }
-
-  int getTopMotorId();
-
-  int getBottomMotorId();
+  public static final int rightTopMotorId = 0;
+  public static final int rightBottomMotorId = 0;
 }
