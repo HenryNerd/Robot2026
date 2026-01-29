@@ -27,7 +27,7 @@ public class FuelDetectionReal implements FuelDetectionIO {
             targets.stream()
                 .map((value) -> new ObjectTarget(value.yaw, value.pitch, value.area))
                 .toArray(ObjectTarget[]::new);
-      }else{
+      } else {
         inputs.bestTarget = new ObjectTarget(0, 0, -1);
       }
     }

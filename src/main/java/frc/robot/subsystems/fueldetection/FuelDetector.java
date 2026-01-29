@@ -19,6 +19,6 @@ public class FuelDetector extends SubsystemBase {
   }
 
   public ObjectTarget getBestTarget() {
-      return inputs.bestTarget;
+    return inputs.bestTarget;
   }
 }
