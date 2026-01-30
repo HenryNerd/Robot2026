@@ -83,7 +83,7 @@ public class Vision extends SubsystemBase {
 
       // Add tag poses
       for (int tagId : inputs[cameraIndex].tagIds) {
-        var tagPose = aprilTagLayout.getTagPose(tagId);
+        var tagPose = APRIL_TAG_LAYOUT.getTagPose(tagId);
         if (tagPose.isPresent()) {
           tagPoses.add(tagPose.get());
         }
@@ -95,15 +95,15 @@ public class Vision extends SubsystemBase {
         boolean rejectPose =
             observation.tagCount() == 0 // Must have at least one tag
                 || (observation.tagCount() == 1
-                    && observation.ambiguity() > maxAmbiguity) // Cannot be high ambiguity
+                    && observation.ambiguity() > MAX_AMBIGUITY) // Cannot be high ambiguity
                 || Math.abs(observation.pose().getZ())
-                    > maxZError // Must have realistic Z coordinate
+                    > MAX_Z_ERROR // Must have realistic Z coordinate
 
                 // Must be within the field boundaries
                 || observation.pose().getX() < 0.0
-                || observation.pose().getX() > aprilTagLayout.getFieldLength()
+                || observation.pose().getX() > APRIL_TAG_LAYOUT.getFieldLength()
                 || observation.pose().getY() < 0.0
-                || observation.pose().getY() > aprilTagLayout.getFieldWidth();
+                || observation.pose().getY() > APRIL_TAG_LAYOUT.getFieldWidth();
 
         // Add pose to log
         robotPoses.add(observation.pose());
@@ -121,11 +121,11 @@ public class Vision extends SubsystemBase {
         // Calculate standard deviations
         double stdDevFactor =
             Math.pow(observation.averageTagDistance(), 2.0) / observation.tagCount();
-        double linearStdDev = linearStdDevBaseline * stdDevFactor;
-        double angularStdDev = angularStdDevBaseline * stdDevFactor;
-        if (cameraIndex < cameraStdDevFactors.length) {
-          linearStdDev *= cameraStdDevFactors[cameraIndex];
-          angularStdDev *= cameraStdDevFactors[cameraIndex];
+        double linearStdDev = LINEAR_STDDEV_BASELINE * stdDevFactor;
+        double angularStdDev = ANGULAR_STDDEV_BASELINE * stdDevFactor;
+        if (cameraIndex < CAMERA_STDDEV_FACTORS.length) {
+          linearStdDev *= CAMERA_STDDEV_FACTORS[cameraIndex];
+          angularStdDev *= CAMERA_STDDEV_FACTORS[cameraIndex];
         }
 
         // Send vision observation

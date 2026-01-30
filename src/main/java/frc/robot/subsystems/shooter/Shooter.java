@@ -23,5 +23,4 @@ public class Shooter extends SubsystemBase {
     shooterIO.setVelocity(velocity);
     Logger.recordOutput("Shooter/Velocity Setpoint", velocity);
   }
-  
 }
