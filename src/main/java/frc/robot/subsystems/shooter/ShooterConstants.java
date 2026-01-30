@@ -2,15 +2,15 @@ package frc.robot.subsystems.shooter;
 
 public class ShooterConstants {
 
-  public static final double kP = 0;
-  public static final double kI = 0;
-  public static final double kD = 0;
+  public static final double KP = 0;
+  public static final double KI = 0;
+  public static final double KD = 0;
 
-  public static final double kV = 0;
+  public static final double KV = 0;
 
-  public static final int leftTopMotorId = 0;
-  public static final int leftBottomMotorId = 0;
+  public static final int LEFT_TOP_MOTOR_ID = 40;
+  public static final int LEFT_BOTTOM_MOTOR_ID = 41;
 
-  public static final int rightTopMotorId = 0;
-  public static final int rightBottomMotorId = 0;
+  public static final int RIGHT_TOP_MOTOR_ID = 42;
+  public static final int RIGHT_BOTTOM_MOTOR_ID = 43;
 }
