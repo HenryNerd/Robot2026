@@ -24,9 +24,4 @@ public class Shooter extends SubsystemBase {
     shooterIO.setVelocity(velocity);
     Logger.recordOutput("Shooter/Velocity Setpoint", velocity);
   }
-
-  public void setVoltage(Voltage voltage) {
-    shooterIO.setVoltage(voltage);
-    Logger.recordOutput("Shooter/Voltage Setpoint", voltage);
-  }
 }

@@ -1,17 +1,19 @@
 package frc.robot.subsystems.shooter;
 
+import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.Celsius;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 import static edu.wpi.first.units.Units.Volts;
 
 import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Temperature;
 import edu.wpi.first.units.measure.Voltage;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface ShooterIO {
   @AutoLog
-  public static class ShooterIOInputs {
+  class ShooterIOInputs {
     public AngularVelocity shooterLeftTopMotorSpeed = RotationsPerSecond.of(0);
     public AngularVelocity shooterLeftBottomMotorSpeed = RotationsPerSecond.of(0);
     public AngularVelocity shooterRightTopMotorSpeed = RotationsPerSecond.of(0);
@@ -22,11 +24,10 @@ public interface ShooterIO {
     public boolean isShooterRightTopMotorConnected = false;
     public boolean isShooterRightBottomMotorConnected = false;
 
-    public Voltage shooterLeftTopMotorAppliedVoltage = Volts.of(0);
-    public Voltage shooterLeftBottomMotorAppliedVoltage = Volts.of(0);
-
-    public Voltage shooterRightTopMotorAppliedVoltage = Volts.of(0);
-    public Voltage shooterRightBottomMotorAppliedVoltage = Volts.of(0);
+    public Current shooterLeftTopMotorAppliedVoltage = Amps.of(0);
+    public Current shooterLeftBottomMotorAppliedVoltage = Amps.of(0);
+    public Current shooterRightTopMotorAppliedVoltage = Amps.of(0);
+    public Current shooterRightBottomMotorAppliedVoltage = Amps.of(0);
 
     public Temperature shooterRightTopTemperature = Celsius.of(0);
     public Temperature shooterRightBottomTemperature = Celsius.of(0);
@@ -34,9 +35,7 @@ public interface ShooterIO {
     public Temperature shooterLeftBottomTemperature = Celsius.of(0);
   }
 
-  public default void updateInputs(ShooterIOInputs inputs) {}
-
-  public default void setVoltage(Voltage voltage) {}
-
-  public default void setVelocity(AngularVelocity velocity) {}
+  default void updateInputs(ShooterIOInputs inputs) {}
+  
+  default void setVelocity(AngularVelocity velocity) {}
 }
