@@ -22,10 +22,10 @@ public interface ShooterIO {
     public boolean isShooterRightTopMotorConnected = false;
     public boolean isShooterRightBottomMotorConnected = false;
 
-    public Current shooterLeftTopMotorAppliedVoltage = Amps.of(0);
-    public Current shooterLeftBottomMotorAppliedVoltage = Amps.of(0);
-    public Current shooterRightTopMotorAppliedVoltage = Amps.of(0);
-    public Current shooterRightBottomMotorAppliedVoltage = Amps.of(0);
+    public Current shooterLeftTopMotorSupplyCurrent = Amps.of(0);
+    public Current shooterLeftBottomMotorSupplyCurrent = Amps.of(0);
+    public Current shooterRightTopMotorSupplyCurrent = Amps.of(0);
+    public Current shooterRightBottomMotorSupplyCurrent = Amps.of(0);
 
     public Temperature shooterRightTopTemperature = Celsius.of(0);
     public Temperature shooterRightBottomTemperature = Celsius.of(0);

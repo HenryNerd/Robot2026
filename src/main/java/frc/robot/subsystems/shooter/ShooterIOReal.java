@@ -12,12 +12,6 @@ import edu.wpi.first.units.measure.Temperature;
 
 public class ShooterIOReal implements ShooterIO {
 
-  private final TalonFX leftTopMotor;
-  private final TalonFX leftBottomMotor;
-
-  private final TalonFX rightTopMotor;
-  private final TalonFX rightBottomMotor;
-
   private final StatusSignal<Current> leftTopMotorSupplyCurrent;
   private final StatusSignal<Current> leftBottomMotorSupplyCurrent;
   private final StatusSignal<Current> rightTopMotorSupplyCurrent;
@@ -28,12 +22,18 @@ public class ShooterIOReal implements ShooterIO {
   private final StatusSignal<AngularVelocity> rightTopMotorVelocity;
   private final StatusSignal<AngularVelocity> rightBottomMotorVelocity;
 
-  private final VelocityTorqueCurrentFOC velocityRequest;
-
   private final StatusSignal<Temperature> leftTopMotorTemperature;
   private final StatusSignal<Temperature> leftBottomMotorTemperature;
   private final StatusSignal<Temperature> rightTopMotorTemperature;
   private final StatusSignal<Temperature> rightBottomMotorTemperature;
+
+
+  private final TalonFX leftTopMotor;
+  private final TalonFX leftBottomMotor;
+  private final TalonFX rightTopMotor;
+  private final TalonFX rightBottomMotor;
+
+  private final VelocityTorqueCurrentFOC velocityRequest;
 
   public ShooterIOReal() {
     leftTopMotor = new TalonFX(ShooterConstants.LEFT_TOP_MOTOR_ID);
@@ -92,10 +92,10 @@ public class ShooterIOReal implements ShooterIO {
     inputs.isShooterRightTopMotorConnected = rightTopShooterStatus.isOK();
     inputs.isShooterRightBottomMotorConnected = rightBottomShooterStatus.isOK();
 
-    inputs.shooterLeftTopMotorAppliedVoltage = leftTopMotorSupplyCurrent.getValue();
-    inputs.shooterLeftBottomMotorAppliedVoltage = leftBottomMotorSupplyCurrent.getValue();
-    inputs.shooterRightTopMotorAppliedVoltage = rightTopMotorSupplyCurrent.getValue();
-    inputs.shooterRightBottomMotorAppliedVoltage = rightBottomMotorSupplyCurrent.getValue();
+    inputs.shooterLeftTopMotorSupplyCurrent = leftTopMotorSupplyCurrent.getValue();
+    inputs.shooterLeftBottomMotorSupplyCurrent = leftBottomMotorSupplyCurrent.getValue();
+    inputs.shooterRightTopMotorSupplyCurrent = rightTopMotorSupplyCurrent.getValue();
+    inputs.shooterRightBottomMotorSupplyCurrent = rightBottomMotorSupplyCurrent.getValue();
 
     inputs.shooterLeftTopMotorSpeed = leftTopMotorVelocity.getValue();
     inputs.shooterLeftBottomMotorSpeed = leftBottomMotorVelocity.getValue();
