@@ -16,7 +16,10 @@ public class FuelDetectionReal implements FuelDetectionIO {
   public void updateInputs(FuelDetectionInputs inputs) {
     inputs.isConnected = camera.isConnected();
 
-    for (PhotonPipelineResult result : camera.getAllUnreadResults()) {
+    List<PhotonPipelineResult> results = camera.getAllUnreadResults();
+
+    if (!results.isEmpty()) {
+      PhotonPipelineResult result = results.get(results.size() - 1);
       if (result.hasTargets()) {
         List<PhotonTrackedTarget> targets = result.getTargets();
         PhotonTrackedTarget bestTarget = result.getBestTarget();
