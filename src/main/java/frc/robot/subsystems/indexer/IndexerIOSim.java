@@ -8,5 +8,5 @@ public class IndexerIOSim implements IndexerIO {
   public void updateInputs(IndexerIOInputs inputs) {}
 
   @Override
-  public void changeVelocity(double velocity) {}
+  public void setPower(double velocity) {}
 }

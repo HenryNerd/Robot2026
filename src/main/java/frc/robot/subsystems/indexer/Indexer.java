@@ -1,13 +1,15 @@
 package frc.robot.subsystems.indexer;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import java.util.function.DoubleSupplier;
 import org.littletonrobotics.junction.Logger;
 
 public class Indexer extends SubsystemBase {
 
   public final IndexerIOInputsAutoLogged inputs = new IndexerIOInputsAutoLogged();
   public final IndexerIO indexerIO;
-  private double targetSpeed = 0;
 
   public Indexer(IndexerIO indexerIO) {
     this.indexerIO = indexerIO;
@@ -17,10 +19,13 @@ public class Indexer extends SubsystemBase {
   public void periodic() {
     indexerIO.updateInputs(inputs);
     Logger.processInputs(getName(), inputs);
-    indexerIO.changeVelocity(targetSpeed);
   }
 
-  public void changeVelocity(double velocity) {
-    targetSpeed = velocity;
+  public void setPower(double power) {
+    indexerIO.setPower(power);
+  }
+
+  public Command getIndexerSpeedCommand(DoubleSupplier speed) {
+    return (Commands.startEnd(() -> setPower(speed.getAsDouble()), () -> setPower(0)));
   }
 }

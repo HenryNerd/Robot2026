@@ -1,12 +1,16 @@
 package frc.robot.subsystems.intake;
 
-public class IntakeIOSim implements IntakeIO {
+import edu.wpi.first.units.measure.Angle;
 
+public class IntakeIOSim implements IntakeIO {
   public IntakeIOSim() {}
 
   @Override
   public void updateInputs(IntakeIOInputs inputs) {}
 
   @Override
-  public void set(double speed) {}
+  public void set(double power) {}
+
+  @Override
+  public void setLatchPosition(Angle angle) {}
 }

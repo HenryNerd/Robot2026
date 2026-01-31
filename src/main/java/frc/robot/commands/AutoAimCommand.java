@@ -48,9 +48,8 @@ public class AutoAimCommand extends ParallelCommandGroup {
 
     Vector<N2> targetVector = target.toVector();
     Vector<N2> velocityVector =
-        VecBuilder.fill(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond)
-            .times(0.02);
+        VecBuilder.fill(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond);
 
-    return targetVector.plus(velocityVector);
+    return targetVector.minus(velocityVector);
   }
 }
