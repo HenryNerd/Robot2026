@@ -21,8 +21,8 @@ public class Intake extends SubsystemBase {
     Logger.processInputs("Intake", inputs);
   }
 
-  public void setPower(double dutyCycle) {
-    this.intakeIO.set(dutyCycle);
+  public void setDutyCycle(double dutyCycle) {
+    this.intakeIO.setDutyCycle(dutyCycle);
     Logger.recordOutput("Intake/Duty Cycle", dutyCycle);
   }
 
@@ -31,11 +31,11 @@ public class Intake extends SubsystemBase {
     Logger.recordOutput("Intake/Deployer Position", angle);
   }
 
-  public Command intakePowerCommand(double dutyCycle) {
-    return new InstantCommand(() -> this.setPower(dutyCycle));
+  public Command intakeAtDutyCycleCommand(double dutyCycle) {
+    return new InstantCommand(() -> this.setDutyCycle(dutyCycle));
   }
 
-  public Command deployerPositionCommand(Angle angle) {
+  public Command positionDeployerCommand(Angle angle) {
     return new InstantCommand(() -> this.setDeployerPosition(angle));
   }
 }
