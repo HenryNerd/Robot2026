@@ -5,21 +5,33 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 public class IndexerIOReal implements IndexerIO {
 
-  private final TalonFX indexerMotor;
+  private final TalonFX leftIndexerMotor;
+  private final TalonFX rightIndexerMotor;
 
   public IndexerIOReal() {
-    indexerMotor = new TalonFX(IndexerConstants.indexerMotorID);
+    leftIndexerMotor = new TalonFX(IndexerConstants.INDEXER_LEFT_MOTOR_ID);
+    rightIndexerMotor = new TalonFX(IndexerConstants.INDEXER_RIGHT_MOTOR_ID);
   }
 
   @Override
   public void updateInputs(IndexerIOInputs inputs) {
-    inputs.velocity = indexerMotor.getVelocity().getValue();
-    inputs.isConnected = indexerMotor.isConnected();
-    inputs.temp = indexerMotor.getDeviceTemp().getValue();
+    inputs.leftVelocity = leftIndexerMotor.getVelocity().getValue();
+    inputs.rightVelocity = rightIndexerMotor.getVelocity().getValue();
+
+    inputs.isLeftMotorConnected = leftIndexerMotor.isConnected();
+    inputs.isRightMotorConnected = rightIndexerMotor.isConnected();
+
+    inputs.leftTemp = leftIndexerMotor.getDeviceTemp().getValue();
+    inputs.rightTemp = rightIndexerMotor.getDeviceTemp().getValue();
+
+    inputs.leftSupplyCurrent = leftIndexerMotor.getSupplyCurrent().getValue();
+    inputs.rightSupplyCurrent = rightIndexerMotor.getSupplyCurrent().getValue();
   }
 
   @Override
-  public void setPower(double dutyCycle) {
-    indexerMotor.setControl((new DutyCycleOut(dutyCycle)).withEnableFOC(true));
+  public void setDutyCycle(double dutyCycle) {
+    DutyCycleOut request = new DutyCycleOut(dutyCycle).withEnableFOC(true);
+    leftIndexerMotor.setControl(request);
+    rightIndexerMotor.setControl(request);
   }
 }

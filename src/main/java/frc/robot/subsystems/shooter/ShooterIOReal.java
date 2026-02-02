@@ -39,7 +39,7 @@ public class ShooterIOReal implements ShooterIO {
   private final StatusSignal<Double> leftBottomMotorError;
   private final StatusSignal<Double> rightTopMotorError;
   private final StatusSignal<Double> rightBottomMotorError;
-  
+
   private final StatusSignal<AngularVelocity> encoderVelocity;
 
   private final TalonFX leftTopMotor;
@@ -56,7 +56,7 @@ public class ShooterIOReal implements ShooterIO {
     // Request Initialization
     velocityRequest = new VelocityTorqueCurrentFOC(0);
     neutralRequest = new NeutralOut();
-    
+
     // CAN Device Initialization
     leftTopMotor = new TalonFX(ShooterConstants.LEFT_TOP_MOTOR_ID);
     leftBottomMotor = new TalonFX(ShooterConstants.LEFT_BOTTOM_MOTOR_ID);
@@ -66,7 +66,7 @@ public class ShooterIOReal implements ShooterIO {
 
     encoder = new CANcoder(ShooterConstants.ENCODER_ID);
     encoderVelocity = encoder.getVelocity();
-    
+
     // Configs
     TalonFXConfiguration shooterMotorConfig = new TalonFXConfiguration();
 
@@ -126,7 +126,7 @@ public class ShooterIOReal implements ShooterIO {
     leftBottomMotorTemperature = leftBottomMotor.getDeviceTemp();
     rightTopMotorTemperature = rightTopMotor.getDeviceTemp();
     rightBottomMotorTemperature = rightBottomMotor.getDeviceTemp();
-    
+
     leftTopMotorError = leftTopMotor.getClosedLoopError();
     leftBottomMotorError = leftBottomMotor.getClosedLoopError();
     rightTopMotorError = rightTopMotor.getClosedLoopError();
@@ -165,12 +165,12 @@ public class ShooterIOReal implements ShooterIO {
     inputs.shooterLeftBottomTemperature = leftBottomMotorTemperature.getValue();
     inputs.shooterRightTopTemperature = rightTopMotorTemperature.getValue();
     inputs.shooterRightBottomTemperature = rightBottomMotorTemperature.getValue();
-    
+
     inputs.shooterLeftTopClosedLoopError = leftTopMotorError.getValue();
     inputs.shooterLeftBottomClosedLoopError = leftBottomMotorError.getValue();
     inputs.shooterRightTopClosedLoopError = rightTopMotorError.getValue();
     inputs.shooterRightBottomClosedLoopError = rightBottomMotorError.getValue();
-    
+
     // Encoder
     var encoderStatus = BaseStatusSignal.refreshAll(encoderVelocity);
     inputs.isEncoderConnected = encoderStatus.isOK();

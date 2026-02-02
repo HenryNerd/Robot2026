@@ -33,17 +33,16 @@ public interface ShooterIO {
     public Temperature shooterRightBottomTemperature = Celsius.of(0);
     public Temperature shooterLeftTopTemperature = Celsius.of(0);
     public Temperature shooterLeftBottomTemperature = Celsius.of(0);
-    
+
     public double shooterLeftTopClosedLoopError = 0;
     public double shooterLeftBottomClosedLoopError = 0;
     public double shooterRightTopClosedLoopError = 0;
     public double shooterRightBottomClosedLoopError = 0;
-
   }
 
   default void updateInputs(ShooterIOInputs inputs) {}
 
   default void setVelocity(AngularVelocity velocity) {}
-  
-  default void setIdle(){}
+
+  default void setIdle() {}
 }
