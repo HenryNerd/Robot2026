@@ -16,11 +16,9 @@ import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.indexer.Indexer;
 import frc.robot.subsystems.indexer.IndexerIO;
 import frc.robot.subsystems.indexer.IndexerIOReal;
-import frc.robot.subsystems.indexer.IndexerIOSim;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIO;
 import frc.robot.subsystems.intake.IntakeIOReal;
-import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.shooter.ShooterIO;
 import frc.robot.subsystems.shooter.ShooterIOReal;
@@ -71,8 +69,8 @@ public class RobotContainer {
                 new ModuleIOSim(TunerConstants.FrontRight),
                 new ModuleIOSim(TunerConstants.BackLeft),
                 new ModuleIOSim(TunerConstants.BackRight));
-        intake = new Intake(new IntakeIOSim());
-        indexer = new Indexer(new IndexerIOSim());
+        intake = new Intake(new IntakeIOReal());
+        indexer = new Indexer(new IndexerIOReal());
         shooter = new Shooter(new ShooterIOReal());
         break;
 

@@ -62,7 +62,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
                         () -> operatorController.setRumble(RumbleType.kBothRumble, 0)))
                 .withTimeout(0.05));
     drive.setDefaultCommand(
-        DriveCommands.joystickDrive(
+        DriveCommands.joystickDriveCommand(
             drive,
             () -> -driverController.getLeftY(),
             () -> -driverController.getLeftX(),
