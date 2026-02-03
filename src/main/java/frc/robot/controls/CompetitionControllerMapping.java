@@ -27,7 +27,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
   @Override
   public void bind() {
     drive.setDefaultCommand(
-        DriveCommands.joystickDrive(
+        DriveCommands.joystickDriveCommand(
             drive,
             () -> -driverController.getLeftY(),
             () -> -driverController.getLeftX(),
@@ -44,8 +44,8 @@ public class CompetitionControllerMapping extends ControllerMapping {
                 .ignoringDisable(true));
     driverController
         .leftTrigger(0.5)
-        .onTrue(Commands.runOnce(() -> intake.set(1)))
-        .onFalse(Commands.runOnce(() -> intake.set(0)));
+        .onTrue(Commands.runOnce(() -> intake.setDutyCycle(1)))
+        .onFalse(Commands.runOnce(() -> intake.setDutyCycle(0)));
   }
 
   @Override

@@ -9,14 +9,17 @@ public class FuelDetectionReal implements FuelDetectionIO {
   private final PhotonCamera camera;
 
   public FuelDetectionReal() {
-    camera = new PhotonCamera(FuelDetectionConstants.fuelDetectionCameraName);
+    camera = new PhotonCamera(FuelDetectionConstants.FUEL_DETECTION_CAMERA_NAME);
   }
 
   @Override
   public void updateInputs(FuelDetectionInputs inputs) {
     inputs.isConnected = camera.isConnected();
 
-    for (PhotonPipelineResult result : camera.getAllUnreadResults()) {
+    List<PhotonPipelineResult> results = camera.getAllUnreadResults();
+
+    if (!results.isEmpty()) {
+      PhotonPipelineResult result = results.get(results.size() - 1);
       if (result.hasTargets()) {
         List<PhotonTrackedTarget> targets = result.getTargets();
         PhotonTrackedTarget bestTarget = result.getBestTarget();

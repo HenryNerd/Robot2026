@@ -18,14 +18,15 @@ public class Indexer extends SubsystemBase {
   @Override
   public void periodic() {
     indexerIO.updateInputs(inputs);
-    Logger.processInputs(getName(), inputs);
+    Logger.processInputs("Indexer", inputs);
   }
 
-  public void setPower(double power) {
-    indexerIO.setPower(power);
+  public void setDutyCycle(double dutyCycle) {
+    indexerIO.setDutyCycle(dutyCycle);
+    Logger.recordOutput("Indexer/Requested Duty Cycle", dutyCycle);
   }
 
-  public Command getIndexerSpeedCommand(DoubleSupplier speed) {
-    return (Commands.startEnd(() -> setPower(speed.getAsDouble()), () -> setPower(0)));
+  public Command indexUntilCancelledCommand(DoubleSupplier speed) {
+    return (Commands.startEnd(() -> setDutyCycle(speed.getAsDouble()), () -> setDutyCycle(0)));
   }
 }
