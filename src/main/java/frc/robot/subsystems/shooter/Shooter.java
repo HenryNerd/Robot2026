@@ -72,8 +72,4 @@ public class Shooter extends SubsystemBase {
   public Trigger isAtRequestedSpeedTrigger() {
     return new Trigger(isAtRequestedSpeed());
   }
-
-  public boolean isAtSpeed() {
-    return shooterIO.isAtSpeed();
-  }
 }

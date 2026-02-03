@@ -45,6 +45,4 @@ public interface ShooterIO {
   default void setVelocity(AngularVelocity velocity) {}
 
   default void setIdle() {}
-
-  public default boolean isAtSpeed() {return true;}
 }

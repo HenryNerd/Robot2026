@@ -188,11 +188,6 @@ public class ShooterIOReal implements ShooterIO {
   }
 
   @Override
-  public boolean isAtSpeed()  {
-    return leftTopMotor.getClosedLoopError().getValue() < ShooterConstants.PID_TOLERANCE.in(RotationsPerSecond);
-  }
-
-  @Override
   public void setIdle() {
     leftTopMotor.setControl(neutralRequest);
     leftBottomMotor.setControl(neutralRequest);
