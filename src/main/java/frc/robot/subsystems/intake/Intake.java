@@ -31,11 +31,19 @@ public class Intake extends SubsystemBase {
     Logger.recordOutput("Intake/Deployer Position", angle);
   }
 
+  public void setDeployerPosition(DeployerPosition position) {
+    this.setDeployerPosition(position.deployerPosition());
+  }
+
   public Command intakeAtDutyCycleCommand(double dutyCycle) {
     return new InstantCommand(() -> this.setDutyCycle(dutyCycle));
   }
 
   public Command positionDeployerCommand(Angle angle) {
     return new InstantCommand(() -> this.setDeployerPosition(angle));
+  }
+
+  public Command positionDeployerCommand(DeployerPosition position) {
+    return new InstantCommand(() -> this.setDeployerPosition(position));
   }
 }
