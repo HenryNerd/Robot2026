@@ -1,6 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.controls.Controls;
 import frc.robot.generated.TunerConstants;
@@ -56,6 +55,19 @@ public class RobotContainer {
         intake = new Intake(new IntakeIOReal());
         indexer = new Indexer(new IndexerIOReal());
         shooter = new Shooter(new ShooterIOReal());
+        vision =
+            new Vision(
+                drive::addVisionMeasurement,
+                new VisionIOPhotonVision(
+                    VisionConstants.LEFT_CAMERA_NAME, VisionConstants.LEFT_CAMERA_POSITION),
+                new VisionIOPhotonVision(
+                    VisionConstants.BACK_LEFT_CAMERA_NAME,
+                    VisionConstants.BACK_LEFT_CAMERA_POSITION),
+                new VisionIOPhotonVision(
+                    VisionConstants.BACK_RIGHT_CAMERA_NAME,
+                    VisionConstants.BACK_RIGHT_CAMERA_POSITION),
+                new VisionIOPhotonVision(
+                    VisionConstants.RIGHT_CAMERA_NAME, VisionConstants.RIGHT_CAMERA_POSITION));
         break;
 
       case SIM:
@@ -70,6 +82,25 @@ public class RobotContainer {
         intake = new Intake(new IntakeIOReal());
         indexer = new Indexer(new IndexerIOReal());
         shooter = new Shooter(new ShooterIOReal());
+        vision =
+            new Vision(
+                drive::addVisionMeasurement,
+                new VisionIOPhotonVisionSim(
+                    VisionConstants.LEFT_CAMERA_NAME,
+                    VisionConstants.LEFT_CAMERA_POSITION,
+                    () -> drive.getPose()),
+                new VisionIOPhotonVisionSim(
+                    VisionConstants.BACK_LEFT_CAMERA_NAME,
+                    VisionConstants.BACK_LEFT_CAMERA_POSITION,
+                    () -> drive.getPose()),
+                new VisionIOPhotonVisionSim(
+                    VisionConstants.BACK_RIGHT_CAMERA_NAME,
+                    VisionConstants.BACK_RIGHT_CAMERA_POSITION,
+                    () -> drive.getPose()),
+                new VisionIOPhotonVisionSim(
+                    VisionConstants.RIGHT_CAMERA_NAME,
+                    VisionConstants.RIGHT_CAMERA_POSITION,
+                    () -> drive.getPose()));
         break;
 
       default:
@@ -84,57 +115,18 @@ public class RobotContainer {
         intake = new Intake(new IntakeIO() {});
         indexer = new Indexer(new IndexerIO() {});
         shooter = new Shooter(new ShooterIO() {});
+        vision =
+            new Vision(
+                drive::addVisionMeasurement,
+                new VisionIO() {},
+                new VisionIO() {},
+                new VisionIO() {},
+                new VisionIO() {});
         break;
     }
 
     controls = new Controls(drive, intake);
     autos = new Autos(drive);
-
-    vision = initializeVision();
-  }
-
-  private Vision initializeVision() {
-    drive.setVisionStdDevs(VecBuilder.fill(1, 1, 1));
-    switch (Constants.currentMode) {
-      case REAL:
-        return new Vision(
-            drive::addVisionMeasurement,
-            new VisionIOPhotonVision(
-                VisionConstants.LEFT_CAMERA_NAME, VisionConstants.LEFT_CAMERA_POSITION),
-            new VisionIOPhotonVision(
-                VisionConstants.BACK_LEFT_CAMERA_NAME, VisionConstants.BACK_LEFT_CAMERA_POSITION),
-            new VisionIOPhotonVision(
-                VisionConstants.BACK_RIGHT_CAMERA_NAME, VisionConstants.BACK_RIGHT_CAMERA_POSITION),
-            new VisionIOPhotonVision(
-                VisionConstants.RIGHT_CAMERA_NAME, VisionConstants.RIGHT_CAMERA_POSITION));
-      case SIM:
-        return new Vision(
-            drive::addVisionMeasurement,
-            new VisionIOPhotonVisionSim(
-                VisionConstants.LEFT_CAMERA_NAME,
-                VisionConstants.LEFT_CAMERA_POSITION,
-                () -> drive.getPose()),
-            new VisionIOPhotonVisionSim(
-                VisionConstants.BACK_LEFT_CAMERA_NAME,
-                VisionConstants.BACK_LEFT_CAMERA_POSITION,
-                () -> drive.getPose()),
-            new VisionIOPhotonVisionSim(
-                VisionConstants.BACK_RIGHT_CAMERA_NAME,
-                VisionConstants.BACK_RIGHT_CAMERA_POSITION,
-                () -> drive.getPose()),
-            new VisionIOPhotonVisionSim(
-                VisionConstants.RIGHT_CAMERA_NAME,
-                VisionConstants.RIGHT_CAMERA_POSITION,
-                () -> drive.getPose()));
-
-      default:
-        return new Vision(
-            drive::addVisionMeasurement,
-            new VisionIO() {},
-            new VisionIO() {},
-            new VisionIO() {},
-            new VisionIO() {});
-    }
   }
 
   public Command getAutonomousCommand() {
