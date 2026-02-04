@@ -1,8 +1,6 @@
 package frc.robot.subsystems.shooter;
 
 import badgerutils.motor.MotorConfigUtils;
-import frc.robot.Constants;
-
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -10,6 +8,7 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import frc.robot.Constants;
 
 public class ShooterConstants {
 
@@ -21,8 +20,6 @@ public class ShooterConstants {
   public static final double ROTOR_TO_SENSOR_RATIO = 1;
 
   public static final double SUPPLY_CURRENT_LIMIT = 60;
-
-  
 
   public static final double ERROR_THRESHOLD = 25;
 
