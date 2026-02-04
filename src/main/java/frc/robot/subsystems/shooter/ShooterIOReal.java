@@ -1,6 +1,7 @@
 package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix6.BaseStatusSignal;
+import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
@@ -92,14 +93,30 @@ public class ShooterIOReal implements ShooterIO {
   @Override
   public void updateInputs(ShooterIOInputs inputs) {
     // Motor Statuses
-    var leftTopShooterStatus =
-        BaseStatusSignal.refreshAll(leftTopMotorSupplyCurrent, leftTopMotorVelocity);
-    var leftBottomShooterStatus =
-        BaseStatusSignal.refreshAll(leftBottomMotorSupplyCurrent, leftBottomMotorVelocity);
-    var rightTopShooterStatus =
-        BaseStatusSignal.refreshAll(rightTopMotorSupplyCurrent, rightTopMotorVelocity);
-    var rightBottomShooterStatus =
-        BaseStatusSignal.refreshAll(rightBottomMotorSupplyCurrent, rightBottomMotorVelocity);
+    StatusCode leftTopShooterStatus =
+        BaseStatusSignal.refreshAll(
+            leftTopMotorSupplyCurrent,
+            leftTopMotorVelocity,
+            leftTopMotorTemperature,
+            leftTopMotorError);
+    StatusCode leftBottomShooterStatus =
+        BaseStatusSignal.refreshAll(
+            leftBottomMotorSupplyCurrent,
+            leftBottomMotorVelocity,
+            leftBottomMotorTemperature,
+            leftBottomMotorError);
+    StatusCode rightTopShooterStatus =
+        BaseStatusSignal.refreshAll(
+            rightTopMotorSupplyCurrent,
+            rightTopMotorVelocity,
+            rightTopMotorTemperature,
+            rightTopMotorError);
+    StatusCode rightBottomShooterStatus =
+        BaseStatusSignal.refreshAll(
+            rightBottomMotorSupplyCurrent,
+            rightBottomMotorVelocity,
+            rightBottomMotorTemperature,
+            rightBottomMotorError);
 
     // Motor Inputs
     inputs.isShooterLeftTopMotorConnected = leftTopShooterStatus.isOK();
