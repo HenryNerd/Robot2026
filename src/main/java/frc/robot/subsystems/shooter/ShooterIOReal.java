@@ -5,7 +5,6 @@ import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
-import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
@@ -70,23 +69,14 @@ public class ShooterIOReal implements ShooterIO {
     // Configs
     TalonFXConfiguration shooterMotorConfig = new TalonFXConfiguration();
 
-    Slot0Configs pidConfigs = new Slot0Configs();
-    pidConfigs.kP = ShooterConstants.KP;
-    pidConfigs.kI = ShooterConstants.KI;
-    pidConfigs.kD = ShooterConstants.KD;
-    pidConfigs.kV = ShooterConstants.KV;
-
     FeedbackConfigs feedbackConfigs = new FeedbackConfigs();
     feedbackConfigs.FeedbackRemoteSensorID = ShooterConstants.ENCODER_ID;
     feedbackConfigs.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
     feedbackConfigs.RotorToSensorRatio = ShooterConstants.ROTOR_TO_SENSOR_RATIO;
 
-    CurrentLimitsConfigs currentConfigs = new CurrentLimitsConfigs();
-    currentConfigs.SupplyCurrentLimit = ShooterConstants.SUPPLY_CURRENT_LIMIT;
-
-    shooterMotorConfig.Slot0 = pidConfigs;
+    shooterMotorConfig.Slot0 = ShooterConstants.PID_CONFIGS;
     shooterMotorConfig.Feedback = feedbackConfigs;
-    shooterMotorConfig.CurrentLimits = currentConfigs;
+    shooterMotorConfig.CurrentLimits = ShooterConstants.CURRENT_LIMITS_CONFIGS;
 
     MotorOutputConfigs motorOutputConfigsNonInvert = new MotorOutputConfigs();
     motorOutputConfigsNonInvert.NeutralMode = NeutralModeValue.Coast;

@@ -24,12 +24,12 @@ public class Intake extends SubsystemBase {
 
   public void setDutyCycle(double dutyCycle) {
     this.intakeIO.setDutyCycle(dutyCycle);
-    Logger.recordOutput("Intake/Duty Cycle", dutyCycle);
+    Logger.recordOutput("Intake/Duty Cycle Setpoint", dutyCycle);
   }
 
   public void setDeployerPosition(Angle angle) {
     intakeIO.setDeployerPosition(angle);
-    Logger.recordOutput("Intake/Deployer Position", angle);
+    Logger.recordOutput("Intake/Deployer Position Setpoint", angle);
   }
 
   public void setDeployerPosition(DeployerPosition position) {

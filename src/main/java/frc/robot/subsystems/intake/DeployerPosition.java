@@ -5,9 +5,9 @@ import static edu.wpi.first.units.Units.Degrees;
 import edu.wpi.first.units.measure.Angle;
 
 public enum DeployerPosition {
-  Retracted(Degrees.of(0)),
+  RETRACTED(Degrees.of(0)),
   // Replace with actual angle once it is known
-  Extended(Degrees.of(0));
+  EXTENDED(Degrees.of(0));
 
   private Angle angle;
 

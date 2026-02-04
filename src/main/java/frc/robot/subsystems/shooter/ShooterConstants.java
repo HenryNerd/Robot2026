@@ -2,6 +2,10 @@ package frc.robot.subsystems.shooter;
 
 import static edu.wpi.first.units.Units.RPM;
 
+import badgerutils.motor.MotorConfigUtils;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.signals.GravityTypeValue;
 import edu.wpi.first.units.measure.AngularVelocity;
 
 public class ShooterConstants {
@@ -27,4 +31,13 @@ public class ShooterConstants {
   public static final int ENCODER_ID = 17;
 
   public static final double ERROR_THRESHOLD = 25;
+
+  public static final Slot0Configs PID_CONFIGS =
+      MotorConfigUtils.createPidConfig(
+          KP, KI, KD, 0, KV, 0, 0, GravityTypeValue.Elevator_Static); // gravity doesn't matter
+  public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS =
+      new CurrentLimitsConfigs()
+          .withStatorCurrentLimitEnable(false)
+          .withSupplyCurrentLimit(SUPPLY_CURRENT_LIMIT)
+          .withSupplyCurrentLimitEnable(true);
 }
