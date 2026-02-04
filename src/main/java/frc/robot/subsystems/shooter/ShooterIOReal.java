@@ -2,17 +2,10 @@ package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
-import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.configs.FeedbackConfigs;
-import com.ctre.phoenix6.configs.MotorOutputConfigs;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
-import com.ctre.phoenix6.signals.InvertedValue;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Temperature;
@@ -66,40 +59,12 @@ public class ShooterIOReal implements ShooterIO {
     encoder = new CANcoder(ShooterConstants.ENCODER_ID);
     encoderVelocity = encoder.getVelocity();
 
-    // Configs
-    TalonFXConfiguration shooterMotorConfig = new TalonFXConfiguration();
-
-    FeedbackConfigs feedbackConfigs = new FeedbackConfigs();
-    feedbackConfigs.FeedbackRemoteSensorID = ShooterConstants.ENCODER_ID;
-    feedbackConfigs.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
-    feedbackConfigs.RotorToSensorRatio = ShooterConstants.ROTOR_TO_SENSOR_RATIO;
-
-    shooterMotorConfig.Slot0 = ShooterConstants.PID_CONFIGS;
-    shooterMotorConfig.Feedback = feedbackConfigs;
-    shooterMotorConfig.CurrentLimits = ShooterConstants.CURRENT_LIMITS_CONFIGS;
-
-    MotorOutputConfigs motorOutputConfigsNonInvert = new MotorOutputConfigs();
-    motorOutputConfigsNonInvert.NeutralMode = NeutralModeValue.Coast;
-    motorOutputConfigsNonInvert.Inverted = InvertedValue.CounterClockwise_Positive;
-
-    MotorOutputConfigs motorOutputConfigsInvert = new MotorOutputConfigs();
-    motorOutputConfigsInvert.NeutralMode = NeutralModeValue.Coast;
-    motorOutputConfigsInvert.Inverted = InvertedValue.Clockwise_Positive;
-
     // Apply configurations
-    leftTopMotor
-        .getConfigurator()
-        .apply(shooterMotorConfig.withMotorOutput(motorOutputConfigsNonInvert));
-    leftBottomMotor
-        .getConfigurator()
-        .apply(shooterMotorConfig.withMotorOutput(motorOutputConfigsNonInvert));
+    leftTopMotor.getConfigurator().apply(ShooterConstants.CW_SHOOTER_MOTOR_CONFIGS);
+    leftBottomMotor.getConfigurator().apply(ShooterConstants.CW_SHOOTER_MOTOR_CONFIGS);
 
-    rightTopMotor
-        .getConfigurator()
-        .apply(shooterMotorConfig.withMotorOutput(motorOutputConfigsInvert));
-    rightBottomMotor
-        .getConfigurator()
-        .apply(shooterMotorConfig.withMotorOutput(motorOutputConfigsInvert));
+    rightTopMotor.getConfigurator().apply(ShooterConstants.CCW_SHOOTER_MOTOR_CONFIGS);
+    rightBottomMotor.getConfigurator().apply(ShooterConstants.CCW_SHOOTER_MOTOR_CONFIGS);
 
     // Status Signals
     leftTopMotorSupplyCurrent = leftTopMotor.getSupplyCurrent();

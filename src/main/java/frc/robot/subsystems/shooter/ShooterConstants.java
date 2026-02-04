@@ -2,8 +2,12 @@ package frc.robot.subsystems.shooter;
 
 import badgerutils.motor.MotorConfigUtils;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
+import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class ShooterConstants {
 
@@ -26,12 +30,28 @@ public class ShooterConstants {
 
   public static final double ERROR_THRESHOLD = 25;
 
-  public static final Slot0Configs PID_CONFIGS =
-      MotorConfigUtils.createPidConfig(
-          KP, KI, KD, 0, KV, 0, 0, GravityTypeValue.Elevator_Static); // gravity doesn't matter
-  public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS =
-      new CurrentLimitsConfigs()
-          .withStatorCurrentLimitEnable(false)
-          .withSupplyCurrentLimit(SUPPLY_CURRENT_LIMIT)
-          .withSupplyCurrentLimitEnable(true);
+  // CONFIGS
+  public static final TalonFXConfiguration CW_SHOOTER_MOTOR_CONFIGS =
+      new TalonFXConfiguration()
+          .withSlot0(
+              MotorConfigUtils.createPidConfig(
+                  KP, KI, KD, 0, KV, 0, 0, GravityTypeValue.Elevator_Static))
+          .withFeedback(
+              new FeedbackConfigs()
+                  .withFeedbackRemoteSensorID(ENCODER_ID)
+                  .withFeedbackSensorSource(FeedbackSensorSourceValue.SyncCANcoder)
+                  .withRotorToSensorRatio(ROTOR_TO_SENSOR_RATIO))
+          .withCurrentLimits(
+              new CurrentLimitsConfigs()
+                  .withStatorCurrentLimitEnable(false)
+                  .withSupplyCurrentLimit(SUPPLY_CURRENT_LIMIT)
+                  .withSupplyCurrentLimitEnable(true))
+          .withMotorOutput(
+              MotorConfigUtils.createMotorOutputConfig(
+                  InvertedValue.Clockwise_Positive, NeutralModeValue.Coast));
+
+  public static final TalonFXConfiguration CCW_SHOOTER_MOTOR_CONFIGS =
+      CW_SHOOTER_MOTOR_CONFIGS.withMotorOutput(
+          MotorConfigUtils.createMotorOutputConfig(
+              InvertedValue.CounterClockwise_Positive, NeutralModeValue.Coast));
 }

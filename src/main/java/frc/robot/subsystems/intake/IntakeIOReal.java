@@ -18,8 +18,12 @@ public class IntakeIOReal implements IntakeIO {
   public IntakeIOReal() {
     leftMotor = new TalonFX(IntakeConstants.INTAKE_LEFT_MOTOR_ID);
     rightMotor = new TalonFX(IntakeConstants.INTAKE_RIGHT_MOTOR_ID);
-
     deployerMotor = new TalonFX(IntakeConstants.DEPLOYER_MOTOR_ID);
+
+    leftMotor.getConfigurator().apply(IntakeConstants.CW_INTAKE_MOTOR_CONFIGS);
+    rightMotor.getConfigurator().apply(IntakeConstants.CCW_INTAKE_MOTOR_CONFIGS);
+    deployerMotor.getConfigurator().apply(IntakeConstants.DEPLOYER_MOTOR_CONFIGS);
+
     deployerPositionRequest = new PositionTorqueCurrentFOC(Degrees.of(0));
 
     dutyCycle = new DutyCycleOut(0).withEnableFOC(true);

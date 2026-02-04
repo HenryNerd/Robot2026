@@ -11,6 +11,9 @@ public class IndexerIOReal implements IndexerIO {
   public IndexerIOReal() {
     leftIndexerMotor = new TalonFX(IndexerConstants.INDEXER_LEFT_MOTOR_ID);
     rightIndexerMotor = new TalonFX(IndexerConstants.INDEXER_RIGHT_MOTOR_ID);
+
+    leftIndexerMotor.getConfigurator().apply(IndexerConstants.CW_INDEXER_MOTOR_CONFIGS);
+    rightIndexerMotor.getConfigurator().apply(IndexerConstants.CCW_INDEXER_MOTOR_CONFIGS);
   }
 
   @Override

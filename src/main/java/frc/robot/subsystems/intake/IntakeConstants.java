@@ -2,8 +2,7 @@ package frc.robot.subsystems.intake;
 
 import badgerutils.motor.MotorConfigUtils;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.configs.MotorOutputConfigs;
-import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -18,16 +17,32 @@ public class IntakeConstants {
   public static final int INTAKE_RIGHT_MOTOR_ID = 0;
   public static final int DEPLOYER_MOTOR_ID = 0;
 
-  public static final MotorOutputConfigs LEFT_MOTOR_OUTPUT_CONFIGS =
-      MotorConfigUtils.createMotorOutputConfig(
-          InvertedValue.Clockwise_Positive, NeutralModeValue.Brake);
-  public static final MotorOutputConfigs RIGHT_MOTOR_OUTPUT_CONFIGS =
-      MotorConfigUtils.createMotorOutputConfig(
-          InvertedValue.CounterClockwise_Positive, NeutralModeValue.Brake);
-  public static final CurrentLimitsConfigs CURRENT_LIMITS_CONFIGS =
-      new CurrentLimitsConfigs()
-          .withStatorCurrentLimitEnable(false)
-          .withSupplyCurrentLimitEnable(false);
-  public static final Slot0Configs PID_CONFIGS =
-      MotorConfigUtils.createPidConfig(KP, KI, KD, 0, 0, 0, 0, GravityTypeValue.Arm_Cosine);
+  // CONFIG
+  public static final TalonFXConfiguration CW_INTAKE_MOTOR_CONFIGS =
+      new TalonFXConfiguration()
+          .withCurrentLimits(
+              new CurrentLimitsConfigs()
+                  .withStatorCurrentLimitEnable(false)
+                  .withSupplyCurrentLimitEnable(false))
+          .withMotorOutput(
+              MotorConfigUtils.createMotorOutputConfig(
+                  InvertedValue.Clockwise_Positive, NeutralModeValue.Brake));
+
+  public static final TalonFXConfiguration CCW_INTAKE_MOTOR_CONFIGS =
+      CW_INTAKE_MOTOR_CONFIGS.withMotorOutput(
+          MotorConfigUtils.createMotorOutputConfig(
+              InvertedValue.CounterClockwise_Positive, NeutralModeValue.Brake));
+
+  public static final TalonFXConfiguration DEPLOYER_MOTOR_CONFIGS =
+      new TalonFXConfiguration()
+          .withMotorOutput(
+              MotorConfigUtils.createMotorOutputConfig(
+                  InvertedValue.Clockwise_Positive, NeutralModeValue.Brake))
+          .withCurrentLimits(
+              new CurrentLimitsConfigs()
+                  .withStatorCurrentLimitEnable(false)
+                  .withSupplyCurrentLimitEnable(false))
+          .withSlot0(
+              MotorConfigUtils.createPidConfig(
+                  KP, KI, KD, 0, 0, 0, 0, GravityTypeValue.Arm_Cosine));
 }
