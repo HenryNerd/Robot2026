@@ -1,9 +1,5 @@
 package frc.robot.subsystems.shooter;
 
-import static edu.wpi.first.units.Units.RPM;
-
-import edu.wpi.first.units.measure.AngularVelocity;
-
 public class ShooterConstants {
 
   public static final double KP = 0;
@@ -11,9 +7,6 @@ public class ShooterConstants {
   public static final double KD = 0;
 
   public static final double KV = 0;
-
-  public static final AngularVelocity PID_TOLERANCE = RPM.of(50);
-
   public static final double ROTOR_TO_SENSOR_RATIO = 1;
 
   public static final double SUPPLY_CURRENT_LIMIT = 60;
