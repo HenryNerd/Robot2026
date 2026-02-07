@@ -44,7 +44,9 @@ public class ShooterConstants {
                   InvertedValue.Clockwise_Positive, NeutralModeValue.Coast));
 
   public static final TalonFXConfiguration CCW_SHOOTER_MOTOR_CONFIGS =
-      CW_SHOOTER_MOTOR_CONFIGS.withMotorOutput(
-          MotorConfigUtils.createMotorOutputConfig(
-              InvertedValue.CounterClockwise_Positive, NeutralModeValue.Coast));
+      CW_SHOOTER_MOTOR_CONFIGS
+          .clone()
+          .withMotorOutput(
+              MotorConfigUtils.createMotorOutputConfig(
+                  InvertedValue.CounterClockwise_Positive, NeutralModeValue.Coast));
 }

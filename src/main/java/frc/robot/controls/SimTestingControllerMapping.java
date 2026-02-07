@@ -36,7 +36,7 @@ public class SimTestingControllerMapping extends ControllerMapping {
             () -> -driverController.getLeftY(),
             () -> -driverController.getLeftX(),
             () -> -driverController.getRightX()));
-    
+
     driverController
         .start()
         .onTrue(
@@ -47,18 +47,20 @@ public class SimTestingControllerMapping extends ControllerMapping {
                     drive)
                 .ignoringDisable(true));
 
-    //INTAKE TESTS
+    // INTAKE TESTS
 
-    //A button: while held, intake duty cycle is 1 (running); when released, intake duty cycle is 0 (off).
+    // A button: while held, intake duty cycle is 1 (running); when released, intake duty cycle is 0
+    // (off).
     driverController.a().whileTrue(intake.intakeUntilInterruptedCommand());
 
-    //B button: while held, intake duty cycle is 0.5 (running slower); when released, intake duty cycle is 0 (off).
+    // B button: while held, intake duty cycle is 0.5 (running slower); when released, intake duty
+    // cycle is 0 (off).
     driverController.b().whileTrue(intake.intakeUntilInterruptedCommand(0.5));
 
-    //X button: intake at 0.5 power when pressed
+    // X button: intake at 0.5 power when pressed
     driverController.x().onTrue(intake.intakeAtDutyCycleCommand(0.5));
 
-    //Y button: when pressed, stop intake
+    // Y button: when pressed, stop intake
     driverController.y().onTrue(intake.intakeAtDutyCycleCommand(0));
   }
 

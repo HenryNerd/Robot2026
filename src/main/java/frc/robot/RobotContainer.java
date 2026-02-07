@@ -125,7 +125,7 @@ public class RobotContainer {
         break;
     }
 
-    controls = new Controls(drive, intake);
+    controls = new Controls(drive, intake, indexer, shooter);
     autos = new Autos(drive);
   }
 
