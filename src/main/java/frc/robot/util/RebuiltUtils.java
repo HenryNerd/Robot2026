@@ -2,10 +2,6 @@ package frc.robot.util;
 
 import badgerutils.triggers.AllianceTriggers;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import frc.robot.subsystems.drive.Drive;
-
-import java.util.Optional;
 
 public class RebuiltUtils {
   /**
@@ -19,9 +15,9 @@ public class RebuiltUtils {
       boolean isShiftEven = getAllianceShift() % 2 == 0;
       switch (gameData.charAt(0)) {
         case 'B':
-            return isRedAlliance == !isShiftEven;
+          return isRedAlliance == !isShiftEven;
         case 'R':
-            return isRedAlliance == isShiftEven;
+          return isRedAlliance == isShiftEven;
       }
     }
     return true;
@@ -34,8 +30,8 @@ public class RebuiltUtils {
     if (DriverStation.isAutonomous()) {
       return 0;
     }
-    if(!DriverStation.isFMSAttached()){
-        return 0;
+    if (!DriverStation.isFMSAttached()) {
+      return 0;
     }
 
     if (time >= 130) {
