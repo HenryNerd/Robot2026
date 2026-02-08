@@ -57,7 +57,7 @@ public class DriveCommands {
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
       Supplier<Translation2d> pose) {
-    return joystickDriveAtAngle(
+    return joystickDriveAtAngleCommand(
         drive,
         xSupplier,
         ySupplier,
