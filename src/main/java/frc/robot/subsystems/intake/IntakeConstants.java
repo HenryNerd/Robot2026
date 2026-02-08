@@ -13,6 +13,8 @@ public class IntakeConstants {
   public static final double KI = 0;
   public static final double KD = 0;
 
+  public static final double DEPLOYER_GEAR_RATIO = 1 / 32;
+
   // CONFIG
   public static final TalonFXConfiguration CW_INTAKE_MOTOR_CONFIGS =
       new TalonFXConfiguration()

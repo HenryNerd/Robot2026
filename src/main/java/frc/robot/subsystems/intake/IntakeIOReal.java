@@ -99,6 +99,7 @@ public class IntakeIOReal implements IntakeIO {
 
   @Override
   public void setDeployerPosition(Angle angle) {
-    deployerMotor.setControl(deployerPositionRequest.withPosition(angle));
+    deployerMotor.setControl(
+        deployerPositionRequest.withPosition(angle.div(IntakeConstants.DEPLOYER_GEAR_RATIO)));
   }
 }
