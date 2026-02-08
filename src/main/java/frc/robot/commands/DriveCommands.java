@@ -52,7 +52,7 @@ public class DriveCommands {
         .getTranslation();
   }
 
-  public static Command driveAimLocked(
+  public static Command driveAimLockedCommand(
       Drive drive,
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
