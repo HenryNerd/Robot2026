@@ -1,5 +1,6 @@
 package frc.robot.subsystems.indexer;
 
+import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,14 +19,23 @@ public class Indexer extends SubsystemBase {
   @Override
   public void periodic() {
     indexerIO.updateInputs(inputs);
-    Logger.processInputs(getName(), inputs);
+    Logger.processInputs("Indexer", inputs);
   }
 
-  public void setPower(double power) {
-    indexerIO.setPower(power);
+  public void setDutyCycle(double dutyCycle) {
+    indexerIO.setDutyCycle(dutyCycle);
+    Logger.recordOutput("Indexer/Requested Duty Cycle", dutyCycle);
   }
 
   public Command indexUntilCancelledCommand(DoubleSupplier speed) {
-    return (Commands.startEnd(() -> setPower(speed.getAsDouble()), () -> setPower(0)));
+    return (Commands.runEnd(() -> setDutyCycle(speed.getAsDouble()), () -> setDutyCycle(0), this));
+  }
+
+  public Command indexUntilCancelledCommand(double speed) {
+    return (Commands.startEnd(() -> setDutyCycle(speed), () -> setDutyCycle(0), this));
+  }
+
+  public Command indexForTime(Time time, double speed) {
+    return indexUntilCancelledCommand(speed).withDeadline(Commands.waitTime(time));
   }
 }

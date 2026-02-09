@@ -3,8 +3,9 @@
   "robotLength": 0.775,
   "holonomicMode": true,
   "pathFolders": [
+    "Alliance Side",
     "Center Collection",
-    "Alliance Side"
+    "Testing"
   ],
   "autoFolders": [],
   "defaultMaxVel": 3.0,
