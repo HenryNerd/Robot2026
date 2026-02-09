@@ -56,7 +56,7 @@ public class SimTestingControllerMapping extends ControllerMapping {
                     drive)
                 .ignoringDisable(true));
 
-    indexerTesting();
+    shooterTesting();
   }
 
   private void shooterTesting() {
@@ -65,12 +65,12 @@ public class SimTestingControllerMapping extends ControllerMapping {
         .a()
         .whileTrue(
             ShooterCommands.shootAtDistanceCommand(
-                shooter, () -> Meters.of(driverController.getLeftTriggerAxis() + 1)));
+                shooter, () -> Meters.of(driverController.getLeftTriggerAxis() + 1))); //1-2 meters
 
-    // B button: while held shooter rpm goes to 20 rps; 0 when released
+    // B button: while held shooter rpm goes to 20 rps for 2 seconds
     driverController
         .b()
-        .whileTrue(ShooterCommands.shootForTimeCommand(shooter, () -> Meters.of(2), Seconds.of(2)));
+        .onTrue(ShooterCommands.shootForTimeCommand(shooter, () -> Meters.of(2), Seconds.of(2)));
 
     // X button: while held, shooter rps goes to 10 rps;
     driverController
