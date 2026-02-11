@@ -293,4 +293,23 @@ public class DriveCommands {
     Rotation2d lastAngle = Rotation2d.kZero;
     double gyroDelta = 0.0;
   }
+
+  public static Command faceForwardCommand(
+      Drive drive, DoubleSupplier xSupplier, DoubleSupplier ySupplier) {
+    return joystickDriveAtAngleCommand(
+        drive,
+        xSupplier,
+        ySupplier,
+        () -> {
+          double x = xSupplier.getAsDouble();
+          double y = ySupplier.getAsDouble();
+          if (Math.abs(x) < DEADBAND) {
+            x = 0;
+          }
+          if (Math.abs(y) < DEADBAND) {
+            y = 0;
+          }
+          return Rotation2d.fromRadians(Math.atan2(x, y));
+        });
+  }
 }
