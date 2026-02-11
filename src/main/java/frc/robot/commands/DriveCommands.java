@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
+import org.littletonrobotics.junction.Logger;
 
 public class DriveCommands {
   private static final double DEADBAND = 0.1;
@@ -125,6 +126,8 @@ public class DriveCommands {
     // Construct command
     return Commands.run(
             () -> {
+              Logger.recordOutput("Angle Error", angleController.getPositionError());
+
               // Get linear velocity
               Translation2d linearVelocity =
                   getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
@@ -309,7 +312,7 @@ public class DriveCommands {
           if (Math.abs(y) < DEADBAND) {
             y = 0;
           }
-          return Rotation2d.fromRadians(Math.atan2(x, y));
+          return Rotation2d.fromRadians(Math.atan2(y, x) + Math.PI);
         });
   }
 }
