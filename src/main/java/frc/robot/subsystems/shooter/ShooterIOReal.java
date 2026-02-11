@@ -4,6 +4,7 @@ import badgerutils.motor.MotorConfigUtils;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.StatusSignal;
+import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -192,17 +193,19 @@ public class ShooterIOReal implements ShooterIO {
   }
 
   public void updatePIDFromTunables() {
-    leftTopMotor
-        .getConfigurator()
-        .apply(
-            MotorConfigUtils.createPidConfig(
-                KP_SUPPLIER.get(),
-                KI_SUPPLIER.get(),
-                KD_SUPPLIER.get(),
-                0,
-                KV_SUPPLIER.get(),
-                0,
-                0,
-                GravityTypeValue.Arm_Cosine));
+    Slot0Configs config =
+        MotorConfigUtils.createPidConfig(
+            KP_SUPPLIER.get(),
+            KI_SUPPLIER.get(),
+            KD_SUPPLIER.get(),
+            0,
+            KV_SUPPLIER.get(),
+            0,
+            0,
+            GravityTypeValue.Arm_Cosine);
+    leftTopMotor.getConfigurator().apply(config);
+    leftBottomMotor.getConfigurator().apply(config);
+    rightTopMotor.getConfigurator().apply(config);
+    rightBottomMotor.getConfigurator().apply(config);
   }
 }
