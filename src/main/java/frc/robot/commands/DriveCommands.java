@@ -153,7 +153,7 @@ public class DriveCommands {
                       isFlipped
                           ? drive.getRotation().plus(new Rotation2d(Math.PI))
                           : drive.getRotation()));
-
+              Logger.recordOutput("Drive/Angle Setpoint", rotationSupplier.get().getRadians());
               Logger.recordOutput("Drive/Angular Error", angleController.getPositionError());
             },
             drive)
