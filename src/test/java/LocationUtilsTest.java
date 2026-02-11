@@ -7,7 +7,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.units.measure.Distance;
 import frc.robot.util.LocationUtils;
 
-public class AngleUtilsTest {
+public class LocationUtilsTest {
     @Test
     private void testGetDistanceToPosition() {
         // testing linear

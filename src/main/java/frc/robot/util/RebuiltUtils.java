@@ -1,7 +1,11 @@
 package frc.robot.util;
 
+import java.util.function.Supplier;
+
 import badgerutils.triggers.AllianceTriggers;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.Constants;
 
 public class RebuiltUtils {
   /**
@@ -50,5 +54,13 @@ public class RebuiltUtils {
     } // End Game
 
     return 0;
+  }
+
+  public static Translation3d getCurrentHubLocation() {
+    return AllianceTriggers.isRedAlliance() ? Constants.Locations.redHub : Constants.Locations.blueHub;
+  }
+
+  public static Supplier<Translation3d> getCurrentHubLocationSupplier() {
+    return () -> AllianceTriggers.isRedAlliance() ? Constants.Locations.redHub : Constants.Locations.blueHub;
   }
 }
