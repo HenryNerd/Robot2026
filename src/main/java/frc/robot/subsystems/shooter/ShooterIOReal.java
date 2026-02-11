@@ -1,5 +1,6 @@
 package frc.robot.subsystems.shooter;
 
+import badgerutils.motor.MotorConfigUtils;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.StatusSignal;
@@ -7,12 +8,31 @@ import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.GravityTypeValue;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Temperature;
 import frc.robot.Constants;
+import frc.robot.util.LoggedNetworkNumberPlus;
+import org.littletonrobotics.junction.AutoLogOutput;
 
 public class ShooterIOReal implements ShooterIO {
+
+  @AutoLogOutput
+  private static final LoggedNetworkNumberPlus KP_SUPPLIER =
+      new LoggedNetworkNumberPlus("/Tuning/Shooter KP", ShooterConstants.KP);
+
+  @AutoLogOutput
+  private static final LoggedNetworkNumberPlus KI_SUPPLIER =
+      new LoggedNetworkNumberPlus("/Tuning/Shooter KI", ShooterConstants.KI);
+
+  @AutoLogOutput
+  private static final LoggedNetworkNumberPlus KD_SUPPLIER =
+      new LoggedNetworkNumberPlus("/Tuning/Shooter KD", ShooterConstants.KD);
+
+  @AutoLogOutput
+  private static final LoggedNetworkNumberPlus KV_SUPPLIER =
+      new LoggedNetworkNumberPlus("/Tuning/Shooter KV", ShooterConstants.KV);
 
   private final StatusSignal<Current> leftTopMotorSupplyCurrent;
   private final StatusSignal<Current> leftBottomMotorSupplyCurrent;
@@ -47,6 +67,11 @@ public class ShooterIOReal implements ShooterIO {
   private final NeutralOut neutralRequest;
 
   public ShooterIOReal() {
+    KP_SUPPLIER.addListener(() -> updatePIDFromTunables());
+    KI_SUPPLIER.addListener(() -> updatePIDFromTunables());
+    KD_SUPPLIER.addListener(() -> updatePIDFromTunables());
+    KV_SUPPLIER.addListener(() -> updatePIDFromTunables());
+
     // Request Initialization
     velocityRequest = new VelocityTorqueCurrentFOC(0);
     neutralRequest = new NeutralOut();
@@ -164,5 +189,20 @@ public class ShooterIOReal implements ShooterIO {
     leftBottomMotor.setControl(neutralRequest);
     rightTopMotor.setControl(neutralRequest);
     rightBottomMotor.setControl(neutralRequest);
+  }
+
+  public void updatePIDFromTunables() {
+    leftTopMotor
+        .getConfigurator()
+        .apply(
+            MotorConfigUtils.createPidConfig(
+                KP_SUPPLIER.get(),
+                KI_SUPPLIER.get(),
+                KD_SUPPLIER.get(),
+                0,
+                KV_SUPPLIER.get(),
+                0,
+                0,
+                GravityTypeValue.Arm_Cosine));
   }
 }

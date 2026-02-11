@@ -9,27 +9,8 @@ import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import frc.robot.Constants;
-import org.littletonrobotics.junction.AutoLogOutput;
-import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
 
 public class ShooterConstants {
-
-  @AutoLogOutput
-  private static final LoggedNetworkNumber KP_SUPPLIER =
-      new LoggedNetworkNumber("/Tuning/Shooter KP", 0);
-
-  @AutoLogOutput
-  private static final LoggedNetworkNumber KI_SUPPLIER =
-      new LoggedNetworkNumber("/Tuning/Shooter KI", 0);
-
-  @AutoLogOutput
-  private static final LoggedNetworkNumber KD_SUPPLIER =
-      new LoggedNetworkNumber("/Tuning/Shooter KD", 0);
-
-  @AutoLogOutput
-  private static final LoggedNetworkNumber KV_SUPPLIER =
-      new LoggedNetworkNumber("/Tuning/Shooter KV", 0);
-
   public static final double KP = 0;
   public static final double KI = 0;
   public static final double KD = 0;
@@ -46,7 +27,7 @@ public class ShooterConstants {
       new TalonFXConfiguration()
           .withSlot0(
               MotorConfigUtils.createPidConfig(
-                  KP, KI, KD, 0, KV, 0, 0, GravityTypeValue.Elevator_Static))
+                  KP, KI, KD, 0, KV, 0, 0, GravityTypeValue.Arm_Cosine))
           .withFeedback(
               new FeedbackConfigs()
                   .withFeedbackRemoteSensorID(Constants.CanIds.SHOOTER_ENCODER_ID)
