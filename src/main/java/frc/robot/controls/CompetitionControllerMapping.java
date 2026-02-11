@@ -27,11 +27,8 @@ public class CompetitionControllerMapping extends ControllerMapping {
   @Override
   public void bind() {
     drive.setDefaultCommand(
-        DriveCommands.joystickDriveCommand(
-            drive,
-            () -> -driverController.getLeftY(),
-            () -> -driverController.getLeftX(),
-            () -> -driverController.getRightX()));
+        DriveCommands.faceForwardCommand(
+            drive, () -> -driverController.getLeftY(), () -> -driverController.getLeftX()));
 
     driverController
         .start()
