@@ -11,61 +11,44 @@ import edu.wpi.first.units.measure.Temperature;
 import frc.robot.Constants;
 
 public class IndexerIOReal implements IndexerIO {
-  private final StatusSignal<AngularVelocity> leftVelocity;
-  private final StatusSignal<AngularVelocity> rightVelocity;
+  private final StatusSignal<AngularVelocity> velocity;
 
-  private final StatusSignal<Temperature> leftTemp;
-  private final StatusSignal<Temperature> rightTemp;
+  private final StatusSignal<Temperature> temp;
 
-  private final StatusSignal<Current> leftSupplyCurrent;
-  private final StatusSignal<Current> rightSupplyCurrent;
+  private final StatusSignal<Current> supplyCurrent;
 
-  private final TalonFX leftIndexerMotor;
-  private final TalonFX rightIndexerMotor;
+  private final TalonFX indexerMotor;
 
   public IndexerIOReal() {
-    leftIndexerMotor = new TalonFX(Constants.CanIds.INDEXER_LEFT_MOTOR_ID);
-    rightIndexerMotor = new TalonFX(Constants.CanIds.INDEXER_RIGHT_MOTOR_ID);
+    indexerMotor = new TalonFX(Constants.CanIds.INDEXER_LEFT_MOTOR_ID);
 
-    leftIndexerMotor.getConfigurator().apply(IndexerConstants.CW_INDEXER_MOTOR_CONFIGS);
-    rightIndexerMotor.getConfigurator().apply(IndexerConstants.CCW_INDEXER_MOTOR_CONFIGS);
+    indexerMotor.getConfigurator().apply(IndexerConstants.CW_INDEXER_MOTOR_CONFIGS);
 
-    leftVelocity = leftIndexerMotor.getVelocity();
-    rightVelocity = rightIndexerMotor.getVelocity();
+    velocity = indexerMotor.getVelocity();
 
-    leftTemp = leftIndexerMotor.getDeviceTemp();
-    rightTemp = rightIndexerMotor.getDeviceTemp();
+    temp = indexerMotor.getDeviceTemp();
 
-    leftSupplyCurrent = leftIndexerMotor.getSupplyCurrent();
-    rightSupplyCurrent = rightIndexerMotor.getSupplyCurrent();
+    supplyCurrent = indexerMotor.getSupplyCurrent();
   }
 
   @Override
   public void updateInputs(IndexerIOInputs inputs) {
-    StatusCode leftStatus = BaseStatusSignal.refreshAll(leftVelocity, leftTemp, leftSupplyCurrent);
-    StatusCode rightStatus =
-        BaseStatusSignal.refreshAll(rightVelocity, rightTemp, rightSupplyCurrent);
+    StatusCode leftStatus = BaseStatusSignal.refreshAll(velocity, temp, supplyCurrent);
 
-    inputs.isLeftMotorConnected = leftStatus.isOK();
-    inputs.isRightMotorConnected = rightStatus.isOK();
+    inputs.isMotorConnected = leftStatus.isOK();
 
-    inputs.leftVelocity = leftVelocity.getValue();
-    inputs.rightVelocity = rightVelocity.getValue();
+    inputs.velocity = velocity.getValue();
 
-    inputs.isLeftMotorConnected = leftIndexerMotor.isConnected();
-    inputs.isRightMotorConnected = rightIndexerMotor.isConnected();
+    inputs.isMotorConnected = indexerMotor.isConnected();
 
-    inputs.leftTemp = leftTemp.getValue();
-    inputs.rightTemp = rightTemp.getValue();
+    inputs.temp = temp.getValue();
 
-    inputs.leftSupplyCurrent = leftSupplyCurrent.getValue();
-    inputs.rightSupplyCurrent = rightSupplyCurrent.getValue();
+    inputs.supplyCurrent = supplyCurrent.getValue();
   }
 
   @Override
   public void setDutyCycle(double dutyCycle) {
     DutyCycleOut request = new DutyCycleOut(dutyCycle).withEnableFOC(true);
-    leftIndexerMotor.setControl(request);
-    rightIndexerMotor.setControl(request);
+    indexerMotor.setControl(request);
   }
 }
