@@ -74,7 +74,8 @@ public class ShooterCommands {
   }
 
   public static Command shootAtDistanceCommand(Shooter shooter, Supplier<Distance> distance) {
-    return shootAtSpeedCommand(shooter, () -> interpolateSetpoints(SETPOINTS, distance.get()).velocity);
+    return shootAtSpeedCommand(
+        shooter, () -> interpolateSetpoints(SETPOINTS, distance.get()).velocity);
   }
 
   public static Command shootForTimeCommand(

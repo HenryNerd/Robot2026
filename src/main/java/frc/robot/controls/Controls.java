@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.drive.Drive;
-import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.shooter.Shooter;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,7 +50,7 @@ public class Controls {
         new SysIdControllerMapping(driverController, operatorController, drivetrain));
     mappings.put(
         ControlStates.TESTING,
-        new TestingControllerMapping(driverController, operatorController, drivetrain));
+        new TestingControllerMapping(driverController, operatorController, drivetrain, shooter));
 
     Consumer<Enum<ControlStates>> onChange =
         (nextState) -> {

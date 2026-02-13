@@ -54,7 +54,7 @@ public class AutoAimTest {
     return new AutoAimDrive(gyroIO, fl, fr, bl, br);
   }
 
-//  @Test
+  //  @Test
   void validateResultantVector() {
     AutoAimDrive testDrive = createTestDrive();
 
@@ -86,7 +86,8 @@ public class AutoAimTest {
     angle = LocationUtils.getDirectionToLocation(new Translation2d(0, 0), new Translation2d(1, -1));
     assertEquals(-45, angle.getDegrees());
 
-    angle = LocationUtils.getDirectionToLocation(new Translation2d(0, 0), new Translation2d(-1, -1));
+    angle =
+        LocationUtils.getDirectionToLocation(new Translation2d(0, 0), new Translation2d(-1, -1));
     assertEquals(-135, angle.getDegrees());
   }
 }

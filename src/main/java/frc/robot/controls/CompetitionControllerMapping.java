@@ -5,11 +5,13 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants;
 import frc.robot.commands.AutoAimCommand;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.ShootOnTheMoveCommand;
 import frc.robot.subsystems.drive.Drive;
-import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.shooter.Shooter;
 
 public class CompetitionControllerMapping extends ControllerMapping {
 
@@ -21,7 +23,8 @@ public class CompetitionControllerMapping extends ControllerMapping {
       CommandXboxController driverController,
       CommandXboxController operatorController,
       Drive drive,
-      Intake intake, Shooter shooter) {
+      Intake intake,
+      Shooter shooter) {
     super(driverController, operatorController);
     this.drive = drive;
     this.intake = intake;
@@ -57,8 +60,13 @@ public class CompetitionControllerMapping extends ControllerMapping {
                 () -> -driverController.getLeftX()));
     driverController
         .leftTrigger(0.5)
-        .onTrue(Commands.runOnce(() -> intake.setDutyCycle(1)))
-        .onFalse(Commands.runOnce(() -> intake.setDutyCycle(0)));
+        .whileTrue(
+            new ShootOnTheMoveCommand(
+                drive,
+                shooter,
+                () -> -driverController.getLeftY(),
+                () -> -driverController.getLeftX(),
+                Constants.Locations.blueHub.toTranslation2d()));
   }
 
   @Override
