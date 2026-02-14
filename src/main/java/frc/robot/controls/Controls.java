@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.shooter.Shooter;
+
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +31,7 @@ public class Controls {
 
   private static final Set<Supplier<Trigger>> persistentTriggers = new HashSet<>();
 
-  public Controls(Drive drivetrain, Intake intake) {
+  public Controls(Drive drivetrain, Intake intake, Shooter shooter) {
     this.drivetrain = drivetrain;
     this.intake = intake;
 
@@ -39,7 +41,7 @@ public class Controls {
 
     mappings.put(
         ControlStates.COMPETITION,
-        new CompetitionControllerMapping(driverController, operatorController, drivetrain, intake));
+        new CompetitionControllerMapping(driverController, operatorController, drivetrain, intake, shooter));
     mappings.put(
         ControlStates.TEST_ONLY_REMOVE_ME,
         new RemoveMeControllerMapping(driverController, operatorController));
