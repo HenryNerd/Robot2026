@@ -2,6 +2,8 @@ package frc.robot.commands;
 
 import static edu.wpi.first.units.Units.Seconds;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.units.measure.Time;
@@ -12,6 +14,7 @@ import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.util.LocationUtils;
 import java.util.function.DoubleSupplier;
+import org.littletonrobotics.junction.Logger;
 
 public class ShootOnTheMoveCommand extends ParallelCommandGroup {
   private Translation2d leadTarget;
@@ -51,7 +54,7 @@ public class ShootOnTheMoveCommand extends ParallelCommandGroup {
 
     Translation2d aimPoint = new Translation2d();
     // Iterate 3 times
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 20; i++) {
       Translation2d motionOffset = velocityVec.times(timeOfFlight.in(Seconds));
       aimPoint = targetPos.minus(motionOffset);
 
@@ -60,6 +63,8 @@ public class ShootOnTheMoveCommand extends ParallelCommandGroup {
           ShooterCommands.interpolateSetpoints(ShooterCommands.SETPOINTS, newDistance).time();
     }
 
+    Logger.recordOutput(
+        "ShootOnTheMove/Target", new Pose2d(aimPoint.getX(), aimPoint.getY(), Rotation2d.kZero));
     return aimPoint;
   }
 }
