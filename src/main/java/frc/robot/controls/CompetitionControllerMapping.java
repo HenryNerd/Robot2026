@@ -1,28 +1,44 @@
 package frc.robot.controls;
 
+import static edu.wpi.first.units.Units.RotationsPerSecond;
+
 import badgerutils.commands.CommandUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.ShooterCommands;
 import frc.robot.subsystems.drive.Drive;
+import frc.robot.subsystems.indexer.Indexer;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.util.LocationUtils;
+import frc.robot.util.RebuiltUtils;
 
 public class CompetitionControllerMapping extends ControllerMapping {
 
   private final Drive drive;
   private final Intake intake;
+  private final Shooter shooter;
+  private final Indexer indexer;
 
   public CompetitionControllerMapping(
       CommandXboxController driverController,
       CommandXboxController operatorController,
       Drive drive,
-      Intake intake) {
+      Intake intake,
+      Shooter shooter,
+      Indexer indexer) {
     super(driverController, operatorController);
     this.drive = drive;
     this.intake = intake;
+    this.shooter = shooter;
+    this.indexer = indexer;
   }
 
   @Override
@@ -56,6 +72,46 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .leftTrigger(0.5)
         .onTrue(Commands.runOnce(() -> intake.setDutyCycle(1)))
         .onFalse(Commands.runOnce(() -> intake.setDutyCycle(0)));
+
+
+
+    // P2 -- ME!!!
+
+    operatorController
+        .leftTrigger(0.1)
+        .whileTrue(
+            indexer
+                .jumbleIndexer(() -> operatorController.getLeftTriggerAxis())
+                .alongWith(
+                    new InstantCommand(
+                        () ->
+                            operatorController.setRumble(
+                                RumbleType.kBothRumble, operatorController.getLeftTriggerAxis()))))
+        .onFalse(new InstantCommand(() -> operatorController.setRumble(RumbleType.kBothRumble, 0)));
+    operatorController
+        .rightTrigger()
+        .whileTrue(
+            ShooterCommands.shootAtDistanceCommand(
+                    shooter,
+                    () ->
+                        LocationUtils.getDistanceToLocation(
+                            drive.getPose().getTranslation(),
+                            RebuiltUtils.getCurrentHubLocation().toTranslation2d()))
+                .alongWith(
+                    new InstantCommand(
+                        () ->
+                            operatorController.setRumble(
+                                RumbleType.kBothRumble, operatorController.getLeftTriggerAxis()))))
+        .onFalse(new InstantCommand(() -> operatorController.setRumble(RumbleType.kBothRumble, 0)));
+    
+    // Overides
+
+    operatorController.leftBumper().onTrue(new InstantCommand(() -> shooter.setVelocity(RotationsPerSecond.of(0)) )); // brake
+
+    operatorController.povUp().onTrue(new InstantCommand(() -> shooter.speedOveride.plus(RotationsPerSecond.of(10))));
+    operatorController.povDown().onTrue(new InstantCommand(() -> shooter.speedOveride.minus(RotationsPerSecond.of(10))));
+
+
   }
 
   @Override
