@@ -17,12 +17,22 @@ public final class Constants {
   public static class Locations {
     public static final Translation3d blueHub = new Translation3d(4.6, 4.034, 1.477);
     public static final Translation3d redHub;
+    
+    public static final Translation2d leftCornerBlueLocation = new Translation2d(6, 1);
+    public static final Translation2d rightCornerBlueLocation = new Translation2d(1.2, 1);
 
+    public static final Translation2d leftCornerRedLocation;
+    public static final Translation2d rightCornerRedLocation;
+    
     static {
       Translation2d redHubPosition = FlippingUtil.flipFieldPosition(blueHub.toTranslation2d());
       redHub =
           new Translation3d(
               redHubPosition.getMeasureX(), redHubPosition.getMeasureY(), blueHub.getMeasureZ());
+
+      leftCornerRedLocation = FlippingUtil.flipFieldPosition(leftCornerBlueLocation);
+      rightCornerRedLocation = FlippingUtil.flipFieldPosition(rightCornerBlueLocation);
+
     }
   }
 
