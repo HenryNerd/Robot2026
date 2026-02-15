@@ -1,11 +1,10 @@
 package frc.robot.subsystems.shooter;
 
+import static edu.wpi.first.units.Units.RotationsPerSecond;
+
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
-import static edu.wpi.first.units.Units.RotationsPerSecond;
-
 import java.util.function.BooleanSupplier;
 import org.littletonrobotics.junction.Logger;
 
