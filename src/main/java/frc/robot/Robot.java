@@ -18,6 +18,7 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 public class Robot extends LoggedRobot {
   private Command autonomousCommand;
   private final RobotContainer robotContainer;
+  PowerDistribution PDH = new PowerDistribution(PDH_ID, ModuleType.kRev);
 
   public Robot() {
     // Record metadata
@@ -80,6 +81,13 @@ public class Robot extends LoggedRobot {
 
     // Return to non-RT thread priority (do not modify the first argument)
     // Threads.setCurrentThreadPriority(false, 10);
+
+    double PDHcurrent = PDH.getTotalCurrent();
+    double totalCurrent = PDHcurrent + totalCurrent;
+
+    Logger.recordOutput("Battery Dischage", totalCurrent);
+
+
   }
 
   /** This function is called once when the robot is disabled. */

@@ -43,6 +43,9 @@ public final class Constants {
     public static final int INTAKE_LEFT_MOTOR_ID = 23;
     public static final int INTAKE_RIGHT_MOTOR_ID = 24;
     public static final int DEPLOYER_MOTOR_ID = 25;
+
+    //PDH
+    public static final int PDH_ID = 0;
   }
 
   public static enum Mode {
