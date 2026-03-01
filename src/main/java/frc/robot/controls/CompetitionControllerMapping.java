@@ -135,12 +135,12 @@ public class CompetitionControllerMapping extends ControllerMapping {
                     drive,
                     shooter,
                     indexer,
+                    intake,
                     () -> -driverController.getLeftY(),
                     () -> -driverController.getLeftX(),
                     () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
                     operatorController.rightBumper())
-                .withInterruptBehavior(InterruptionBehavior.kCancelIncoming)
-                .alongWith(intake.intakeUntilInterruptedCommand(0.5)));
+                .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
 
     // Shoot to Corner
     driverController
@@ -150,12 +150,12 @@ public class CompetitionControllerMapping extends ControllerMapping {
                     drive,
                     shooter,
                     indexer,
+                    intake,
                     () -> -driverController.getLeftY(),
                     () -> -driverController.getLeftX(),
                     () -> RebuiltUtils.getNearestAllianceCorner(drive.getPose().getTranslation()),
                     operatorController.rightBumper())
-                .withInterruptBehavior(InterruptionBehavior.kCancelIncoming)
-                .alongWith(intake.intakeUntilInterruptedCommand(0.5)));
+                .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
 
     // Shoot to Hub or Corner Depending on Location
     driverController
@@ -165,6 +165,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
                     drive,
                     shooter,
                     indexer,
+                    intake,
                     () -> -driverController.getLeftY(),
                     () -> -driverController.getLeftX(),
                     () ->
@@ -173,8 +174,6 @@ public class CompetitionControllerMapping extends ControllerMapping {
                             : RebuiltUtils.getNearestAllianceCorner(
                                 drive.getPose().getTranslation()),
                     operatorController.rightBumper())
-                .withInterruptBehavior(InterruptionBehavior.kCancelIncoming)
-                .alongWith(intake.intakeUntilInterruptedCommand(0.5))
                 .alongWith(loggedTargetCommand));
 
     /* ---P2--- */

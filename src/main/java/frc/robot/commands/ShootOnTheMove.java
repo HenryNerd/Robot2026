@@ -30,7 +30,7 @@ public class ShootOnTheMove {
       Supplier<Translation2d> target,
       BooleanSupplier override) {
     return new SafeShootCommand(
-        drive, shooter, indexer, () -> calculateLeadTarget(drive, target), override);
+        drive, shooter, indexer, intake, () -> calculateLeadTarget(drive, target), override);
   }
 
   public static Command aimAndShootOnTheMoveCommand(
@@ -46,6 +46,7 @@ public class ShootOnTheMove {
         drive,
         shooter,
         indexer,
+        intake,
         () -> xSupplier.getAsDouble() * SLOWDOWN_FACTOR,
         () -> ySupplier.getAsDouble() * SLOWDOWN_FACTOR,
         () -> calculateLeadTarget(drive, target),
