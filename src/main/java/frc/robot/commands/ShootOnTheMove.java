@@ -14,7 +14,6 @@ import frc.robot.subsystems.indexer.Indexer;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.util.LocationUtils;
-import frc.robot.util.RebuiltUtils;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
@@ -28,11 +27,22 @@ public class ShootOnTheMove {
       Shooter shooter,
       Indexer indexer,
       Intake intake,
+      Supplier<Translation2d> target,
+      BooleanSupplier override) {
+    return new SafeShootCommand(
+        drive, shooter, indexer, () -> calculateLeadTarget(drive, target), override);
+  }
+
+  public static Command aimAndShootOnTheMoveCommand(
+      Drive drive,
+      Shooter shooter,
+      Indexer indexer,
+      Intake intake,
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
       Supplier<Translation2d> target,
       BooleanSupplier override) {
-    return new SafeShootCommand(
+    return new SafeAimAndShootCommand(
         drive,
         shooter,
         indexer,

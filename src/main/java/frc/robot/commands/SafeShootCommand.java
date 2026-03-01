@@ -11,7 +11,6 @@ import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.indexer.Indexer;
 import frc.robot.subsystems.shooter.Shooter;
 import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 import org.littletonrobotics.junction.Logger;
 
@@ -24,17 +23,14 @@ public class SafeShootCommand extends ParallelCommandGroup {
       Drive drive,
       Shooter shooter,
       Indexer indexer,
-      DoubleSupplier xSupplier,
-      DoubleSupplier ySupplier,
       Supplier<Translation2d> positionSupplier,
-      BooleanSupplier override) {
+      BooleanSupplier overrideSafeguards) {
 
     Command shootAtDistanceCommand =
         ShooterCommands.shootAtDistanceCommand(
             shooter,
             () -> Meters.of(drive.getPose().getTranslation().getDistance(positionSupplier.get())));
-    Command driveAtAngleCommand =
-        DriveCommands.driveAimLockedCommand(drive, xSupplier, ySupplier, positionSupplier, true);
+
     Command indexerCommand = indexer.indexUntilCancelledCommand(INDEXER_SPEED);
 
     BooleanSupplier shooterVelocityCondition = shooter.isAtRequestedSpeed();
@@ -44,7 +40,7 @@ public class SafeShootCommand extends ParallelCommandGroup {
 
     BooleanSupplier shootCondition =
         () ->
-            override.getAsBoolean()
+            overrideSafeguards.getAsBoolean()
                 || (shooterVelocityCondition.getAsBoolean() && driveAngleCondition.getAsBoolean());
 
     Command guardedIndexerCommand = new GuardedCommand(indexerCommand, shootCondition);
@@ -52,8 +48,7 @@ public class SafeShootCommand extends ParallelCommandGroup {
     Command loggedGuardCommand =
         Commands.run(() -> logConditions(shooterVelocityCondition, driveAngleCondition));
 
-    addCommands(
-        shootAtDistanceCommand, driveAtAngleCommand, guardedIndexerCommand, loggedGuardCommand);
+    addCommands(shootAtDistanceCommand, guardedIndexerCommand, loggedGuardCommand);
   }
 
   private void logConditions(

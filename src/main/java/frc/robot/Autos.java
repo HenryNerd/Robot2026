@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.SafeShootCommand;
+import frc.robot.commands.SafeAimAndShootCommand;
 import frc.robot.commands.ShooterCommands;
 import frc.robot.controls.Controls;
 import frc.robot.subsystems.drive.Drive;
@@ -90,7 +90,7 @@ public class Autos {
   private void bindNamedCommands() {
     NamedCommands.registerCommand(
         "shoot-8",
-        new SafeShootCommand(
+        new SafeAimAndShootCommand(
                 drive,
                 shooter,
                 indexer,
@@ -121,7 +121,7 @@ public class Autos {
 
     NamedCommands.registerCommand(
         "shoot-until-done",
-        new SafeShootCommand(
+        new SafeAimAndShootCommand(
                 drive,
                 shooter,
                 indexer,

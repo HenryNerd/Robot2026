@@ -117,7 +117,7 @@ public class ShootOnTheMoveControllerMapping extends ControllerMapping {
     driverController
         .rightBumper()
         .whileTrue(
-            ShootOnTheMove.shootOnTheMoveCommand(
+            ShootOnTheMove.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
@@ -132,7 +132,7 @@ public class ShootOnTheMoveControllerMapping extends ControllerMapping {
     driverController
         .leftBumper()
         .whileTrue(
-            ShootOnTheMove.shootOnTheMoveCommand(
+            ShootOnTheMove.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
@@ -147,7 +147,7 @@ public class ShootOnTheMoveControllerMapping extends ControllerMapping {
     driverController
         .rightTrigger()
         .whileTrue(
-            ShootOnTheMove.shootOnTheMoveCommand(
+            ShootOnTheMove.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
