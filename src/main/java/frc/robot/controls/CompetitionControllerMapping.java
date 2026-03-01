@@ -212,7 +212,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .onFalse(new InstantCommand(() -> operatorController.setRumble(RumbleType.kBothRumble, 0)));
 
     // Deploy Intake
-    operatorController.x().onTrue(intake.deployCommand());
+    operatorController.x().whileTrue(intake.deployCommand());
 
     // Overides
 
