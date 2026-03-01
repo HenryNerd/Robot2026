@@ -1,13 +1,11 @@
 package frc.robot.controls;
 
-import static edu.wpi.first.units.Units.Feet;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
 import badgerutils.commands.CommandUtils;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -16,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.FaceforwardCommand;
 import frc.robot.commands.FuelCollectionCommand;
-import frc.robot.commands.SafeAimAndShootCommand;
+import frc.robot.commands.ShootOnTheMove;
 import frc.robot.commands.ShooterCommands;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.fueldetection.FuelDetection;
@@ -27,7 +25,7 @@ import frc.robot.util.LocationUtils;
 import frc.robot.util.RebuiltUtils;
 import org.littletonrobotics.junction.Logger;
 
-public class CompetitionControllerMapping extends ControllerMapping {
+public class ShootOnTheMoveControllerMapping extends ControllerMapping {
 
   private final Drive drive;
   private final Intake intake;
@@ -35,7 +33,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
   private final Indexer indexer;
   private final FuelDetection fuelDetection;
 
-  public CompetitionControllerMapping(
+  public ShootOnTheMoveControllerMapping(
       CommandXboxController driverController,
       CommandXboxController operatorController,
       Drive drive,
@@ -53,16 +51,6 @@ public class CompetitionControllerMapping extends ControllerMapping {
 
   @Override
   public void bind() {
-    Command logWithinRangeCommand =
-        Commands.run(
-            () ->
-                SmartDashboard.putBoolean(
-                    "Controls/In Range",
-                    LocationUtils.getDistanceToLocation(
-                            drive.getPose().getTranslation(),
-                            RebuiltUtils.getCurrentHubLocation().toTranslation2d())
-                        .gt(Feet.of(7.5))));
-
     Command loggedTargetCommand =
         Commands.run(
             () ->
@@ -77,11 +65,10 @@ public class CompetitionControllerMapping extends ControllerMapping {
     // Drive with stick
     drive.setDefaultCommand(
         DriveCommands.joystickDriveCommand(
-                drive,
-                () -> -driverController.getLeftY(),
-                () -> -driverController.getLeftX(),
-                () -> -driverController.getRightX())
-            .alongWith(logWithinRangeCommand));
+            drive,
+            () -> -driverController.getLeftY(),
+            () -> -driverController.getLeftX(),
+            () -> -driverController.getRightX()));
 
     /* ---P1--- */
 
@@ -101,7 +88,8 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .leftTrigger(0.5)
         .whileTrue(
             intake
-                .intakeUntilInterruptedCommand(1)
+                .intakeUntilInterruptedCommand(
+                    () -> operatorController.rightStick().getAsBoolean() ? 0.5 : 0.75)
                 .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
 
     // Fuel Collection
@@ -125,12 +113,11 @@ public class CompetitionControllerMapping extends ControllerMapping {
             new FaceforwardCommand(
                     drive, () -> -driverController.getLeftY(), () -> -driverController.getLeftX())
                 .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
-
     // Shoot to Hub
     driverController
         .rightBumper()
         .whileTrue(
-            new SafeAimAndShootCommand(
+            ShootOnTheMove.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
@@ -145,7 +132,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
     driverController
         .leftBumper()
         .whileTrue(
-            new SafeAimAndShootCommand(
+            ShootOnTheMove.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
@@ -160,7 +147,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
     driverController
         .rightTrigger()
         .whileTrue(
-            new SafeAimAndShootCommand(
+            ShootOnTheMove.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
@@ -188,10 +175,20 @@ public class CompetitionControllerMapping extends ControllerMapping {
                         () ->
                             operatorController.setRumble(
                                 RumbleType.kBothRumble, operatorController.getLeftTriggerAxis()))))
-        .onFalse(
-            new InstantCommand(() -> operatorController.setRumble(RumbleType.kBothRumble, 0))
-                .ignoringDisable(true));
-
+        .onFalse(new InstantCommand(() -> operatorController.setRumble(RumbleType.kBothRumble, 0)));
+    /*
+       operatorController
+           .leftTrigger(0.1)
+           .whileTrue(
+               intake
+                   .jumbleIntake()
+                   .alongWith(
+                       new InstantCommand(
+                           () ->
+                               operatorController.setRumble(
+                                   RumbleType.kBothRumble, operatorController.getLeftTriggerAxis()))))
+           .onFalse(new InstantCommand(() -> operatorController.setRumble(RumbleType.kBothRumble, 0)));
+    */
     // Spool Shooter
     operatorController
         .rightTrigger()
@@ -211,7 +208,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .onFalse(new InstantCommand(() -> operatorController.setRumble(RumbleType.kBothRumble, 0)));
 
     // Deploy Intake
-    operatorController.x().whileTrue(intake.deployCommand());
+    operatorController.x().onTrue(intake.deployCommand());
 
     // Overides
 

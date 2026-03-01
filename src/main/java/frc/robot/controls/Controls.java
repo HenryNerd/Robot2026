@@ -40,7 +40,7 @@ public class Controls {
 
     mappings.put(
         ControlStates.COMPETITION,
-        new CompetitionControllerMapping(
+        new ShootOnTheMoveControllerMapping(
             driverController,
             operatorController,
             drivetrain,
@@ -55,6 +55,16 @@ public class Controls {
         ControlStates.CLEANING,
         new CleaningControllerMapping(
             driverController, operatorController, intake, indexer, shooter));
+    mappings.put(
+        ControlStates.SHOOT_ON_THE_MOVE,
+        new ShootOnTheMoveControllerMapping(
+            driverController,
+            operatorController,
+            drivetrain,
+            intake,
+            shooter,
+            indexer,
+            fuelDetection));
 
     Consumer<Enum<ControlStates>> onChange =
         (nextState) -> {
@@ -63,7 +73,6 @@ public class Controls {
             System.out.println("Invalid State: " + actualState);
             return;
           }
-
           mappings.get(currentState).clear();
           mappings.get(actualState).bind();
 
