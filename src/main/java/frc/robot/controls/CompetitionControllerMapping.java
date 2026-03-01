@@ -101,8 +101,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .leftTrigger(0.5)
         .whileTrue(
             intake
-                .intakeUntilInterruptedCommand(
-                    () -> operatorController.rightStick().getAsBoolean() ? 0.5 : 1)
+                .intakeUntilInterruptedCommand(1)
                 .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
 
     // Fuel Collection
@@ -212,7 +211,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .onFalse(new InstantCommand(() -> operatorController.setRumble(RumbleType.kBothRumble, 0)));
 
     // Deploy Intake
-    operatorController.x().onTrue(intake.deployCommand());
+    operatorController.x().whileTrue(intake.deployCommand());
 
     // Overides
 

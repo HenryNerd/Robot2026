@@ -115,8 +115,7 @@ public class Autos {
                         .getTranslation()
                         .getDistance(RebuiltUtils.getCurrentHubLocation().toTranslation2d()))));
 
-    NamedCommands.registerCommand(
-        "deploy-intake", intake.deployCommand());
+    NamedCommands.registerCommand("deploy-intake", intake.deployCommand());
 
     NamedCommands.registerCommand(
         "shoot-until-done",
