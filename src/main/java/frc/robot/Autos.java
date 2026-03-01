@@ -21,7 +21,6 @@ import frc.robot.commands.ShooterCommands;
 import frc.robot.controls.Controls;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.indexer.Indexer;
-import frc.robot.subsystems.intake.DeployerPosition;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.util.RebuiltUtils;
@@ -116,8 +115,8 @@ public class Autos {
                         .getTranslation()
                         .getDistance(RebuiltUtils.getCurrentHubLocation().toTranslation2d()))));
 
-    NamedCommands.registerCommand( // TODO: use new deployer command
-        "deploy-intake", intake.positionDeployerCommand(DeployerPosition.EXTENDED));
+    NamedCommands.registerCommand(
+        "deploy-intake", intake.deployCommand());
 
     NamedCommands.registerCommand(
         "shoot-until-done",
