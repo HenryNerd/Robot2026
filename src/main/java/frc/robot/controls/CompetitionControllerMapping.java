@@ -255,23 +255,16 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .onTrue(new InstantCommand(() -> intake.setDutyCycle(-0.5)))
         .onFalse(new InstantCommand(() -> intake.setDutyCycle(0)));
 
-    
     Command rumblePulse =
         Commands.sequence(
                 Commands.runOnce(() -> operatorController.setRumble(RumbleType.kBothRumble, 0.1)),
                 Commands.waitTime(Seconds.of(0.1)),
-                Commands.runOnce(() -> operatorController.setRumble(RumbleType.kBothRumble, 0))
-               )
-            .finallyDo(
-                () ->
-                    operatorController.setRumble(
-                        RumbleType.kBothRumble, 0)); 
+                Commands.runOnce(() -> operatorController.setRumble(RumbleType.kBothRumble, 0)))
+            .finallyDo(() -> operatorController.setRumble(RumbleType.kBothRumble, 0));
 
     // Apply it to your trigger
-    Trigger warningTrigger =
-        new Trigger(() -> RebuiltUtils.getShiftTime() <= 5.0);
+    Trigger warningTrigger = new Trigger(() -> RebuiltUtils.getShiftTime() <= 5.0);
 
-    
     warningTrigger.whileTrue(rumblePulse.ignoringDisable(true));
   }
 

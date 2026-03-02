@@ -4,6 +4,7 @@ import badgerutils.triggers.AllianceTriggers;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
 import frc.robot.Constants.Locations;
 import java.util.Arrays;
@@ -29,32 +30,14 @@ public class RebuiltUtils {
     true, true, false, true, false, true, true, true, true
   };
 
-  /**
-   * @return The current HUB state on robots alliance
-   */
-  public static boolean isHubActive() {
-    boolean[] currentSchedule = new boolean[9];
-    String gameData = DriverStation.getGameSpecificMessage();
-    boolean isRedAlliance = AllianceTriggers.isRedAlliance();
-    if (!gameData.isEmpty() && !DriverStation.isAutonomous()) {
+  private static Timer shiftTimer = new Timer();
 
-      switch (gameData.charAt(0)) {
-        case 'B':
-          currentSchedule = isRedAlliance ? looseSchedule : winSchedule;
-        case 'R':
-          currentSchedule = isRedAlliance ? winSchedule : looseSchedule;
-        default:
-          Arrays.fill(currentSchedule, true);
-      }
-    }
-
-    return currentSchedule[getAllianceShift().ordinal()];
+  public static void initShiftTimer() {
+    shiftTimer.start();
   }
-  /**
-   * @return The current alliance shift, if in AUTO, TRANSITION SHIFT or END GAME, returns 0
-   */
-  public static AllianceShift getAllianceShift() {
-    double time = DriverStation.getMatchTime();
+
+  private static AllianceShift getAllianceShiftFromTime(double time) {
+
     if (DriverStation.isAutonomous()) {
       return AllianceShift.AUTO;
     }
@@ -74,17 +57,62 @@ public class RebuiltUtils {
     } else if (time <= 80 && time >= 55) {
 
       return AllianceShift.SHIFT3;
-    } else if (time <= 55 && time >= 30) {
+    } else if (time <= 55.0 && time >= 30.0) {
 
       return AllianceShift.SHIFT4;
-    } else if (time <= 30) {
+    } else if (time <= 30.0) {
       return AllianceShift.ENDGAME;
     } // End Game
     return AllianceShift.UNKNOWN;
   }
 
+  public static AllianceShift getOfficalAllianceShift() {
+    return getAllianceShiftFromTime(DriverStation.getMatchTime());
+  }
+  /**
+   * @return The current HUB state on robots alliance
+   */
+  public static boolean isHubActive() {
+    boolean[] currentSchedule = new boolean[9];
+    String gameData = DriverStation.getGameSpecificMessage();
+    boolean isRedAlliance = AllianceTriggers.isRedAlliance();
+    if (!gameData.isEmpty() && !DriverStation.isAutonomous()) {
+
+      switch (gameData.charAt(0)) {
+        case 'B':
+          currentSchedule = isRedAlliance ? looseSchedule : winSchedule;
+        case 'R':
+          currentSchedule = isRedAlliance ? winSchedule : looseSchedule;
+        default:
+          Arrays.fill(currentSchedule, true);
+      }
+    }
+
+    return currentSchedule[getAllianceShiftFromTime(DriverStation.getMatchTime()).ordinal()];
+  }
+
+  public static boolean isHubActiveOffset(double offset) {
+    boolean[] currentSchedule = new boolean[9];
+    String gameData = DriverStation.getGameSpecificMessage();
+    boolean isRedAlliance = AllianceTriggers.isRedAlliance();
+    if (!gameData.isEmpty() && !DriverStation.isAutonomous()) {
+
+      switch (gameData.charAt(0)) {
+        case 'B':
+          currentSchedule = isRedAlliance ? looseSchedule : winSchedule;
+        case 'R':
+          currentSchedule = isRedAlliance ? winSchedule : looseSchedule;
+        default:
+          Arrays.fill(currentSchedule, true);
+      }
+    }
+    // make sure we don't end our shooting period early
+    return currentSchedule[getAllianceShiftFromTime(shiftTimer.get() - offset).ordinal()]
+        || currentSchedule[getAllianceShiftFromTime(shiftTimer.get()).ordinal()];
+  }
+
   public static double getShiftTime() {
-    AllianceShift currentShift = getAllianceShift();
+    AllianceShift currentShift = getAllianceShiftFromTime(DriverStation.getMatchTime());
     double time = DriverStation.getMatchTime();
     if (switch (currentShift) {
       case AUTO, ENDGAME, DISCONNECTED, UNKNOWN -> false;
