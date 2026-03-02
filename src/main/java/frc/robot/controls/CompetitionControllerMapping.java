@@ -255,14 +255,13 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .onTrue(new InstantCommand(() -> intake.setDutyCycle(-0.5)))
         .onFalse(new InstantCommand(() -> intake.setDutyCycle(0)));
 
-    // Alliance Shift Rumble
-    // Define the pulsing behavior as a separate command
+    
     Command rumblePulse =
-        Commands.repeatingSequence(
+        Commands.sequence(
                 Commands.runOnce(() -> operatorController.setRumble(RumbleType.kBothRumble, 0.1)),
-                Commands.waitTime(Seconds.of(0.5)),
-                Commands.runOnce(() -> operatorController.setRumble(RumbleType.kBothRumble, 0)),
-                Commands.waitTime(Seconds.of(0.5)))
+                Commands.waitTime(Seconds.of(0.1)),
+                Commands.runOnce(() -> operatorController.setRumble(RumbleType.kBothRumble, 0))
+               )
             .finallyDo(
                 () ->
                     operatorController.setRumble(
@@ -270,9 +269,9 @@ public class CompetitionControllerMapping extends ControllerMapping {
 
     // Apply it to your trigger
     Trigger warningTrigger =
-        new Trigger(() -> RebuiltUtils.getShiftTime() <= 5 && RebuiltUtils.getShiftTime() != -1);
+        new Trigger(() -> RebuiltUtils.getShiftTime() <= 5.0);
 
-    // .whileTrue starts the command when the condition is met and cancels it when it's not
+    
     warningTrigger.whileTrue(rumblePulse.ignoringDisable(true));
   }
 
