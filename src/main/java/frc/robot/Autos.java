@@ -92,18 +92,16 @@ public class Autos {
   private void bindNamedCommands() {
     NamedCommands.registerCommand(
         "shoot-8",
-        new SafeAimAndShootCommand(
+        ShootOnTheMoveCommands.shootOnTheMoveCommand(
                 drive,
                 shooter,
                 indexer,
                 intake,
-                () -> 0,
-                () -> 0,
                 () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
                 () -> false)
             .withDeadline(Commands.waitTime(STARTING_FUEL_SHOOT_DURATION)));
 
-    NamedCommands.registerCommand("intake", intake.intakeAtDutyCycleCommand(0.5));
+    NamedCommands.registerCommand("intake", intake.intakeAtDutyCycleCommand(1));
 
     NamedCommands.registerCommand("stop-intake", intake.intakeAtDutyCycleCommand(0));
 
@@ -134,6 +132,8 @@ public class Autos {
   }
 
   private void bindEventMarkers() {
+    // NONE OF THESE SHOULD REQUIRE THE DRIVE SUBSYSTEM
+
     new EventTrigger("shoot-until-done")
         .onTrue(
             ShootOnTheMoveCommands.shootOnTheMoveCommand(
@@ -146,18 +146,16 @@ public class Autos {
 
     new EventTrigger("shoot-8")
         .onTrue(
-            new SafeAimAndShootCommand(
+            ShootOnTheMoveCommands.shootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
                     intake,
-                    () -> 0,
-                    () -> 0,
                     () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
                     () -> false)
                 .withDeadline(Commands.waitTime(STARTING_FUEL_SHOOT_DURATION)));
 
-    new EventTrigger("intake").onTrue(intake.intakeAtDutyCycleCommand(0.5));
+    new EventTrigger("intake").onTrue(intake.intakeAtDutyCycleCommand(1));
 
     new EventTrigger("stop-intake").onTrue(intake.intakeAtDutyCycleCommand(0));
 
