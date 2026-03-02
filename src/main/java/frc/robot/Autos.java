@@ -143,6 +143,36 @@ public class Autos {
                 intake,
                 () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
                 () -> true));
+
+    new EventTrigger("shoot-8")
+        .onTrue(
+            new SafeAimAndShootCommand(
+                    drive,
+                    shooter,
+                    indexer,
+                    intake,
+                    () -> 0,
+                    () -> 0,
+                    () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                    () -> false)
+                .withDeadline(Commands.waitTime(STARTING_FUEL_SHOOT_DURATION)));
+
+    new EventTrigger("intake").onTrue(intake.intakeAtDutyCycleCommand(0.5));
+
+    new EventTrigger("stop-intake").onTrue(intake.intakeAtDutyCycleCommand(0));
+
+    new EventTrigger("spool-shooter")
+        .onTrue(
+            ShooterCommands.shootAtDistanceCommand(
+                shooter,
+                () ->
+                    Meters.of(
+                        drive
+                            .getPose()
+                            .getTranslation()
+                            .getDistance(RebuiltUtils.getCurrentHubLocation().toTranslation2d()))));
+
+    new EventTrigger("deploy-intake").onTrue(intake.deployCommand());
   }
 
   public static final class Auto {
