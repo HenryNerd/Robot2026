@@ -44,7 +44,7 @@
   ],
   "eventMarkers": [
     {
-      "name": "test-shoot",
+      "name": "shoot-until-done",
       "waypointRelativePos": 0.19950372208436234,
       "endWaypointRelativePos": null,
       "command": null

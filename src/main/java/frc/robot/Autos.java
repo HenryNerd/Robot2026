@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.SafeAimAndShootCommand;
-import frc.robot.commands.ShootOnTheMove;
+import frc.robot.commands.ShootOnTheMoveCommands;
 import frc.robot.commands.ShooterCommands;
 import frc.robot.controls.Controls;
 import frc.robot.subsystems.drive.Drive;
@@ -134,9 +134,9 @@ public class Autos {
   }
 
   private void bindEventMarkers() {
-    new EventTrigger("test-shoot")
+    new EventTrigger("shoot-until-done")
         .onTrue(
-            ShootOnTheMove.shootOnTheMoveCommand(
+            ShootOnTheMoveCommands.shootOnTheMoveCommand(
                 drive,
                 shooter,
                 indexer,
