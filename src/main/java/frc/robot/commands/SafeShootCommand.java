@@ -10,6 +10,8 @@ import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.indexer.Indexer;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.util.RebuiltUtils;
+
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
@@ -42,17 +44,18 @@ public class SafeShootCommand extends ParallelCommandGroup {
 
     BooleanSupplier driveAngleCondition = () -> drive.isLocked(drive, positionSupplier.get(), true);
 
+    BooleanSupplier hubActiveCondition = () -> RebuiltUtils.isHubActive();
     BooleanSupplier shootCondition =
         () ->
             override.getAsBoolean()
-                || (shooterVelocityCondition.getAsBoolean() && driveAngleCondition.getAsBoolean());
+                || (shooterVelocityCondition.getAsBoolean() && driveAngleCondition.getAsBoolean() && hubActiveCondition.getAsBoolean());
 
     Command guardedIndexerCommand = new GuardedCommand(indexerCommand, shootCondition);
 
     Command guardedIntakeCommand = new GuardedCommand(intakeCommand, shootCondition);
 
     Command loggedGuardCommand =
-        Commands.run(() -> logConditions(shooterVelocityCondition, driveAngleCondition));
+        Commands.run(() -> logConditions(shooterVelocityCondition, driveAngleCondition, hubActiveCondition));
 
     addCommands(
         shootAtDistanceCommand,
@@ -63,12 +66,13 @@ public class SafeShootCommand extends ParallelCommandGroup {
   }
 
   private void logConditions(
-      BooleanSupplier shooterVelocityCondition, BooleanSupplier driveAngleCondition) {
+      BooleanSupplier shooterVelocityCondition, BooleanSupplier driveAngleCondition, BooleanSupplier hubActiveCondition) {
     Logger.recordOutput(
         "Controls/Ready To Shoot",
         shooterVelocityCondition.getAsBoolean() && driveAngleCondition.getAsBoolean());
     Logger.recordOutput(
         "Controls/Shooter Velocity Condition", shooterVelocityCondition.getAsBoolean());
     Logger.recordOutput("Controls/Drive Angle Condition", driveAngleCondition.getAsBoolean());
+    Logger.recordOutput("Controls/HubActive", hubActiveCondition.getAsBoolean());
   }
 }

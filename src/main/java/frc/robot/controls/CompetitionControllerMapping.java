@@ -141,7 +141,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
                     () -> -driverController.getLeftY(),
                     () -> -driverController.getLeftX(),
                     () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
-                    operatorController.rightBumper())
+                    operatorController.leftBumper())
                 .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
 
     // Shoot to Corner
@@ -156,7 +156,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
                     () -> -driverController.getLeftY(),
                     () -> -driverController.getLeftX(),
                     () -> RebuiltUtils.getNearestAllianceCorner(drive.getPose().getTranslation()),
-                    operatorController.rightBumper())
+                    operatorController.leftBumper())
                 .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
 
     // Shoot to Hub or Corner Depending on Location
@@ -175,7 +175,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
                             ? RebuiltUtils.getCurrentHubLocation().toTranslation2d()
                             : RebuiltUtils.getNearestAllianceCorner(
                                 drive.getPose().getTranslation()),
-                    operatorController.rightBumper())
+                    operatorController.leftBumper())
                 .alongWith(loggedTargetCommand));
 
     /* ---P2--- */
@@ -265,7 +265,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
             .finallyDo(
                 () ->
                     operatorController.setRumble(
-                        RumbleType.kBothRumble, 0)); // Ensure it stops when trigger ends
+                        RumbleType.kBothRumble, 0)); 
 
     // Apply it to your trigger
     Trigger warningTrigger =
