@@ -49,16 +49,12 @@ public class RebuiltUtils {
       return AllianceShift.TRANSITION;
     } // Transition Shift
     else if (time <= 130 && time >= 105) {
-
       return AllianceShift.SHIFT1;
     } else if (time <= 105 && time >= 80) {
-
       return AllianceShift.SHIFT2;
     } else if (time <= 80 && time >= 55) {
-
       return AllianceShift.SHIFT3;
     } else if (time <= 55.0 && time >= 30.0) {
-
       return AllianceShift.SHIFT4;
     } else if (time <= 30.0) {
       return AllianceShift.ENDGAME;
@@ -81,10 +77,13 @@ public class RebuiltUtils {
       switch (gameData.charAt(0)) {
         case 'B':
           currentSchedule = isRedAlliance ? loseSchedule : winSchedule;
+          break;
         case 'R':
           currentSchedule = isRedAlliance ? winSchedule : loseSchedule;
+          break;
         default:
           Arrays.fill(currentSchedule, true);
+          break;
       }
     }
 
@@ -100,10 +99,13 @@ public class RebuiltUtils {
       switch (gameData.charAt(0)) {
         case 'B':
           currentSchedule = isRedAlliance ? loseSchedule : winSchedule;
+          break;
         case 'R':
           currentSchedule = isRedAlliance ? winSchedule : loseSchedule;
+          break;
         default:
           Arrays.fill(currentSchedule, true);
+          break;
       }
     }
     // make sure we don't end our shooting period early
