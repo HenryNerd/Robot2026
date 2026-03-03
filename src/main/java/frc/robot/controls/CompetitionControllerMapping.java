@@ -18,7 +18,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.FaceforwardCommand;
 import frc.robot.commands.FuelCollectionCommand;
-import frc.robot.commands.SafeShootCommand;
+import frc.robot.commands.SafeAimAndShootCommand;
+import frc.robot.commands.ShootOnTheMoveCommands;
 import frc.robot.commands.ShooterCommands;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.fueldetection.FuelDetection;
@@ -103,8 +104,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .leftTrigger(0.5)
         .whileTrue(
             intake
-                .intakeUntilInterruptedCommand(
-                    () -> operatorController.rightStick().getAsBoolean() ? 0.5 : 1)
+                .intakeUntilInterruptedCommand(1)
                 .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
 
     // Fuel Collection
@@ -133,7 +133,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
     driverController
         .rightBumper()
         .whileTrue(
-            new SafeShootCommand(
+            ShootOnTheMoveCommands.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
@@ -148,7 +148,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
     driverController
         .leftBumper()
         .whileTrue(
-            new SafeShootCommand(
+            ShootOnTheMoveCommands.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
@@ -163,7 +163,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
     driverController
         .rightTrigger()
         .whileTrue(
-            new SafeShootCommand(
+            ShootOnTheMoveCommands.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
@@ -216,7 +216,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
                 .ignoringDisable(true));
 
     // Deploy Intake
-    operatorController.x().onTrue(intake.deployCommand());
+    operatorController.x().whileTrue(intake.deployCommand());
 
     // Overides
 

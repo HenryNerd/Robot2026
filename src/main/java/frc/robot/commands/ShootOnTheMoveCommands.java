@@ -8,8 +8,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.units.measure.Time;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.Constants;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.indexer.Indexer;
 import frc.robot.subsystems.intake.Intake;
@@ -20,9 +19,21 @@ import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 import org.littletonrobotics.junction.Logger;
 
-public class ShootOnTheMoveCommand extends ParallelCommandGroup {
+public class ShootOnTheMoveCommands {
+  private static double SLOWDOWN_FACTOR = 0.25;
 
-  public ShootOnTheMoveCommand(
+  public static Command shootOnTheMoveCommand(
+      Drive drive,
+      Shooter shooter,
+      Indexer indexer,
+      Intake intake,
+      Supplier<Translation2d> target,
+      BooleanSupplier override) {
+    return new SafeShootCommand(
+        drive, shooter, indexer, intake, () -> calculateLeadTarget(drive, target), override);
+  }
+
+  public static Command aimAndShootOnTheMoveCommand(
       Drive drive,
       Shooter shooter,
       Indexer indexer,
@@ -31,21 +42,20 @@ public class ShootOnTheMoveCommand extends ParallelCommandGroup {
       DoubleSupplier ySupplier,
       Supplier<Translation2d> target,
       BooleanSupplier override) {
-    addCommands(
-        new SafeShootCommand(
-            drive,
-            shooter,
-            indexer,
-            intake,
-            xSupplier,
-            ySupplier,
-            () -> calculateLeadTarget(drive),
-            override));
+    return new SafeAimAndShootCommand(
+        drive,
+        shooter,
+        indexer,
+        intake,
+        () -> xSupplier.getAsDouble() * SLOWDOWN_FACTOR,
+        () -> ySupplier.getAsDouble() * SLOWDOWN_FACTOR,
+        () -> calculateLeadTarget(drive, target),
+        override);
   }
 
-  private Translation2d calculateLeadTarget(Drive drive) {
+  private static Translation2d calculateLeadTarget(Drive drive, Supplier<Translation2d> target) {
     Translation2d robotPos = drive.getPose().getTranslation();
-    Translation2d targetPos = Constants.Locations.blueHub.toTranslation2d();
+    Translation2d targetPos = target.get();
 
     ChassisSpeeds fieldSpeeds =
         ChassisSpeeds.fromRobotRelativeSpeeds(drive.getChassisSpeeds(), drive.getRotation());
