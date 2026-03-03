@@ -159,6 +159,6 @@ public class RebuiltUtils {
   }
 
   public static boolean isInAllianceZone(Translation2d position) {
-    return position.getX() <= 4.02844 || position.getX() >= 16.540988 - 4.02844;
+    return AllianceTriggers.isBlueAlliance() ? position.getX() <= 4.02844 : position.getX() >= 16.540988 - 4.02844;
   }
 }
