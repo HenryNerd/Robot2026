@@ -23,7 +23,7 @@ public class RebuiltUtils {
     UNKNOWN;
   }
 
-  private static final boolean[] looseSchedule = {
+  private static final boolean[] loseSchedule = {
     true, true, true, false, true, false, true, true, true
   };
   private static final boolean[] winSchedule = {
@@ -80,9 +80,9 @@ public class RebuiltUtils {
 
       switch (gameData.charAt(0)) {
         case 'B':
-          currentSchedule = isRedAlliance ? looseSchedule : winSchedule;
+          currentSchedule = isRedAlliance ? loseSchedule : winSchedule;
         case 'R':
-          currentSchedule = isRedAlliance ? winSchedule : looseSchedule;
+          currentSchedule = isRedAlliance ? winSchedule : loseSchedule;
         default:
           Arrays.fill(currentSchedule, true);
       }
@@ -99,9 +99,9 @@ public class RebuiltUtils {
 
       switch (gameData.charAt(0)) {
         case 'B':
-          currentSchedule = isRedAlliance ? looseSchedule : winSchedule;
+          currentSchedule = isRedAlliance ? loseSchedule : winSchedule;
         case 'R':
-          currentSchedule = isRedAlliance ? winSchedule : looseSchedule;
+          currentSchedule = isRedAlliance ? winSchedule : loseSchedule;
         default:
           Arrays.fill(currentSchedule, true);
       }
