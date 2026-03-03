@@ -85,6 +85,8 @@ public class RebuiltUtils {
           Arrays.fill(currentSchedule, true);
           break;
       }
+    } else {
+      Arrays.fill(currentSchedule, true);
     }
 
     return currentSchedule[getAllianceShiftFromTime(DriverStation.getMatchTime()).ordinal()];
@@ -107,6 +109,8 @@ public class RebuiltUtils {
           Arrays.fill(currentSchedule, true);
           break;
       }
+    } else {
+      Arrays.fill(currentSchedule, true);
     }
     // make sure we don't end our shooting period early
     return currentSchedule[getAllianceShiftFromTime(shiftTimer.get() - offset).ordinal()]
