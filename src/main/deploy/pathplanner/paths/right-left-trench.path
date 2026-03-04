@@ -3,32 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.4,
-        "y": 0.75
+        "x": 4.3752352941176476,
+        "y": 0.6280336134453774
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.3965655024977615,
-        "y": 0.8328082075122043
+        "x": 5.3752352941176476,
+        "y": 0.6280336134453774
       },
       "isLocked": false,
       "linkedName": "start-trench-right"
-    },
-    {
-      "anchor": {
-        "x": 6.0,
-        "y": 0.75
-      },
-      "prevControl": {
-        "x": 5.5,
-        "y": 0.7500000000000001
-      },
-      "nextControl": {
-        "x": 6.5,
-        "y": 0.75
-      },
-      "isLocked": false,
-      "linkedName": "trench-right-center"
     },
     {
       "anchor": {
@@ -94,15 +78,11 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1,
-      "rotationDegrees": -90.0
+      "waypointRelativePos": 0.95,
+      "rotationDegrees": 45.0
     },
     {
-      "waypointRelativePos": 1.8547717842323648,
-      "rotationDegrees": 90.0
-    },
-    {
-      "waypointRelativePos": 4,
+      "waypointRelativePos": 3.0,
       "rotationDegrees": 135.0
     }
   ],
@@ -111,19 +91,19 @@
   "eventMarkers": [
     {
       "name": "intake",
-      "waypointRelativePos": 1.75,
+      "waypointRelativePos": 0.9,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
       "name": "stop-intake",
-      "waypointRelativePos": 4.0,
+      "waypointRelativePos": 3.0,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
       "name": "spool-shooter",
-      "waypointRelativePos": 4.004962779156297,
+      "waypointRelativePos": 3.0049627791562967,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -138,13 +118,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 135.0
+    "rotation": 133.3376446743923
   },
   "reversed": false,
   "folder": "Center Collection",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -95.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

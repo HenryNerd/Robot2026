@@ -20,8 +20,8 @@
         "y": 2.5
       },
       "prevControl": {
-        "x": 6.130413449519968,
-        "y": 2.995134034370785
+        "x": 6.165206724759984,
+        "y": 2.7475670171853928
       },
       "nextControl": {
         "x": 6.408759651440098,
@@ -95,7 +95,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1.0,
-      "rotationDegrees": 135.0
+      "rotationDegrees": 45.0
     },
     {
       "waypointRelativePos": 1.8547717842323648,
@@ -142,7 +142,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -135.0
+    "rotation": -133.67497514699588
   },
   "reversed": false,
   "folder": "Center Collection",

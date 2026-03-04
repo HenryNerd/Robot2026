@@ -3,32 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.4,
-        "y": 7.35
+        "x": 4.3752352941176476,
+        "y": 7.3962352941176475
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.3963980072059785,
-        "y": 7.265200169599492
+        "x": 5.3752352941176476,
+        "y": 7.3962352941176475
       },
       "isLocked": false,
       "linkedName": "start-trench-left"
-    },
-    {
-      "anchor": {
-        "x": 5.920542168674699,
-        "y": 7.35
-      },
-      "prevControl": {
-        "x": 5.420542168674701,
-        "y": 7.35
-      },
-      "nextControl": {
-        "x": 6.904096852209365,
-        "y": 7.35
-      },
-      "isLocked": false,
-      "linkedName": "trench-left-center"
     },
     {
       "anchor": {
@@ -94,15 +78,11 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1,
-      "rotationDegrees": 90.0
+      "waypointRelativePos": 0.95,
+      "rotationDegrees": -45.0
     },
     {
-      "waypointRelativePos": 1.8547717842323648,
-      "rotationDegrees": -90.0
-    },
-    {
-      "waypointRelativePos": 4,
+      "waypointRelativePos": 3.0,
       "rotationDegrees": -135.0
     }
   ],
@@ -111,19 +91,19 @@
   "eventMarkers": [
     {
       "name": "intake",
-      "waypointRelativePos": 1.75,
+      "waypointRelativePos": 0.9,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
       "name": "stop-intake",
-      "waypointRelativePos": 4.0,
+      "waypointRelativePos": 3.0,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
       "name": "spool-shooter",
-      "waypointRelativePos": 4.004962779156297,
+      "waypointRelativePos": 3.0049627791562967,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -138,13 +118,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -135.0
+    "rotation": -133.67497514699588
   },
   "reversed": false,
   "folder": "Center Collection",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": 95.0
+    "velocity": 0.0,
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

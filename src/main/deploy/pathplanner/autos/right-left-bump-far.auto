@@ -27,7 +27,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "left-left-bump"
+                        "pathName": "right-left-bump"
                       }
                     },
                     {
@@ -46,6 +46,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Single Pass",
   "choreoAuto": false
 }
