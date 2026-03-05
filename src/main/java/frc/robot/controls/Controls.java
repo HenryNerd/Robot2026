@@ -63,7 +63,6 @@ public class Controls {
             System.out.println("Invalid State: " + actualState);
             return;
           }
-
           mappings.get(currentState).clear();
           mappings.get(actualState).bind();
 

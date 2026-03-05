@@ -8,6 +8,7 @@ import badgerutils.triggers.AllianceTriggers;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.events.EventTrigger;
 import com.pathplanner.lib.util.FlippingUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.units.measure.Time;
@@ -16,12 +17,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.SafeShootCommand;
+import frc.robot.commands.SafeAimAndShootCommand;
+import frc.robot.commands.ShootOnTheMoveCommands;
 import frc.robot.commands.ShooterCommands;
 import frc.robot.controls.Controls;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.indexer.Indexer;
-import frc.robot.subsystems.intake.DeployerPosition;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.util.RebuiltUtils;
@@ -67,6 +68,7 @@ public class Autos {
                 .onTrue(new InstantCommand(this::resetAutoOdometry).ignoringDisable(true)));
 
     bindNamedCommands();
+    bindEventMarkers();
   }
 
   public Command createCommandFromSelectedAuto() {
@@ -90,7 +92,7 @@ public class Autos {
   private void bindNamedCommands() {
     NamedCommands.registerCommand(
         "shoot-8",
-        new SafeShootCommand(
+        new SafeAimAndShootCommand(
                 drive,
                 shooter,
                 indexer,
@@ -101,7 +103,7 @@ public class Autos {
                 () -> false)
             .withDeadline(Commands.waitTime(STARTING_FUEL_SHOOT_DURATION)));
 
-    NamedCommands.registerCommand("intake", intake.intakeAtDutyCycleCommand(0.5));
+    NamedCommands.registerCommand("intake", intake.intakeAtDutyCycleCommand(1));
 
     NamedCommands.registerCommand("stop-intake", intake.intakeAtDutyCycleCommand(0));
 
@@ -116,12 +118,11 @@ public class Autos {
                         .getTranslation()
                         .getDistance(RebuiltUtils.getCurrentHubLocation().toTranslation2d()))));
 
-    NamedCommands.registerCommand( // TODO: use new deployer command
-        "deploy-intake", intake.positionDeployerCommand(DeployerPosition.EXTENDED));
+    NamedCommands.registerCommand("deploy-intake", intake.deployCommand());
 
     NamedCommands.registerCommand(
         "shoot-until-done",
-        new SafeShootCommand(
+        new SafeAimAndShootCommand(
             drive,
             shooter,
             indexer,
@@ -130,6 +131,48 @@ public class Autos {
             () -> 0,
             () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
             () -> false));
+  }
+
+  private void bindEventMarkers() {
+    // NONE OF THESE SHOULD REQUIRE THE DRIVE SUBSYSTEM
+
+    new EventTrigger("shoot-until-done")
+        .onTrue(
+            ShootOnTheMoveCommands.shootOnTheMoveCommand(
+                drive,
+                shooter,
+                indexer,
+                intake,
+                () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                () -> true));
+
+    new EventTrigger("shoot-8")
+        .onTrue(
+            ShootOnTheMoveCommands.shootOnTheMoveCommand(
+                    drive,
+                    shooter,
+                    indexer,
+                    intake,
+                    () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                    () -> false)
+                .withDeadline(Commands.waitTime(STARTING_FUEL_SHOOT_DURATION)));
+
+    new EventTrigger("intake").onTrue(intake.intakeAtDutyCycleCommand(1));
+
+    new EventTrigger("stop-intake").onTrue(intake.intakeAtDutyCycleCommand(0));
+
+    new EventTrigger("spool-shooter")
+        .onTrue(
+            ShooterCommands.shootAtDistanceCommand(
+                shooter,
+                () ->
+                    Meters.of(
+                        drive
+                            .getPose()
+                            .getTranslation()
+                            .getDistance(RebuiltUtils.getCurrentHubLocation().toTranslation2d()))));
+
+    new EventTrigger("deploy-intake").onTrue(intake.deployCommand());
   }
 
   public static final class Auto {

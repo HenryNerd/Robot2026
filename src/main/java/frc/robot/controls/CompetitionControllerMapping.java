@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.FaceforwardCommand;
 import frc.robot.commands.FuelCollectionCommand;
-import frc.robot.commands.SafeShootCommand;
+import frc.robot.commands.ShootOnTheMoveCommands;
 import frc.robot.commands.ShooterCommands;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.fueldetection.FuelDetection;
@@ -101,8 +101,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .leftTrigger(0.5)
         .whileTrue(
             intake
-                .intakeUntilInterruptedCommand(
-                    () -> operatorController.rightStick().getAsBoolean() ? 0.5 : 1)
+                .intakeUntilInterruptedCommand(1)
                 .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
 
     // Fuel Collection
@@ -127,41 +126,11 @@ public class CompetitionControllerMapping extends ControllerMapping {
                     drive, () -> -driverController.getLeftY(), () -> -driverController.getLeftX())
                 .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
 
-    // Shoot to Hub
+    // Shoot to Hub or Corner Depending on Location
     driverController
         .rightBumper()
         .whileTrue(
-            new SafeShootCommand(
-                    drive,
-                    shooter,
-                    indexer,
-                    intake,
-                    () -> -driverController.getLeftY(),
-                    () -> -driverController.getLeftX(),
-                    () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
-                    operatorController.rightBumper())
-                .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
-
-    // Shoot to Corner
-    driverController
-        .leftBumper()
-        .whileTrue(
-            new SafeShootCommand(
-                    drive,
-                    shooter,
-                    indexer,
-                    intake,
-                    () -> -driverController.getLeftY(),
-                    () -> -driverController.getLeftX(),
-                    () -> RebuiltUtils.getNearestAllianceCorner(drive.getPose().getTranslation()),
-                    operatorController.rightBumper())
-                .withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
-
-    // Shoot to Hub or Corner Depending on Location
-    driverController
-        .rightTrigger()
-        .whileTrue(
-            new SafeShootCommand(
+            ShootOnTheMoveCommands.aimAndShootOnTheMoveCommand(
                     drive,
                     shooter,
                     indexer,
