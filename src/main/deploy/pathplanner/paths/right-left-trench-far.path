@@ -1,0 +1,130 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.3752352941176476,
+        "y": 0.6280336134453774
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.3752352941176476,
+        "y": 0.6280336134453774
+      },
+      "isLocked": false,
+      "linkedName": "start-trench-right"
+    },
+    {
+      "anchor": {
+        "x": 8.6,
+        "y": 1.5
+      },
+      "prevControl": {
+        "x": 8.6,
+        "y": 0.25
+      },
+      "nextControl": {
+        "x": 8.6,
+        "y": 2.499999999999992
+      },
+      "isLocked": false,
+      "linkedName": "fuel-far-right-entrance"
+    },
+    {
+      "anchor": {
+        "x": 8.4,
+        "y": 5.75
+      },
+      "prevControl": {
+        "x": 8.753553390593273,
+        "y": 5.396446609406727
+      },
+      "nextControl": {
+        "x": 8.046446609406727,
+        "y": 6.103553390593273
+      },
+      "isLocked": false,
+      "linkedName": "fuel-far-left-exit"
+    },
+    {
+      "anchor": {
+        "x": 6.2,
+        "y": 5.5
+      },
+      "prevControl": {
+        "x": 7.2,
+        "y": 5.5
+      },
+      "nextControl": {
+        "x": 5.2,
+        "y": 5.5
+      },
+      "isLocked": false,
+      "linkedName": "bump-left-center"
+    },
+    {
+      "anchor": {
+        "x": 3.0,
+        "y": 5.5
+      },
+      "prevControl": {
+        "x": 3.25,
+        "y": 5.5
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "bump-left-alliance"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.95,
+      "rotationDegrees": 45.0
+    },
+    {
+      "waypointRelativePos": 3.0,
+      "rotationDegrees": 135.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "intake",
+      "waypointRelativePos": 0.5,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "stop-intake",
+      "waypointRelativePos": 3.0,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "spool-shooter",
+      "waypointRelativePos": 3.0049627791562967,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 133.3376446743923
+  },
+  "reversed": false,
+  "folder": "Center Collection",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}

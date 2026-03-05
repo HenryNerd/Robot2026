@@ -19,21 +19,21 @@
                 "data": {
                   "commands": [
                     {
+                      "type": "path",
+                      "data": {
+                        "pathName": "left-left-trench-far"
+                      }
+                    },
+                    {
                       "type": "named",
                       "data": {
-                        "name": "shoot-8"
+                        "name": "shoot-small-hopper"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "right-left-trench-far"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "shoot-until-done"
+                        "pathName": "left-left-trench-close"
                       }
                     }
                   ]
@@ -46,6 +46,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Single Pass",
+  "folder": "Double Pass",
   "choreoAuto": false
 }
