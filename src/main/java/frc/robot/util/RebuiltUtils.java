@@ -42,7 +42,7 @@ public class RebuiltUtils {
       return AllianceShift.AUTO;
     }
     if (!DriverStation.isFMSAttached()) {
-      return AllianceShift.DISCONNECTED;
+      // return AllianceShift.DISCONNECTED;
     }
 
     if (time >= 130) {
