@@ -19,12 +19,6 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
-                      "data": {
-                        "name": "shoot-8"
-                      }
-                    },
-                    {
                       "type": "path",
                       "data": {
                         "pathName": "left-left-bump-far"
