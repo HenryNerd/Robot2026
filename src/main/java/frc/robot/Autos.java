@@ -101,6 +101,7 @@ public class Autos {
                 () -> 0,
                 () -> 0,
                 () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                () -> false,
                 () -> false)
             .withDeadline(Commands.waitTime(STARTING_FUEL_SHOOT_DURATION)));
 
@@ -131,6 +132,7 @@ public class Autos {
             () -> 0,
             () -> 0,
             () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+            () -> false,
             () -> false));
 
     NamedCommands.registerCommand(
@@ -143,6 +145,7 @@ public class Autos {
                 () -> 0,
                 () -> 0,
                 () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                () -> false,
                 () -> false)
             .withDeadline(Commands.waitTime(SMALL_HOPPER_SHOOT_DURATION)));
   }
@@ -158,7 +161,8 @@ public class Autos {
                 indexer,
                 intake,
                 () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
-                () -> true));
+                () -> true,
+                () -> false));
 
     new EventTrigger("shoot-8")
         .onTrue(
@@ -168,6 +172,7 @@ public class Autos {
                     indexer,
                     intake,
                     () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                    () -> false,
                     () -> false)
                 .withDeadline(Commands.waitTime(STARTING_FUEL_SHOOT_DURATION)));
 
@@ -196,6 +201,7 @@ public class Autos {
                     indexer,
                     intake,
                     () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                    () -> false,
                     () -> false)
                 .withDeadline(Commands.waitTime(SMALL_HOPPER_SHOOT_DURATION)));
   }
