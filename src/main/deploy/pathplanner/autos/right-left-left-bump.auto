@@ -15,7 +15,19 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "left-left-bump-far"
+                        "pathName": "right-left-bump-far"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "shoot-small-hopper"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "left-left-trench-close"
                       }
                     },
                     {
@@ -34,6 +46,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Single Pass",
+  "folder": "Double Pass",
   "choreoAuto": false
 }

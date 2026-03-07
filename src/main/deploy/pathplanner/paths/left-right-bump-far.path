@@ -48,16 +48,16 @@
     },
     {
       "anchor": {
-        "x": 8.4,
-        "y": 2.25
+        "x": 8.20443373493976,
+        "y": 2.2319277108433733
       },
       "prevControl": {
-        "x": 8.753553390593273,
-        "y": 2.603553390593274
+        "x": 8.557987125533034,
+        "y": 2.5854811014366472
       },
       "nextControl": {
-        "x": 8.046446609406727,
-        "y": 1.8964466094067265
+        "x": 7.850880344346487,
+        "y": 1.8783743202500998
       },
       "isLocked": false,
       "linkedName": "fuel-far-right-exit"
@@ -80,11 +80,11 @@
     },
     {
       "anchor": {
-        "x": 3.0,
+        "x": 2.5,
         "y": 2.5
       },
       "prevControl": {
-        "x": 3.25,
+        "x": 2.75,
         "y": 2.5
       },
       "nextControl": null,
@@ -99,7 +99,7 @@
     },
     {
       "waypointRelativePos": 1.8547717842323648,
-      "rotationDegrees": -45.0
+      "rotationDegrees": -90.0
     },
     {
       "waypointRelativePos": 4,
@@ -110,6 +110,12 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
+      "name": "deploy-intake",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
       "name": "intake",
       "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
@@ -117,13 +123,7 @@
     },
     {
       "name": "stop-intake",
-      "waypointRelativePos": 4.0,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "spool-shooter",
-      "waypointRelativePos": 4.004962779156297,
+      "waypointRelativePos": 4.2,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -138,7 +138,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -133.67497514699588
+    "rotation": -140.87772276439145
   },
   "reversed": false,
   "folder": "Center Collection",

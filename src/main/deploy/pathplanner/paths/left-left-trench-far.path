@@ -80,11 +80,11 @@
     },
     {
       "anchor": {
-        "x": 2.587590361445783,
+        "x": 2.5,
         "y": 5.5
       },
       "prevControl": {
-        "x": 2.837590361445783,
+        "x": 2.75,
         "y": 5.5
       },
       "nextControl": null,
@@ -137,7 +137,7 @@
     },
     {
       "name": "stop-intake",
-      "waypointRelativePos": 4.0,
+      "waypointRelativePos": 4.2,
       "endWaypointRelativePos": null,
       "command": null
     }

@@ -3,12 +3,12 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.0,
+        "x": 2.5,
         "y": 2.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.0,
+        "x": 2.5,
         "y": 1.4999999999999964
       },
       "isLocked": false,
@@ -80,11 +80,11 @@
     },
     {
       "anchor": {
-        "x": 2.587590361445783,
+        "x": 2.5,
         "y": 5.5
       },
       "prevControl": {
-        "x": 2.837590361445783,
+        "x": 2.75,
         "y": 5.5
       },
       "nextControl": null,
@@ -146,7 +146,7 @@
   "folder": "Close Collection",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -133.67497514699588
+    "rotation": -140.87772276439145
   },
   "useDefaultConstraints": true
 }

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.587590361445783,
+        "x": 2.5,
         "y": 5.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.587590361445783,
-        "y": 6.5000000000000036
+        "x": 2.5,
+        "y": 6.5
       },
       "isLocked": false,
       "linkedName": "bump-left-alliance"
@@ -80,11 +80,11 @@
     },
     {
       "anchor": {
-        "x": 3.0,
+        "x": 2.5,
         "y": 2.5
       },
       "prevControl": {
-        "x": 3.25,
+        "x": 2.75,
         "y": 2.5
       },
       "nextControl": null,
@@ -140,7 +140,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -133.67497514699588
+    "rotation": -140.87772276439145
   },
   "reversed": false,
   "folder": "Close Collection",
