@@ -28,9 +28,16 @@ public class ShootOnTheMoveCommands {
       Indexer indexer,
       Intake intake,
       Supplier<Translation2d> target,
-      BooleanSupplier override) {
+      BooleanSupplier overrideAngleSafeguard,
+      BooleanSupplier overrideVelocitySafeguard) {
     return new SafeShootCommand(
-        drive, shooter, indexer, intake, () -> calculateLeadTarget(drive, target), override);
+        drive,
+        shooter,
+        indexer,
+        intake,
+        () -> calculateLeadTarget(drive, target),
+        overrideAngleSafeguard,
+        overrideVelocitySafeguard);
   }
 
   public static Command aimAndShootOnTheMoveCommand(
@@ -41,7 +48,8 @@ public class ShootOnTheMoveCommands {
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
       Supplier<Translation2d> target,
-      BooleanSupplier override) {
+      BooleanSupplier overrideAngleSafeguard,
+      BooleanSupplier overrideVelocitySafeguard) {
     return new SafeAimAndShootCommand(
         drive,
         shooter,
@@ -50,7 +58,8 @@ public class ShootOnTheMoveCommands {
         () -> xSupplier.getAsDouble() * SLOWDOWN_FACTOR,
         () -> ySupplier.getAsDouble() * SLOWDOWN_FACTOR,
         () -> calculateLeadTarget(drive, target),
-        override);
+        overrideAngleSafeguard,
+        overrideVelocitySafeguard);
   }
 
   private static Translation2d calculateLeadTarget(Drive drive, Supplier<Translation2d> target) {

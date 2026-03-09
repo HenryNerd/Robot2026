@@ -30,7 +30,8 @@ public class SafeShootCommand extends ParallelCommandGroup {
       Indexer indexer,
       Intake intake,
       Supplier<Translation2d> positionSupplier,
-      BooleanSupplier overrideSafeguards) {
+      BooleanSupplier overrideAngleSafeguard,
+      BooleanSupplier overrideVelocitySafeguard) {
 
     BooleanSupplier shooterVelocityCondition = shooter.isAtRequestedSpeed();
 
@@ -41,9 +42,10 @@ public class SafeShootCommand extends ParallelCommandGroup {
         new GuardedCommand(
             indexer.indexUntilCancelledCommand(INDEXER_SPEED),
             () ->
-                overrideSafeguards.getAsBoolean()
-                    || (shooterVelocityCondition.getAsBoolean()
-                        && driveAngleCondition.getAsBoolean()));
+                (shooterVelocityCondition.getAsBoolean()
+                        || overrideVelocitySafeguard.getAsBoolean())
+                    && (driveAngleCondition.getAsBoolean()
+                        || overrideAngleSafeguard.getAsBoolean()));
 
     Command shootAtDistanceCommand =
         ShooterCommands.shootAtDistanceCommand(
