@@ -56,6 +56,11 @@ public class Controls {
         new CleaningControllerMapping(
             driverController, operatorController, intake, indexer, shooter));
 
+    mappings.put(
+        ControlStates.OUTREACH,
+        new OutreachControllerMapping(
+            driverController, operatorController, drivetrain, intake, shooter, indexer));
+
     Consumer<Enum<ControlStates>> onChange =
         (nextState) -> {
           ControlStates actualState = (ControlStates) nextState;
