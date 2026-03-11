@@ -20,8 +20,6 @@ public class Shooter extends SubsystemBase {
 
   private final SysIdRoutine sysId;
 
-  private AngularVelocity setpoint = RotationsPerSecond.zero();
-
   public Shooter(ShooterIO shooterIO) {
     this.shooterIO = shooterIO;
 
@@ -41,14 +39,14 @@ public class Shooter extends SubsystemBase {
     Logger.processInputs("Shooter", inputs);
   }
 
-  public void setVelocity(AngularVelocity velocity) {
+  private void setVelocity(AngularVelocity velocity) {
     double multiplier = Math.signum(velocity.in(RotationsPerSecond));
 
     shooterIO.setVelocity(velocity.plus(speedOverride.times(multiplier)));
     Logger.recordOutput("Shooter/Velocity Setpoint", velocity);
   }
 
-  public void setDutyCycle(double dutyCycle) {
+  private void setDutyCycle(double dutyCycle) {
     shooterIO.setDutyCycle(dutyCycle);
     Logger.recordOutput("Shooter/DutyCycle", dutyCycle);
   }
