@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import static edu.wpi.first.units.Units.Meters;
-import static edu.wpi.first.units.Units.Seconds;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -40,19 +39,10 @@ public class SafeShootCommand extends ParallelCommandGroup {
     BooleanSupplier driveAngleCondition =
         () -> drive.isLocked(drive, positionSupplier.get(), true, ANGLE_TOLERANCE);
 
-    BooleanSupplier hubActiveCondition =
-        () ->
-            RebuiltUtils.isHubActiveOffset(
-                    ShooterCommands.interpolateSetpoints(
-                            ShooterCommands.SETPOINTS,
-                            Meters.of(
-                                drive
-                                    .getPose()
-                                    .getTranslation()
-                                    .getDistance(positionSupplier.get())))
-                        .time()
-                        .in(Seconds))
-                || !RebuiltUtils.isInAllianceZone(drive.getPose().getTranslation());
+    BooleanSupplier hubActiveCondition = () -> RebuiltUtils.isHubActive();
+    // || !RebuiltUtils.isInAllianceZone(drive.getPose().getTranslation())
+    Logger.recordOutput("Controls/Hub Active Condition", hubActiveCondition.getAsBoolean());
+
     BooleanSupplier shootCondition =
         () ->
             overrideAllSafeguards.getAsBoolean()

@@ -113,8 +113,8 @@ public class RebuiltUtils {
       Arrays.fill(currentSchedule, true);
     }
     // make sure we don't end our shooting period early
-    return currentSchedule[getAllianceShiftFromTime(shiftTimer.get() - offset).ordinal()]
-        || currentSchedule[getAllianceShiftFromTime(shiftTimer.get()).ordinal()];
+    return currentSchedule[getAllianceShiftFromTime(140 - shiftTimer.get() - offset).ordinal()]
+        || currentSchedule[getAllianceShiftFromTime(140 - shiftTimer.get()).ordinal()];
   }
 
   public static double getShiftTime() {
@@ -126,6 +126,7 @@ public class RebuiltUtils {
       case SHIFT2 -> time - 80;
       case SHIFT3 -> time - 55;
       case SHIFT4 -> time - 30;
+      case ENDGAME -> time - 0;
       default -> -1;
     };
   }
