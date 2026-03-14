@@ -54,7 +54,7 @@ public class SafeShootCommand extends ParallelCommandGroup {
                     Meters.of(drive.getPose().getTranslation().getDistance(positionSupplier.get())))
             .withInterruptBehavior(InterruptionBehavior.kCancelIncoming);
 
-    Command intakeCommand = intake.intakeUntilInterruptedCommand(INTAKE_SPEED);
+    Command intakeCommand = intake.shakeIntake();
 
     Trigger intakeRescheduler =
         new Trigger(
