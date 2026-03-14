@@ -82,7 +82,7 @@ public class Intake extends SubsystemBase {
             () -> this.setDutyCycle(dutyCycleWhileOn.getAsDouble()),
             () -> this.setDutyCycle(0),
             this)
-        .alongWith(deployAtDutyCycleCommand(0.1));
+        .alongWith(deployAtDutyCycleCommand(IntakeConstants.IDLE_DEPLOYER_DUTY_CYCLE));
   }
 
   public Command shakeIntake() {
