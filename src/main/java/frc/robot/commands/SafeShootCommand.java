@@ -6,7 +6,10 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.indexer.Indexer;
@@ -23,6 +26,7 @@ public class SafeShootCommand extends ParallelCommandGroup {
   private static double INTAKE_SPEED = 0.5;
 
   private boolean isActive;
+  private boolean hasShotFirstShot = false;
 
   public SafeShootCommand(
       Drive drive,
@@ -40,12 +44,18 @@ public class SafeShootCommand extends ParallelCommandGroup {
 
     Command guardedIndexerCommand =
         new GuardedCommand(
-            indexer.indexUntilCancelledCommand(INDEXER_SPEED),
-            () ->
-                (shooterVelocityCondition.getAsBoolean()
-                        || overrideVelocitySafeguard.getAsBoolean())
-                    && (driveAngleCondition.getAsBoolean()
-                        || overrideAngleSafeguard.getAsBoolean()));
+                new ConditionalCommand(
+                        new InstantCommand(), new WaitCommand(0.25), () -> hasShotFirstShot)
+                    .andThen(
+                        indexer
+                            .indexUntilCancelledCommand(INDEXER_SPEED)
+                            .alongWith(new InstantCommand(() -> hasShotFirstShot = true))),
+                () ->
+                    (shooterVelocityCondition.getAsBoolean()
+                            || overrideVelocitySafeguard.getAsBoolean())
+                        && (driveAngleCondition.getAsBoolean()
+                            || overrideAngleSafeguard.getAsBoolean()))
+            .finallyDo(() -> hasShotFirstShot = false);
 
     Command shootAtDistanceCommand =
         ShooterCommands.shootAtDistanceCommand(
