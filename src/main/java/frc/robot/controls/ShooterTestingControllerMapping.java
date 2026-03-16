@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.GuardedCommand;
+import frc.robot.commands.SafeShootCommand;
 import frc.robot.commands.ShooterCommands;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.indexer.Indexer;
@@ -118,7 +119,8 @@ public class ShooterTestingControllerMapping extends ControllerMapping {
                     shooter, () -> RotationsPerSecond.of(targetSpeed.get()))
                 .alongWith(
                     new GuardedCommand(
-                            indexer.indexUntilCancelledCommand(1), shooter.isAtRequestedSpeed())
+                            indexer.indexUntilCancelledCommand(1),
+                            shooter.isAtRequestedSpeed(SafeShootCommand.NORMAL_SPEED_TOLERANCE))
                         .alongWith(intake.shakeIntake())
                         .alongWith(
                             DriveCommands.driveAimLockedCommand(

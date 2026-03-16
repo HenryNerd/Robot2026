@@ -1,15 +1,14 @@
 package frc.robot.commands;
 
 import static edu.wpi.first.units.Units.Meters;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.indexer.Indexer;
@@ -20,13 +19,13 @@ import java.util.function.Supplier;
 import org.littletonrobotics.junction.Logger;
 
 public class SafeShootCommand extends ParallelCommandGroup {
-  private static Rotation2d ANGLE_TOLERANCE = Rotation2d.fromDegrees(5);
+  private static final Rotation2d ANGLE_TOLERANCE = Rotation2d.fromDegrees(5);
+  private static final AngularVelocity INITIAL_SPEED_TOLERANCE = RotationsPerSecond.of(0.5);
+  public static final AngularVelocity NORMAL_SPEED_TOLERANCE = RotationsPerSecond.of(2);
 
   private static double INDEXER_SPEED = 1;
-  private static double INTAKE_SPEED = 0.5;
 
   private boolean isActive;
-  private boolean hasShotFirstShot = false;
 
   public SafeShootCommand(
       Drive drive,
@@ -37,25 +36,21 @@ public class SafeShootCommand extends ParallelCommandGroup {
       BooleanSupplier overrideAngleSafeguard,
       BooleanSupplier overrideVelocitySafeguard) {
 
-    BooleanSupplier shooterVelocityCondition = shooter.isAtRequestedSpeed();
+    BooleanSupplier shooterVelocityCondition = shooter.isAtRequestedSpeed(NORMAL_SPEED_TOLERANCE);
 
     BooleanSupplier driveAngleCondition =
         () -> drive.isLocked(drive, positionSupplier.get(), true, ANGLE_TOLERANCE);
 
+    BooleanSupplier combinedCondition =
+        () ->
+            (shooterVelocityCondition.getAsBoolean() || overrideVelocitySafeguard.getAsBoolean())
+                && (driveAngleCondition.getAsBoolean() || overrideAngleSafeguard.getAsBoolean());
+
     Command guardedIndexerCommand =
         new GuardedCommand(
-                new ConditionalCommand(
-                        new InstantCommand(), new WaitCommand(0.25), () -> hasShotFirstShot)
-                    .andThen(
-                        indexer
-                            .indexUntilCancelledCommand(INDEXER_SPEED)
-                            .alongWith(new InstantCommand(() -> hasShotFirstShot = true))),
-                () ->
-                    (shooterVelocityCondition.getAsBoolean()
-                            || overrideVelocitySafeguard.getAsBoolean())
-                        && (driveAngleCondition.getAsBoolean()
-                            || overrideAngleSafeguard.getAsBoolean()))
-            .finallyDo(() -> hasShotFirstShot = false);
+            Commands.waitUntil(shooter.isAtRequestedSpeed(INITIAL_SPEED_TOLERANCE))
+                .andThen(indexer.indexUntilCancelledCommand(INDEXER_SPEED)),
+            combinedCondition);
 
     Command shootAtDistanceCommand =
         ShooterCommands.shootAtDistanceCommand(
@@ -66,6 +61,7 @@ public class SafeShootCommand extends ParallelCommandGroup {
 
     Command intakeCommand = intake.shakeIntake();
 
+    @SuppressWarnings("unused")
     Trigger intakeRescheduler =
         new Trigger(
                 () ->
@@ -73,6 +69,7 @@ public class SafeShootCommand extends ParallelCommandGroup {
                         && (intake.getCurrentCommand() == null
                             || intake.getCurrentCommand() == intake.getDefaultCommand()))
             .onTrue(intakeCommand);
+    @SuppressWarnings("unused")
     Trigger indexerRescheduler =
         new Trigger(
                 () ->

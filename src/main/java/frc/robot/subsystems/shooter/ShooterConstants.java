@@ -22,8 +22,6 @@ public class ShooterConstants {
 
   public static final double SUPPLY_CURRENT_LIMIT = 60;
 
-  public static final double ERROR_THRESHOLD = 2;
-
   // CONFIGS
   public static final TalonFXConfiguration CW_SHOOTER_MOTOR_CONFIGS =
       new TalonFXConfiguration()
