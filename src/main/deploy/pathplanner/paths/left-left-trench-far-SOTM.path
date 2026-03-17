@@ -1,0 +1,185 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.375,
+        "y": 7.4
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.3750000000000036,
+        "y": 7.4
+      },
+      "isLocked": false,
+      "linkedName": "start-trench-left"
+    },
+    {
+      "anchor": {
+        "x": 8.2,
+        "y": 6.4
+      },
+      "prevControl": {
+        "x": 8.2,
+        "y": 7.4
+      },
+      "nextControl": {
+        "x": 8.2,
+        "y": 5.400000000000004
+      },
+      "isLocked": false,
+      "linkedName": "fuel-far-left-entrance"
+    },
+    {
+      "anchor": {
+        "x": 8.2,
+        "y": 4.75
+      },
+      "prevControl": {
+        "x": 8.2,
+        "y": 5.25
+      },
+      "nextControl": {
+        "x": 8.2,
+        "y": 4.250000000000001
+      },
+      "isLocked": false,
+      "linkedName": "fuel-halfway-left"
+    },
+    {
+      "anchor": {
+        "x": 7.25,
+        "y": 5.3
+      },
+      "prevControl": {
+        "x": 7.5367882181755235,
+        "y": 4.890423977855504
+      },
+      "nextControl": {
+        "x": 6.819817672736716,
+        "y": 5.914364033216744
+      },
+      "isLocked": false,
+      "linkedName": "fuel-mid-left-exit"
+    },
+    {
+      "anchor": {
+        "x": 5.9,
+        "y": 5.5
+      },
+      "prevControl": {
+        "x": 6.9,
+        "y": 5.5
+      },
+      "nextControl": {
+        "x": 4.9,
+        "y": 5.5
+      },
+      "isLocked": false,
+      "linkedName": "bump-left-center"
+    },
+    {
+      "anchor": {
+        "x": 2.5,
+        "y": 5.5
+      },
+      "prevControl": {
+        "x": 2.75,
+        "y": 5.5
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "bump-left-alliance"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.95,
+      "rotationDegrees": -100.0
+    },
+    {
+      "waypointRelativePos": 2.0,
+      "rotationDegrees": -119.99999999999999
+    },
+    {
+      "waypointRelativePos": 2.5,
+      "rotationDegrees": 125.00000000000001
+    },
+    {
+      "waypointRelativePos": 4.0,
+      "rotationDegrees": 135.0
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 4.5,
+      "maxWaypointRelativePos": 5.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 4.6,
+        "y": 4.036
+      },
+      "rotationOffset": 180.0,
+      "minWaypointRelativePos": 4.5,
+      "maxWaypointRelativePos": 5.0,
+      "name": "Point Towards Zone"
+    }
+  ],
+  "eventMarkers": [
+    {
+      "name": "deploy-intake",
+      "waypointRelativePos": 0.1,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "intake",
+      "waypointRelativePos": 0.5,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "stop-intake",
+      "waypointRelativePos": 4.2,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "shoot-small-hopper",
+      "waypointRelativePos": 4.5,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 1.0,
+    "rotation": 144.82397065842056
+  },
+  "reversed": false,
+  "folder": "Center Collection",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}
