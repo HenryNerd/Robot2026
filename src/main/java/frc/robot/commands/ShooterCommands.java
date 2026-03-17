@@ -21,7 +21,6 @@ import org.littletonrobotics.junction.Logger;
 
 public class ShooterCommands {
 
-  // todo fix all the times
   public static final ShooterSetpoint[] SETPOINTS =
       Arrays.stream(
               new ShooterSetpoint[] {
