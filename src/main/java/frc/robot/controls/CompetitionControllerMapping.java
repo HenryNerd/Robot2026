@@ -22,6 +22,7 @@ import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.fueldetection.FuelDetection;
 import frc.robot.subsystems.indexer.Indexer;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.leds.Leds;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.util.LocationUtils;
 import frc.robot.util.RebuiltUtils;
@@ -34,6 +35,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
   private final Shooter shooter;
   private final Indexer indexer;
   private final FuelDetection fuelDetection;
+  private final Leds leds;
 
   public CompetitionControllerMapping(
       CommandXboxController driverController,
@@ -42,13 +44,14 @@ public class CompetitionControllerMapping extends ControllerMapping {
       Intake intake,
       Shooter shooter,
       Indexer indexer,
-      FuelDetection fuelDetection) {
+      FuelDetection fuelDetection, Leds leds) {
     super(driverController, operatorController);
     this.drive = drive;
     this.intake = intake;
     this.shooter = shooter;
     this.indexer = indexer;
     this.fuelDetection = fuelDetection;
+    this.leds = leds;
   }
 
   @Override
@@ -219,6 +222,8 @@ public class CompetitionControllerMapping extends ControllerMapping {
         .a()
         .onTrue(new InstantCommand(() -> intake.setDutyCycle(-0.5)))
         .onFalse(new InstantCommand(() -> intake.setDutyCycle(0)));
+    // Led triggers
+    
   }
 
   @Override
