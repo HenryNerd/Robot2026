@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
-import org.littletonrobotics.junction.AutoLogOutput;
 
 public class LedsRio implements LedsIO {
 
@@ -33,6 +32,4 @@ public class LedsRio implements LedsIO {
     blink.applyTo(ledBuffer);
     ledStrip.setData(ledBuffer);
   }
-
-
 }

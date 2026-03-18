@@ -24,10 +24,9 @@ public class Leds extends SubsystemBase {
           0,
           AllianceTriggers.isRedAlliance() ? 0 : 255);
 
-    } else if(DriverStation.isAutonomous()){
+    } else if (DriverStation.isAutonomous()) {
       LedsIO.setSolid(255, 0, 255);
-    }
-      else if (isShooting && !isInShootingTolerance) {
+    } else if (isShooting && !isInShootingTolerance) {
 
       LedsIO.setSolid(0, 255, 0);
     } else if (isShooting) {
@@ -39,7 +38,6 @@ public class Leds extends SubsystemBase {
           AllianceTriggers.isRedAlliance() ? 0 : 255);
     }
 
-    
     Logger.recordOutput("Leds/isShooting", isShooting);
     Logger.recordOutput("Leds/isInShootingTolerance", isInShootingTolerance);
   }
