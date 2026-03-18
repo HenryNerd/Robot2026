@@ -1,5 +1,7 @@
 package frc.robot.subsystems.leds;
 
+import badgerutils.triggers.AllianceTriggers;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.littletonrobotics.junction.Logger;
@@ -18,18 +20,39 @@ public class Leds extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (isDisabled) {
-      LedsIO.setBlink(255, 0, 0, 2);
-      currentColor = new Color(255, 20, 0);
+    if (DriverStation.isDisabled()) {
+      currentColor =
+          new Color(
+              AllianceTriggers.isRedAlliance() ? 255 : 0,
+              0,
+              AllianceTriggers.isRedAlliance() ? 0 : 255);
+      LedsIO.setSolid(
+          (int) (currentColor.red * 255),
+          (int) (currentColor.green * 255),
+          (int) (currentColor.blue * 255));
     } else if (isShooting && !isInShootingTolerance) {
-      LedsIO.setSolid(0, 255, 0);
-      currentColor = new Color(0, 255, 0);
+      currentColor = new Color(150, 150, 0);
+      LedsIO.setSolid(
+          (int) (currentColor.red * 255),
+          (int) (currentColor.green * 255),
+          (int) (currentColor.blue * 255));
     } else if (isShooting) {
-      LedsIO.setBlink(0, 255, 0, 4);
-      currentColor = new Color(0, 0, 255);
+      currentColor = new Color(0, 255, 0);
+      LedsIO.setBlink(
+          (int) (currentColor.red * 255),
+          (int) (currentColor.green * 255),
+          (int) (currentColor.blue * 255),
+          (int) (1));
     } else {
-      LedsIO.setSolid(255, 0, 0);
-      currentColor = new Color(255, 0, 0);
+      currentColor =
+          new Color(
+              AllianceTriggers.isRedAlliance() ? 255 : 0,
+              0,
+              AllianceTriggers.isRedAlliance() ? 0 : 255);
+      LedsIO.setSolid(
+          (int) (currentColor.red * 255),
+          (int) (currentColor.green * 255),
+          (int) (currentColor.blue * 255));
     }
 
     Logger.recordOutput("Leds/isDisabled", isDisabled);
