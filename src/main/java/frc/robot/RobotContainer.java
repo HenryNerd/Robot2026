@@ -81,9 +81,9 @@ public class RobotContainer {
                 new VisionIOPhotonVision(
                     VisionConstants.RIGHT_SIDE_CAMERA_NAME,
                     VisionConstants.RIGHT_SIDE_CAMERA_POSITION));
-       fuelDetection = new FuelDetection(new FuelDetectionIO() {});
+        fuelDetection = new FuelDetection(new FuelDetectionIO() {});
         leds = new Leds(new LedsRio());
-        
+
         break;
 
       case SIM:
@@ -117,10 +117,9 @@ public class RobotContainer {
                     VisionConstants.RIGHT_SIDE_CAMERA_NAME,
                     VisionConstants.RIGHT_SIDE_CAMERA_POSITION,
                     () -> drive.getPose()));
-       
-       
+
         fuelDetection = new FuelDetection(new FuelDetectionIO() {});
-         leds = new Leds(new LedsRio());
+        leds = new Leds(new LedsRio());
         break;
 
       default:
