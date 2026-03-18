@@ -24,13 +24,16 @@ public class ShooterCommands {
   public static final ShooterSetpoint[] SETPOINTS =
       Arrays.stream(
               new ShooterSetpoint[] {
-                new ShooterSetpoint(Feet.of(6.8), RotationsPerSecond.of(37), Seconds.of(0.816625)),
-                new ShooterSetpoint(Feet.of(8.2), RotationsPerSecond.of(38), Seconds.of(0.841625)),
-                new ShooterSetpoint(Feet.of(10.5), RotationsPerSecond.of(42.5), Seconds.of(0.945875)),
+                new ShooterSetpoint(Feet.of(6.8), RotationsPerSecond.of(37), Seconds.of(0.8166)),
+                new ShooterSetpoint(Feet.of(8.2), RotationsPerSecond.of(38), Seconds.of(0.8416)),
+                new ShooterSetpoint(Feet.of(10.5), RotationsPerSecond.of(42.5), Seconds.of(0.9459)),
                 new ShooterSetpoint(Feet.of(13.3), RotationsPerSecond.of(44.5), Seconds.of(1.225)),
-                new ShooterSetpoint(Feet.of(15.3), RotationsPerSecond.of(50.5), Seconds.of(1.36675)),
-                new ShooterSetpoint(Feet.of(17.2), RotationsPerSecond.of(55), Seconds.of(1.43325)),
-                new ShooterSetpoint(Feet.of(23.9), RotationsPerSecond.of(65), Seconds.of(1.8936)), // extrapolated using linear regression
+                new ShooterSetpoint(Feet.of(15.3), RotationsPerSecond.of(50.5), Seconds.of(1.3668)),
+                new ShooterSetpoint(Feet.of(17.2), RotationsPerSecond.of(55), Seconds.of(1.4333)),
+                new ShooterSetpoint(
+                    Feet.of(23.9),
+                    RotationsPerSecond.of(65),
+                    Seconds.of(1.8936)), // extrapolated using linear regression
               })
           .sorted()
           .toArray(ShooterSetpoint[]::new);
