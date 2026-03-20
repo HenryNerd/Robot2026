@@ -73,7 +73,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "start-trench-left"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
@@ -132,7 +132,7 @@
   "folder": "Center Collection",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 95.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }
