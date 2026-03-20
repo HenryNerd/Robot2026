@@ -148,7 +148,7 @@
   "folder": "Center Collection",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 95.0
   },
   "useDefaultConstraints": true
 }
