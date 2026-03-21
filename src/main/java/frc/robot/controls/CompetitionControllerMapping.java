@@ -56,6 +56,8 @@ public class CompetitionControllerMapping extends ControllerMapping {
     this.indexer = indexer;
     this.fuelDetection = fuelDetection;
     this.leds = leds;
+
+    shooter.resetVelocityOverride();
   }
 
   @Override
