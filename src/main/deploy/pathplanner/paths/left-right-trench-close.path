@@ -146,7 +146,7 @@
   "folder": "Close Collection",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 144.82397065842056
+    "rotation": 135.0
   },
   "useDefaultConstraints": true
 }

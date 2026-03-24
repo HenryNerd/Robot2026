@@ -3,87 +3,58 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.65,
-        "y": 6.0
+        "x": 2.5,
+        "y": 5.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.15,
-        "y": 6.0
+        "x": 1.5155449674884305,
+        "y": 5.5
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "bump-left-alliance"
     },
     {
       "anchor": {
-        "x": 1.4401807228915664,
-        "y": 6.1003373493975905
+        "x": 0.6329075630252108,
+        "y": 5.978571428571429
       },
       "prevControl": {
-        "x": 1.9401807228915664,
-        "y": 6.1003373493975905
-      },
-      "nextControl": {
-        "x": 1.1901807228915664,
-        "y": 6.1003373493975905
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 0.65,
-        "y": 6.1003373493975905
-      },
-      "prevControl": {
-        "x": 0.4,
-        "y": 6.1003373493975905
-      },
-      "nextControl": {
-        "x": 1.15,
-        "y": 6.1003373493975905
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.729650602409638,
-        "y": 4.045927710843373
-      },
-      "prevControl": {
-        "x": 2.229650602409638,
-        "y": 4.045927710843373
+        "x": 0.3829075630252108,
+        "y": 5.978571428571429
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
+  "rotationTargets": [],
+  "constraintZones": [
     {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 180.0
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 5.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
     }
   ],
-  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "intake",
-      "waypointRelativePos": 1.0,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "spool-shooter",
-      "waypointRelativePos": 2.0,
+      "waypointRelativePos": 0.25,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
       "name": "stop-intake",
-      "waypointRelativePos": 2.5,
+      "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -98,13 +69,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 178.8766972859246
+    "rotation": 158.58703052512834
   },
   "reversed": false,
   "folder": "Alliance Side",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 135.0
   },
   "useDefaultConstraints": true
 }
