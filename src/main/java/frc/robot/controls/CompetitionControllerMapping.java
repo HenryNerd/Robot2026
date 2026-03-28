@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.FaceforwardCommand;
 import frc.robot.commands.FuelCollectionCommand;
@@ -161,6 +162,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
                             ? RebuiltUtils.getCurrentHubLocation().toTranslation2d()
                             : RebuiltUtils.getNearestAllianceCorner(
                                 drive.getPose().getTranslation()),
+                    RebuiltUtils.isInAllianceZone(drive.getPose().getTranslation()) ? Constants.Tolerances.SCORING_ANGLE_TOLERANCE : Constants.Tolerances.PASSING_ANGLE_TOLERANCE,
                     operatorController.rightBumper(),
                     () ->
                         operatorController.rightBumper().getAsBoolean()

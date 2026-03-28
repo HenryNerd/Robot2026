@@ -21,7 +21,6 @@ import java.util.function.Supplier;
 import org.littletonrobotics.junction.Logger;
 
 public class SafeShootCommand extends ParallelCommandGroup {
-  private static final Rotation2d ANGLE_TOLERANCE = Rotation2d.fromDegrees(5);
   private static final AngularVelocity INITIAL_SPEED_TOLERANCE = RotationsPerSecond.of(0.5);
   public static final AngularVelocity NORMAL_SPEED_TOLERANCE = RotationsPerSecond.of(2);
 
@@ -36,6 +35,7 @@ public class SafeShootCommand extends ParallelCommandGroup {
       Intake intake,
       Leds leds,
       Supplier<Translation2d> positionSupplier,
+      Rotation2d angleTolerance,
       BooleanSupplier overrideAngleSafeguard,
       BooleanSupplier overrideVelocitySafeguard,
       BooleanSupplier overrideHubActive) {
@@ -43,7 +43,7 @@ public class SafeShootCommand extends ParallelCommandGroup {
     BooleanSupplier shooterVelocityCondition = shooter.isAtRequestedSpeed(NORMAL_SPEED_TOLERANCE);
 
     BooleanSupplier driveAngleCondition =
-        () -> drive.isLocked(drive, positionSupplier.get(), true, ANGLE_TOLERANCE);
+        () -> drive.isLocked(drive, positionSupplier.get(), true, angleTolerance);
 
     BooleanSupplier hubActiveCondition =
         () ->
@@ -59,7 +59,10 @@ public class SafeShootCommand extends ParallelCommandGroup {
 
     Command guardedIndexerCommand =
         new GuardedCommand(
-            Commands.waitUntil(shooter.isAtRequestedSpeed(INITIAL_SPEED_TOLERANCE))
+            Commands.waitUntil(
+                    () ->
+                        shooter.isAtRequestedSpeed(INITIAL_SPEED_TOLERANCE).getAsBoolean()
+                            || overrideVelocitySafeguard.getAsBoolean())
                 .andThen(indexer.indexUntilCancelledCommand(INDEXER_SPEED)),
             combinedCondition);
 

@@ -105,6 +105,7 @@ public class Autos {
                 () -> 0,
                 () -> 0,
                 () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
                 () -> false,
                 () -> false,
                 () -> true)
@@ -138,6 +139,7 @@ public class Autos {
             () -> 0,
             () -> 0,
             () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+            Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
             () -> false,
             () -> false,
             () -> true));
@@ -153,6 +155,7 @@ public class Autos {
                 () -> 0,
                 () -> 0,
                 () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
                 () -> false,
                 () -> false,
                 () -> true)
@@ -171,6 +174,7 @@ public class Autos {
                 intake,
                 leds,
                 () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
                 () -> true,
                 () -> false,
                 () -> true));
@@ -184,6 +188,7 @@ public class Autos {
                     intake,
                     leds,
                     () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                    Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
                     () -> true,
                     () -> false,
                     () -> true)
@@ -215,6 +220,7 @@ public class Autos {
                     intake,
                     leds,
                     () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
+                    Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
                     () -> true,
                     () -> false,
                     () -> true)
