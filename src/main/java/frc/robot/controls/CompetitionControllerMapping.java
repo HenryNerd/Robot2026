@@ -201,6 +201,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
                                 : RebuiltUtils.getNearestAllianceCorner(
                                     drive.getPose().getTranslation()),
                             drive.getPose().getTranslation()))
+                .withInterruptBehavior(InterruptionBehavior.kCancelSelf)
                 .alongWith(
                     new InstantCommand(
                         () -> operatorController.setRumble(RumbleType.kBothRumble, 0.25))))
