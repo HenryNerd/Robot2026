@@ -91,8 +91,8 @@ public class CompetitionControllerMapping extends ControllerMapping {
                 () -> -driverController.getLeftY(),
                 () -> -driverController.getLeftX(),
                 () -> -driverController.getRightX())
-            .withName("Default Drive")
-            .alongWith(logWithinRangeCommand));
+            .alongWith(logWithinRangeCommand)
+            .withName("Default Drive"));
 
     /* ---P1--- */
 

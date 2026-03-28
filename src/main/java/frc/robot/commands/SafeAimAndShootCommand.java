@@ -43,7 +43,8 @@ public class SafeAimAndShootCommand extends ParallelCommandGroup {
             overrideHubActive);
 
     Command driveAtAngleCommand =
-        DriveCommands.driveAimLockedCommand(drive, xSupplier, ySupplier, positionSupplier, true);
+        DriveCommands.driveAimLockedCommand(drive, xSupplier, ySupplier, positionSupplier, true)
+            .withInterruptBehavior(InterruptionBehavior.kCancelIncoming);
 
     setName("Safe Aim and Shoot");
     addCommands(safeShootCommand, driveAtAngleCommand);

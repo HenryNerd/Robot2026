@@ -71,16 +71,31 @@ public class Robot extends LoggedRobot {
 
   @Override
   public void robotInit() {
+    /*CommandScheduler.getInstance()
+    .onCommandInitialize(
+        (command) -> {
+          System.out.println(
+              "Initialized Command:\nRequirements: "
+                  + command.getRequirements()
+                  + "\nName: "
+                  + command.getName()
+                  + "\nInterruption Behavior: "
+                  + command.getInterruptionBehavior()
+                  + "\n\n");
+        });*/
+
     CommandScheduler.getInstance()
-        .onCommandInitialize(
-            (command) -> {
+        .onCommandInterrupt(
+            (command, interruptingCommand) -> {
               System.out.println(
-                  "Initialized Command:\nRequirements: "
-                      + command.getRequirements()
-                      + "\nName: "
+                  "Command Interrupted:\nName: "
                       + command.getName()
                       + "\nInterruption Behavior: "
                       + command.getInterruptionBehavior()
+                      + "\n Interrupted By: "
+                      + (interruptingCommand.isPresent()
+                          ? interruptingCommand.get().getName()
+                          : "None")
                       + "\n\n");
             });
   }
