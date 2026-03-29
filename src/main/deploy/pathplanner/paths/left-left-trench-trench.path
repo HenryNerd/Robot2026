@@ -3,32 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.4727349397590364,
-        "y": 5.5
+        "x": 4.3752352941176476,
+        "y": 7.3962352941176475
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.4727349397590395,
-        "y": 5.5
+        "x": 5.375235294117651,
+        "y": 7.3962352941176475
       },
       "isLocked": false,
-      "linkedName": "start-bump-left-alliance"
-    },
-    {
-      "anchor": {
-        "x": 6.0291764705882365,
-        "y": 5.5
-      },
-      "prevControl": {
-        "x": 5.9954348456521105,
-        "y": 5.252287459448114
-      },
-      "nextControl": {
-        "x": 6.219610205527995,
-        "y": 6.898060240963855
-      },
-      "isLocked": false,
-      "linkedName": "bump-left-center"
+      "linkedName": "start-trench-left"
     },
     {
       "anchor": {
@@ -36,12 +20,12 @@
         "y": 6.4
       },
       "prevControl": {
-        "x": 8.181636434462986,
-        "y": 8.399915693088271
+        "x": 8.2,
+        "y": 7.4
       },
       "nextControl": {
-        "x": 8.209181782768507,
-        "y": 5.400042153455865
+        "x": 8.2,
+        "y": 5.400000000000004
       },
       "isLocked": false,
       "linkedName": "fuel-far-left-entrance"
@@ -57,77 +41,57 @@
       },
       "nextControl": {
         "x": 8.2,
-        "y": 3.75
+        "y": 4.250000000000001
       },
       "isLocked": false,
       "linkedName": "fuel-halfway-left"
     },
     {
       "anchor": {
-        "x": 7.3,
-        "y": 4.75
+        "x": 7.25,
+        "y": 5.3
       },
       "prevControl": {
-        "x": 7.3,
-        "y": 3.75
+        "x": 7.5,
+        "y": 4.866987298107781
       },
       "nextControl": {
-        "x": 7.3,
-        "y": 6.25
+        "x": 5.9,
+        "y": 7.638268590217985
       },
       "isLocked": false,
       "linkedName": "fuel-mid-left-exit"
     },
     {
       "anchor": {
-        "x": 6.0291764705882365,
-        "y": 5.5
+        "x": 4.3752352941176476,
+        "y": 7.3962352941176475
       },
       "prevControl": {
-        "x": 7.0291764705882365,
-        "y": 5.5
-      },
-      "nextControl": {
-        "x": 5.0291764705882365,
-        "y": 5.5
-      },
-      "isLocked": false,
-      "linkedName": "bump-left-center"
-    },
-    {
-      "anchor": {
-        "x": 2.0,
-        "y": 5.5
-      },
-      "prevControl": {
-        "x": 2.25,
-        "y": 5.5
+        "x": 5.3752352941176476,
+        "y": 7.3962352941176475
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "bump-left-alliance"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": -45.0
-    },
-    {
-      "waypointRelativePos": 1.8547717842323648,
+      "waypointRelativePos": 0.95,
       "rotationDegrees": -100.0
     },
     {
-      "waypointRelativePos": 3.0,
-      "rotationDegrees": -100.0
+      "waypointRelativePos": 2.0,
+      "rotationDegrees": -119.99999999999999
     },
     {
-      "waypointRelativePos": 4.0,
-      "rotationDegrees": 90.0
+      "waypointRelativePos": 2.5,
+      "rotationDegrees": 125.00000000000001
     },
     {
-      "waypointRelativePos": 5.0,
-      "rotationDegrees": 135.0
+      "waypointRelativePos": 3.5,
+      "rotationDegrees": 105.00000000000001
     }
   ],
   "constraintZones": [],
@@ -135,19 +99,19 @@
   "eventMarkers": [
     {
       "name": "deploy-intake",
-      "waypointRelativePos": 0.0,
+      "waypointRelativePos": 0.1,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
       "name": "intake",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 0.5,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
       "name": "stop-intake",
-      "waypointRelativePos": 5.2,
+      "waypointRelativePos": 4,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -162,13 +126,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 135.0
+    "rotation": 95.0
   },
   "reversed": false,
   "folder": "Center Collection",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -45.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }
