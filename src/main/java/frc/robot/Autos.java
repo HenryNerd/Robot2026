@@ -200,8 +200,8 @@ public class Autos {
 
     new EventTrigger("shoot-8")
         .onTrue(
-          new ConditionalCommand(
-            ShootOnTheMoveCommands.shootOnTheMoveAutoCommand(
+            new ConditionalCommand(
+                ShootOnTheMoveCommands.shootOnTheMoveAutoCommand(
                     drive,
                     shooter,
                     indexer,
