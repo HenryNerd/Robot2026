@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import static edu.wpi.first.units.Units.Seconds;
 
-import badgerutils.triggers.AllianceTriggers;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -59,7 +58,7 @@ public class ShootOnTheMoveCommands {
             () -> {
               driveCommand.resetPID();
               PPHolonomicDriveController.overrideRotationFeedback(
-                  () -> driveCommand.getPIDOutput(AllianceTriggers.isRedAlliance()));
+                  () -> driveCommand.getPIDOutput(false));
             },
             () -> PPHolonomicDriveController.clearRotationFeedbackOverride()));
   }

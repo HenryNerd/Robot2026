@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.2,
-        "y": 7.3
+        "x": 2.0,
+        "y": 5.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.2,
-        "y": 8.300000000000004
+        "x": 2.0,
+        "y": 6.500000000000004
       },
       "isLocked": false,
       "linkedName": "bump-left-alliance"
@@ -96,12 +96,12 @@
     },
     {
       "anchor": {
-        "x": 5.2,
-        "y": 7.3
+        "x": 2.0,
+        "y": 5.5
       },
       "prevControl": {
-        "x": 5.45,
-        "y": 7.3
+        "x": 2.25,
+        "y": 5.5
       },
       "nextControl": null,
       "isLocked": false,
