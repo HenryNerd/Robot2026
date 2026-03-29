@@ -194,26 +194,9 @@ public class Autos {
                 leds,
                 () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
                 Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
-                () -> true,
+                () -> false,
                 () -> false,
                 () -> true));
-
-    new EventTrigger("shoot-8")
-        .onTrue(
-            new ConditionalCommand(
-                ShootOnTheMoveCommands.shootOnTheMoveAutoCommand(
-                    drive,
-                    shooter,
-                    indexer,
-                    intake,
-                    leds,
-                    () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
-                    Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
-                    () -> true,
-                    () -> false,
-                    () -> true),
-                Commands.none(),
-                inAllianceZoneSupplier));
 
     new EventTrigger("shoot-8")
         .onTrue(
@@ -226,7 +209,7 @@ public class Autos {
                         leds,
                         () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
                         Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
-                        () -> true,
+                        () -> false,
                         () -> false,
                         () -> true),
                     Commands.none(),
@@ -260,7 +243,7 @@ public class Autos {
                     leds,
                     () -> RebuiltUtils.getCurrentHubLocation().toTranslation2d(),
                     Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
-                    () -> true,
+                    () -> false,
                     () -> false,
                     () -> true)
                 .withDeadline(Commands.waitTime(SMALL_HOPPER_SHOOT_DURATION)));

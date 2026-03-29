@@ -27,25 +27,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "depot-bump"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 1.0
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "stop-shooting"
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "depot-transition-bump"
+                        "pathName": "SHOP depot-bump"
                       }
                     }
                   ]

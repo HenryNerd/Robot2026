@@ -49,7 +49,7 @@ public class SafeAimAndShootCommand extends ParallelCommandGroup {
     addCommands(safeShootCommand, driveCommand);
   }
 
-  public double getPIDOutput() {
-    return driveCommand.getPIDOutput();
+  public double getPIDOutput(boolean flipped) {
+    return driveCommand.getPIDOutput(flipped);
   }
 }

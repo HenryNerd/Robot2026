@@ -31,7 +31,11 @@ public class DriveAimLockedCommand extends ParallelCommandGroup {
     addCommands(driveAtAngleCommand);
   }
 
-  public double getPIDOutput() {
-    return driveAtAngleCommand.getPIDOutput();
+  public void resetPID() {
+    driveAtAngleCommand.resetPID();
+  }
+
+  public double getPIDOutput(boolean flipped) {
+    return driveAtAngleCommand.getPIDOutput(flipped);
   }
 }

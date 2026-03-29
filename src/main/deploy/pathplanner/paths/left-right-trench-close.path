@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0,
-        "y": 5.5
+        "x": 5.2,
+        "y": 7.3
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0,
-        "y": 6.5
+        "x": 5.2,
+        "y": 8.3
       },
       "isLocked": false,
       "linkedName": "bump-left-alliance"
@@ -17,15 +17,15 @@
     {
       "anchor": {
         "x": 4.4,
-        "y": 7.4
+        "y": 7.5
       },
       "prevControl": {
         "x": 2.9000000000000004,
-        "y": 7.4
+        "y": 7.5
       },
       "nextControl": {
         "x": 5.9,
-        "y": 7.4
+        "y": 7.5
       },
       "isLocked": false,
       "linkedName": "start-trench-left"
@@ -146,7 +146,7 @@
   "folder": "Close Collection",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 135.0
+    "rotation": 148.372381067324
   },
   "useDefaultConstraints": true
 }
