@@ -39,13 +39,13 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "stop-shooting"
+                        "name": null
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "depot-transition-bump"
+                        "pathName": "depot-transition-SOTM"
                       }
                     }
                   ]

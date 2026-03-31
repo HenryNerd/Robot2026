@@ -5,35 +5,27 @@
     "data": {
       "commands": [
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "left-left-trench-far-trench"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "shoot-small-hopper"
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "left-left-trench-close-trench"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "pathName": "left-left-trench-far-trench"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shoot-small-hopper"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "left-left-trench-close-trench"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "depot-transition-SOTM"
           }
         }
       ]

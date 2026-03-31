@@ -92,21 +92,19 @@ public class SafeShootCommand extends ParallelCommandGroup {
                             || indexer.getCurrentCommand() == indexer.getDefaultCommand()))
             .onTrue(guardedIndexerCommand);
 
-    @SuppressWarnings("unused")
-    Trigger commandCanceler =
-        new Trigger(() -> !this.isActive)
-            .onTrue(
-                Commands.runOnce(
-                    () -> {
-                      intakeCommand.cancel();
-                      guardedIndexerCommand.cancel();
-                    }));
-
     Command loggedGuardCommand =
         Commands.run(
             () -> logConditions(shooterVelocityCondition, driveAngleCondition, hubActiveCondition));
 
-    Command activityTracker = Commands.startEnd(() -> isActive = true, () -> isActive = false);
+    Command activityTracker =
+        Commands.startEnd(
+            () -> isActive = true,
+            () -> {
+              isActive = false;
+              intakeCommand.cancel();
+              guardedIndexerCommand.cancel();
+              shootAtDistanceCommand.cancel();
+            });
 
     Trigger isShooting = new Trigger(() -> isActive);
     Trigger combinedTrigger = new Trigger(combinedCondition);
@@ -118,7 +116,7 @@ public class SafeShootCommand extends ParallelCommandGroup {
         Commands.runEnd(() -> leds.isShooting = true, () -> leds.isShooting = false));
     addCommands(
         activityTracker,
-        shootAtDistanceCommand,
+        shootAtDistanceCommand.asProxy(),
         guardedIndexerCommand.asProxy(),
         loggedGuardCommand,
         intakeCommand.asProxy());

@@ -136,7 +136,7 @@
       "command": null
     },
     {
-      "name": "stop-intake",
+      "name": "",
       "waypointRelativePos": 4.2,
       "endWaypointRelativePos": null,
       "command": null

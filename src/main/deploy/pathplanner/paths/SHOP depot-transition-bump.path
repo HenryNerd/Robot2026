@@ -16,15 +16,15 @@
     },
     {
       "anchor": {
-        "x": 3.4727349397590364,
+        "x": 3.353907563025211,
         "y": 5.5
       },
       "prevControl": {
-        "x": 2.9727349397590364,
+        "x": 2.853907563025211,
         "y": 5.5
       },
       "nextControl": {
-        "x": 4.472734939759036,
+        "x": 4.35390756302521,
         "y": 5.5
       },
       "isLocked": false,
@@ -86,7 +86,7 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "Transition Prep",
+  "folder": "Alliance Side",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 158.58703052512834

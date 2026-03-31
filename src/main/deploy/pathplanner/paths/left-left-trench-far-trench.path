@@ -44,7 +44,7 @@
         "y": 4.0
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "fuel-mid-exit-1-left"
     },
     {
       "anchor": {
@@ -60,7 +60,7 @@
         "y": 5.5
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "fuel-mid-exit-2-left"
     },
     {
       "anchor": {
@@ -76,7 +76,7 @@
         "y": 7.3
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "trench-shooting-align-left"
     },
     {
       "anchor": {
@@ -89,7 +89,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "trench-shooting-left"
     }
   ],
   "rotationTargets": [
@@ -116,8 +116,24 @@
     {
       "name": "intake",
       "waypointRelativePos": 0.5,
+      "endWaypointRelativePos": 5.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "intake"
+        }
+      }
+    },
+    {
+      "name": "spool-shooter",
+      "waypointRelativePos": 3.5,
       "endWaypointRelativePos": null,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "spool-shooter"
+        }
+      }
     }
   ],
   "globalConstraints": {

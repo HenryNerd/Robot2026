@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 1.1560602409638552,
-        "y": 5.805289156626507
+        "x": 0.6786386554621853,
+        "y": 5.803268907563026
       },
       "prevControl": {
-        "x": 1.4060602409638554,
-        "y": 5.805289156626507
+        "x": 0.9286386554621855,
+        "y": 5.803268907563026
       },
       "nextControl": null,
       "isLocked": false,
@@ -64,7 +64,7 @@
       "command": null
     },
     {
-      "name": "stop-intake",
+      "name": "",
       "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
       "command": null
@@ -80,7 +80,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 159.27444113443946
+    "rotation": 167.69198418257204
   },
   "reversed": false,
   "folder": "Alliance Side",

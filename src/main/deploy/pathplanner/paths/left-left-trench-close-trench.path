@@ -12,7 +12,7 @@
         "y": 7.3
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "trench-shooting-left"
     },
     {
       "anchor": {
@@ -28,7 +28,7 @@
         "y": 6.55
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "trench-exit-spin-left"
     },
     {
       "anchor": {
@@ -44,7 +44,7 @@
         "y": 5.5
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "trench-exit-2-spin-left"
     },
     {
       "anchor": {
@@ -60,7 +60,7 @@
         "y": 3.0
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "hub-left-close"
     },
     {
       "anchor": {
@@ -76,7 +76,7 @@
         "y": 5.1
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "hub-left-center"
     },
     {
       "anchor": {
@@ -112,16 +112,16 @@
     },
     {
       "anchor": {
-        "x": 0.7548571428571433,
+        "x": 0.6786386554621853,
         "y": 5.803268907563026
       },
       "prevControl": {
-        "x": 1.1878698447493625,
-        "y": 5.553268907563026
+        "x": 1.1616015686067191,
+        "y": 5.673859385011765
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "depot-gather-bump"
     }
   ],
   "rotationTargets": [
@@ -156,7 +156,7 @@
       "minWaypointRelativePos": 6.0,
       "maxWaypointRelativePos": 7.0,
       "constraints": {
-        "maxVelocity": 1.0,
+        "maxVelocity": 0.75,
         "maxAcceleration": 1.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -170,14 +170,35 @@
     {
       "name": "intake",
       "waypointRelativePos": 0.0,
-      "endWaypointRelativePos": null,
-      "command": null
+      "endWaypointRelativePos": 7.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "intake"
+        }
+      }
     },
     {
-      "name": "shoot-small-hopper",
-      "waypointRelativePos": 6.0,
+      "name": "spool-shooter",
+      "waypointRelativePos": 5.5,
       "endWaypointRelativePos": null,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "spool-shooter"
+        }
+      }
+    },
+    {
+      "name": "sotm-small-hopper",
+      "waypointRelativePos": 6.0,
+      "endWaypointRelativePos": 7.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "sotm-small-hopper"
+        }
+      }
     }
   ],
   "globalConstraints": {
@@ -190,7 +211,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 160.0
+    "rotation": 167.69198418257204
   },
   "reversed": false,
   "folder": "Close Collection",
