@@ -22,6 +22,7 @@ import frc.robot.commands.FaceforwardCommand;
 import frc.robot.commands.FuelCollectionCommand;
 import frc.robot.commands.ShootOnTheMoveCommands;
 import frc.robot.commands.ShooterCommands;
+import frc.robot.subsystems.deploy.Deploy;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.fueldetection.FuelDetection;
 import frc.robot.subsystems.indexer.Indexer;
@@ -40,6 +41,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
   private final Indexer indexer;
   private final FuelDetection fuelDetection;
   private final Leds leds;
+  private final Deploy deploy;
 
   public CompetitionControllerMapping(
       CommandXboxController driverController,
@@ -49,7 +51,8 @@ public class CompetitionControllerMapping extends ControllerMapping {
       Shooter shooter,
       Indexer indexer,
       FuelDetection fuelDetection,
-      Leds leds) {
+      Leds leds,
+      Deploy deploy) {
     super(driverController, operatorController);
     this.drive = drive;
     this.intake = intake;
@@ -57,6 +60,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
     this.indexer = indexer;
     this.fuelDetection = fuelDetection;
     this.leds = leds;
+    this.deploy = deploy;
 
     shooter.resetVelocityOverride();
   }
@@ -214,7 +218,7 @@ public class CompetitionControllerMapping extends ControllerMapping {
                 .ignoringDisable(true));
 
     // Deploy Intake
-    operatorController.x().whileTrue(intake.deployCommand());
+    operatorController.x().whileTrue(deploy.deployCommand());
 
     // Overides
 

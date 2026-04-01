@@ -1,4 +1,4 @@
-package frc.robot.subsystems.intake;
+package frc.robot.subsystems.deploy;
 
 import static edu.wpi.first.units.Units.Degrees;
 
@@ -11,11 +11,11 @@ public enum DeployerPosition {
 
   private Angle angle;
 
-  private DeployerPosition(Angle a) {
-    this.angle = a;
+  private DeployerPosition(Angle angle) {
+    this.angle = angle;
   }
 
-  public Angle deployerPosition() {
+  public Angle getAngle() {
     return angle;
   }
 }

@@ -22,6 +22,7 @@ import frc.robot.commands.SafeAimAndShootCommand;
 import frc.robot.commands.ShootOnTheMoveCommands;
 import frc.robot.commands.ShooterCommands;
 import frc.robot.controls.Controls;
+import frc.robot.subsystems.deploy.Deploy;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.indexer.Indexer;
 import frc.robot.subsystems.intake.Intake;
@@ -45,6 +46,7 @@ public class Autos {
   private final Intake intake;
   private final Shooter shooter;
   private final Leds leds;
+  private final Deploy deploy;
 
   // Prefer to construct autos lazily to save limited memory. Required with many auto files
   private final LoggedDashboardChooser<Auto> autoChooser;
@@ -54,12 +56,14 @@ public class Autos {
 
   private static final List<String> autoNames = AutoBuilder.getAllAutoNames();
 
-  public Autos(Drive drive, Indexer indexer, Intake intake, Shooter shooter, Leds leds) {
+  public Autos(
+      Drive drive, Indexer indexer, Intake intake, Shooter shooter, Leds leds, Deploy deploy) {
     this.drive = drive;
     this.indexer = indexer;
     this.intake = intake;
     this.shooter = shooter;
     this.leds = leds;
+    this.deploy = deploy;
 
     inAllianceZoneSupplier = () -> RebuiltUtils.isInAllianceZone(drive.getPose().getTranslation());
 
@@ -136,7 +140,7 @@ public class Autos {
                         .getTranslation()
                         .getDistance(RebuiltUtils.getCurrentHubLocation().toTranslation2d()))));
 
-    NamedCommands.registerCommand("deploy-intake", intake.deployCommand());
+    NamedCommands.registerCommand("deploy-intake", deploy.deployCommand());
 
     NamedCommands.registerCommand(
         "shoot-until-done",
@@ -231,7 +235,7 @@ public class Autos {
                             .getTranslation()
                             .getDistance(RebuiltUtils.getCurrentHubLocation().toTranslation2d()))));
 
-    new EventTrigger("deploy-intake").onTrue(intake.deployCommand());
+    new EventTrigger("deploy-intake").onTrue(deploy.deployCommand());
 
     new EventTrigger("shoot-small-hopper")
         .onTrue(
