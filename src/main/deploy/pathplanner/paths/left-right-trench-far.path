@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 8.3,
-        "y": 6.4
+        "x": 8.4,
+        "y": 6.5
       },
       "prevControl": {
-        "x": 8.3,
-        "y": 7.65
+        "x": 8.4,
+        "y": 7.75
       },
       "nextControl": {
-        "x": 8.3,
-        "y": 6.15
+        "x": 8.4,
+        "y": 6.25
       },
       "isLocked": false,
       "linkedName": "fuel-far-left-entrance"

@@ -16,31 +16,31 @@
     },
     {
       "anchor": {
-        "x": 8.3,
-        "y": 6.4
+        "x": 8.4,
+        "y": 6.5
       },
       "prevControl": {
-        "x": 8.3,
-        "y": 7.4
+        "x": 8.4,
+        "y": 7.5
       },
       "nextControl": {
-        "x": 8.3,
-        "y": 5.400000000000004
+        "x": 8.4,
+        "y": 5.5000000000000036
       },
       "isLocked": false,
       "linkedName": "fuel-far-left-entrance"
     },
     {
       "anchor": {
-        "x": 8.3,
+        "x": 8.4,
         "y": 5.0
       },
       "prevControl": {
-        "x": 8.3,
+        "x": 8.4,
         "y": 5.5
       },
       "nextControl": {
-        "x": 8.3,
+        "x": 8.4,
         "y": 4.0
       },
       "isLocked": false,
