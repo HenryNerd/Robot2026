@@ -57,16 +57,14 @@ public class SafeShootCommand extends ParallelCommandGroup {
 
     Command guardedIndexerCommand =
         new GuardedCommand(
-                Commands.waitUntil(
-                        () ->
-                            shooter
-                                    .isAtRequestedSpeed(
-                                        Constants.Tolerances.INITIAL_SPEED_TOLERANCE)
-                                    .getAsBoolean()
-                                || overrideVelocitySafeguard.getAsBoolean())
-                    .andThen(indexer.indexUntilCancelledCommand(INDEXER_SPEED)),
-                combinedCondition)
-            .withInterruptBehavior(InterruptionBehavior.kCancelIncoming);
+            Commands.waitUntil(
+                    () ->
+                        shooter
+                                .isAtRequestedSpeed(Constants.Tolerances.INITIAL_SPEED_TOLERANCE)
+                                .getAsBoolean()
+                            || overrideVelocitySafeguard.getAsBoolean())
+                .andThen(indexer.indexUntilCancelledCommand(INDEXER_SPEED)),
+            combinedCondition);
 
     Command shootAtDistanceCommand =
         ShooterCommands.shootAtDistanceCommand(
