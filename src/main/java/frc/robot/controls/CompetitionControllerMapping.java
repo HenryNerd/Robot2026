@@ -223,6 +223,9 @@ public class CompetitionControllerMapping extends ControllerMapping {
     // Deploy Intake
     operatorController.x().whileTrue(deploy.deployCommand());
 
+    // Retract Intake
+    operatorController.a().whileTrue(deploy.crunchCommand());
+
     // Overides
 
     // Force Indexer
