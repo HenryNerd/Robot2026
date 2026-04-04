@@ -1,5 +1,7 @@
 package frc.robot.subsystems.deploy;
 
+import static edu.wpi.first.units.Units.Rotations;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,11 +18,12 @@ public class Deploy extends SubsystemBase {
   @Override
   public void periodic() {
     deployIO.updateInputs(inputs);
-    Logger.processInputs("Intake", inputs);
+    Logger.processInputs("Deploy", inputs);
   }
 
   public void setDeployerPosition(DeployerPosition position) {
     deployIO.setPosition(position.getAngle());
+    Logger.recordOutput("Deploy/Angle Setpoint", position.getAngle().in(Rotations));
   }
 
   public Command deployCommand() {
