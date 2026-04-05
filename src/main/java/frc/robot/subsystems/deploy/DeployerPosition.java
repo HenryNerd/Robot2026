@@ -1,13 +1,12 @@
 package frc.robot.subsystems.deploy;
 
-import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.Rotations;
 
 import edu.wpi.first.units.measure.Angle;
 
 public enum DeployerPosition {
-  RETRACTED(Degrees.of(0)),
-  // Replace with actual angle once it is known
-  EXTENDED(Degrees.of(25));
+  RETRACTED(Rotations.of(1.34)),
+  EXTENDED(Rotations.of(12.26));
 
   private Angle angle;
 
