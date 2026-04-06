@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SHOP left-trench-far"
+            "pathName": "left-trench-safe"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SHOP left-depot-hub"
+            "pathName": "left-depot-hub"
           }
         },
         {
