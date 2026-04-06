@@ -19,19 +19,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "left-trench-hub"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "shoot-small-hopper"
+            "pathName": "left-depot-hub"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "left-trench-collect"
+            "pathName": "depot-transition-SOTM"
           }
         }
       ]
