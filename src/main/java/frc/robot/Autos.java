@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import frc.robot.commands.SafeAimAndShootCommand;
 import frc.robot.commands.ShootOnTheMoveCommands;
 import frc.robot.commands.ShooterCommands;
@@ -82,7 +81,8 @@ public class Autos {
                     Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
                     () -> false,
                     () -> false,
-                    () -> true)
+                    () -> true,
+                    () -> false)
                 .alongWith(intake.intakeUntilInterruptedCommand(1).asProxy())
                 .withDeadline(Commands.waitTime(SMALL_HOPPER_SHOOT_DURATION)),
             Commands.none(),
@@ -118,7 +118,8 @@ public class Autos {
                 Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
                 () -> false,
                 () -> false,
-                () -> true),
+                () -> true,
+                () -> false),
             Commands.none(),
             inAllianceZoneSupplier);
 
@@ -136,7 +137,8 @@ public class Autos {
                     Constants.Tolerances.SCORING_ANGLE_TOLERANCE,
                     () -> false,
                     () -> false,
-                    () -> true),
+                    () -> true,
+                    () -> false),
                 Commands.none(),
                 inAllianceZoneSupplier)
             .withDeadline(Commands.waitTime(SMALL_HOPPER_SHOOT_DURATION));

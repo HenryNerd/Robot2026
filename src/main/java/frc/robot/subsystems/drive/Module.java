@@ -82,14 +82,6 @@ public class Module {
     io.setTurnPosition(state.angle);
   }
 
-  public void setBrakeMode() {
-    io.setBrakeMode();
-  }
-
-  public void setCoastMode() {
-    io.setCoastMode();
-  }
-
   /** Runs the module with the specified output while controlling to zero degrees. */
   public void runCharacterization(double output) {
     io.setDriveOpenLoop(output);
