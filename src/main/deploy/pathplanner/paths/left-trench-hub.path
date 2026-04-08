@@ -49,15 +49,15 @@
     {
       "anchor": {
         "x": 5.8,
-        "y": 4.0
+        "y": 4.7
       },
       "prevControl": {
         "x": 5.8,
-        "y": 4.25
+        "y": 4.95
       },
       "nextControl": {
         "x": 5.8,
-        "y": 3.0
+        "y": 3.7
       },
       "isLocked": false,
       "linkedName": "hub-left-close"
@@ -65,15 +65,15 @@
     {
       "anchor": {
         "x": 6.8,
-        "y": 4.0
+        "y": 4.7
       },
       "prevControl": {
         "x": 6.8,
-        "y": 3.0
+        "y": 3.7
       },
       "nextControl": {
         "x": 6.8,
-        "y": 7.0
+        "y": 7.7
       },
       "isLocked": false,
       "linkedName": "hub-left-center"
@@ -81,15 +81,15 @@
     {
       "anchor": {
         "x": 5.5,
-        "y": 7.3
+        "y": 7.2
       },
       "prevControl": {
         "x": 6.5,
-        "y": 7.3
+        "y": 7.2
       },
       "nextControl": {
-        "x": 4.0,
-        "y": 7.3
+        "x": 5.0,
+        "y": 7.2
       },
       "isLocked": false,
       "linkedName": "trench-shooting-align-left"
