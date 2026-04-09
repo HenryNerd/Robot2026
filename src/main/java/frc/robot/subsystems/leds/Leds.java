@@ -54,12 +54,14 @@ public class Leds extends SubsystemBase {
       if (alliance.isPresent()) {
         if (alliance.get() == DriverStation.Alliance.Red) {
           stateMachine.tryChangeState(LedState.ACTIVERED);
-        } else if (alliance.get() == DriverStation.Alliance.Red) {
+        } else if (alliance.get() == DriverStation.Alliance.Blue) {
           stateMachine.tryChangeState(LedState.ACTIVEBLUE);
         } else {
           stateMachine.tryChangeState(LedState.OTHER);
         }
-      }
+      } else {
+          stateMachine.tryChangeState(LedState.OTHER);
+        }
     }
     Logger.recordOutput("Leds/state", stateMachine.getCurrentState());
     Logger.recordOutput("Leds/isShooting", isShooting);
