@@ -3,12 +3,12 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0,
+        "x": 2.75,
         "y": 5.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.015544967488431,
+        "x": 1.765544967488431,
         "y": 5.5
       },
       "isLocked": false,
@@ -52,22 +52,26 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "shoot-until-done",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
-      "command": null
+      "name": "sotm-small-hopper",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": 1.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "sotm-small-hopper"
+        }
+      }
     },
     {
       "name": "intake",
-      "waypointRelativePos": 0.25,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "",
-      "waypointRelativePos": 1.0,
-      "endWaypointRelativePos": null,
-      "command": null
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": 1.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "intake"
+        }
+      }
     }
   ],
   "globalConstraints": {
@@ -86,7 +90,7 @@
   "folder": "Depot",
   "idealStartingState": {
     "velocity": 1.0,
-    "rotation": 148.372381067324
+    "rotation": 140.0
   },
   "useDefaultConstraints": true
 }
