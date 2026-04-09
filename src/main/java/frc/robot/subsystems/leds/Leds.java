@@ -18,6 +18,8 @@ public class Leds extends SubsystemBase {
     AUTO,
     AIMING,
     SHOOTING,
+    ACTIVERED,
+    ACTIVEBLUE,
     OTHER,
     NONE,
   }
@@ -34,6 +36,8 @@ public class Leds extends SubsystemBase {
             .anyToState(LedState.AUTO, state -> LedsIO.setSolid(255, 0, 255))
             .anyToState(LedState.AIMING, state -> LedsIO.setSolid(0, 255, 0))
             .anyToState(LedState.SHOOTING, state -> LedsIO.setBounce(0, 255, 0, 80))
+            .anyToState(LedState.ACTIVERED, state -> LedsIO.setSolid(255, 0, 0))
+            .anyToState(LedState.ACTIVEBLUE, state -> LedsIO.setSolid(0, 0, 255))
             .anyToState(LedState.OTHER, state -> LedsIO.setSolid(255, 255, 255));
 
     stateMachine = new StateMachine<>(LedState.NONE, edges);
@@ -46,7 +50,16 @@ public class Leds extends SubsystemBase {
     } else if (isShooting) {
       stateMachine.tryChangeState(LedState.SHOOTING);
     } else {
-      stateMachine.tryChangeState(LedState.OTHER);
+      var alliance = DriverStation.getAlliance();
+      if (alliance.isPresent()) {
+        if (alliance.get() == DriverStation.Alliance.Red) {
+          stateMachine.tryChangeState(LedState.ACTIVERED);
+        } else if (alliance.get() == DriverStation.Alliance.Red) {
+          stateMachine.tryChangeState(LedState.ACTIVEBLUE);
+        } else {
+          stateMachine.tryChangeState(LedState.OTHER);
+        }
+      }
     }
     Logger.recordOutput("Leds/state", stateMachine.getCurrentState());
     Logger.recordOutput("Leds/isShooting", isShooting);
